@@ -2,16 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.nrg</groupId>
-	<artifactId>NRG-TRACK</artifactId>
+	<artifactId>NRG</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>NRG-TRAKING</name>
+	<name>NRG</name>
 	<packaging>pom</packaging>
 	<modules>
-		<module>NRG-TRACK-APP</module>
-		<module>NRG-TRACK-Common</module>
-		<module>NRG-TRACK-Welcome</module>
-		<module>NRG-TRACK-DataCollector</module>
-		<module>NRG-TRACK-WEB</module>
+		<module>NRG-APP</module>
+		<module>NRG-Common</module>
+		<module>NRG-Welcome</module>
+		<module>NRG-DataCatcher</module>
+		<module>NRG-User</module>
 	</modules>
 
 	<parent>
@@ -111,8 +111,7 @@
 			</properties>
 		</profile>
 	</profiles>
-
-	<build>
+	<!-- <build>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -132,5 +131,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>
