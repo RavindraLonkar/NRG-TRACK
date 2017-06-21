@@ -1,26 +1,10 @@
 package com.nrg.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.nrg.utils.CommonConstants;
-import com.nrg.utils.Response;
 
 @RestController
 public class UploadPostController {
+	/*
 
 	private Logger logger = Logger.getLogger(UploadPostController.class);
 	
@@ -74,6 +58,6 @@ public class UploadPostController {
 		}
 
 		return response;
-	}
+	}*/
 
 }
