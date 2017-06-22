@@ -6,10 +6,18 @@
 		<artifactId>NRG</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>NRG-DataCatcher</artifactId>
 	<packaging>war</packaging>
-
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.nrg</groupId>
+			<artifactId>NRG-Common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>

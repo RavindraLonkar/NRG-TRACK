@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nrg.models.TXN_User;
+import com.nrg.models.User;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 		
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<String> createEmployee(@RequestBody TXN_User employee) 
+	public ResponseEntity<String> createEmployee(@RequestBody User employee) 
 	{
 	    System.out.println(employee);
 	    return new ResponseEntity<String>(HttpStatus.CREATED);
