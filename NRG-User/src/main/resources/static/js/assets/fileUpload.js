@@ -6,7 +6,7 @@ $( document ).ready(function() {
     // SUBMIT FORM
     $("#btnSubmit").click(function (event) {
         // Prevent the form from submitting via the browser.
-        event.preventDefault();
+       /* event.preventDefault();
         var validation=true;//uploadFormValidation($("#file").val().split("\\").pop(-1));
 
         if(validation==true){
@@ -62,7 +62,18 @@ $( document ).ready(function() {
 	        	break;
 	        }        
 		   
-    	}
+    	}*/
+    	
+    	 $.ajax({
+             type : "POST",
+             url : url + "user/save",
+             success : function(result) {
+             	
+             },
+             error : function(e) {
+                 console.log("ERROR: ", e);
+             }
+         });
     }); 
     
     function ajaxFilePost(data,objectName,dataTableHeader,tableName){
