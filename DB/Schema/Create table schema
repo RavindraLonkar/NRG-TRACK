@@ -1,1 +1,75 @@
+create table MST_Vechicle(
+Id      	       serial not null,
+userId              int   not null,
+vechicleName    	varchar(100) NULL,
+CreatedBy      		int,
+CreatedDate       	timestamp,
+LastModifiedBy 		int,
+LastModifiedDate	timestamp,
+CONSTRAINT mst_Vechicle_pkey PRIMARY KEY (Id),
+FOREIGN KEY(userId) REFERENCES Txn_User
+)
+
+
+create table MST_Tracker(
+Id      	        serial not null,
+deviceId            varchar(100) not null,    
+vechicleId          int   	not null,
+trackerName         varchar(100) null,
+CreatedBy      		int,
+CreatedDate       	timestamp,
+LastModifiedBy 		int,
+LastModifiedDate	timestamp,
+CONSTRAINT mst_Tracker_pkey PRIMARY KEY (Id),
+unique (deviceId),
+FOREIGN KEY(vechicleId) REFERENCES mst_Vechicle
+)
+
+
+create table TXN_TrackingData(
+Id 	        serial not null,
+trackerId 	int not null,
+latitude 	float8 NOT NULL,
+longitude 	float8 NOT NULL,
+createdDate 	timestamp NOT NULL,
+CONSTRAINT Txn_TrackingData_pkey PRIMARY KEY (Id),
+FOREIGN KEY(trackerId) REFERENCES mst_Tracker
+)
+
+
+
+create table Txn_User(
+UserID              	serial,  
+UserName            	varchar(255),
+Password            	varchar(1020),
+LastName      		varchar(510),
+MiddleName    		varchar(255),
+FirstName     		varchar(255),
+SalutationID		int,
+CompanyName         	varchar(255),
+DOB                     timestamp,
+Age                     int,
+GenderID                int,
+MaritalStatusID         int,
+ContactMobile       	varchar(255),
+ContactMobile2      	varchar(255),
+SecurityQuestionID  	int,
+SecurityAnswer      	varchar(510),
+RoleID              	INT,
+IsActive            	BIT,
+EmailID             	varchar(1020),
+IsEMailIDConfirmed  	BIT,
+IsAccountLocked	    	bit,
+AccountLockDttm		timestamp,
+AccountLockExpiryDttm	timestamp,
+CreatedBy		int,
+CreatedDate		timestamp,
+LastModifiedBy		int,
+LastModifiedDate	timestamp,
+TCSignOffFlag		bit,
+TCSignOffContentID	int,
+CONSTRAINT Txn_User_pkey PRIMARY KEY (UserID) 
+
+)
+
 
