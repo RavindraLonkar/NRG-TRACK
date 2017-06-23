@@ -24,8 +24,7 @@ public class Vechicle {
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="userId")
 	private User user;
-	@Column
-	private String vechicleName;
+	@Column private String vechicleName;
 	@Column
 	private Integer CreatedBy;
 	@Column
@@ -34,6 +33,7 @@ public class Vechicle {
 	private Integer LastModifiedBy;
 	@Column
 	private Date LastModifiedDate;
+	
 	public Integer getId() {
 		return Id;
 	}

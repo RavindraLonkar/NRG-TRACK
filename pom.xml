@@ -73,7 +73,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8181</api_server_path>
+				<api_server_path>localhost:8080</api_server_path>
 				<build.profile.id>dev</build.profile.id>
 			</properties>
 		</profile>
@@ -83,7 +83,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8181</api_server_path>
+				<api_server_path>localhost:8080</api_server_path>
 			</properties>
 		</profile>
 		<profile>
@@ -92,7 +92,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8181</api_server_path>
+				<api_server_path>localhost:8080</api_server_path>
 			</properties>
 		</profile>
 		<profile>
@@ -101,7 +101,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8181</api_server_path>
+				<api_server_path>localhost:8080</api_server_path>
 			</properties>
 		</profile>
 		<profile>
@@ -110,13 +110,8 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8181</api_server_path>
+				<api_server_path>localhost:8080</api_server_path>
 			</properties>
 		</profile>
 	</profiles>
-	<!-- <build> <resources> <resource> <directory>src/main/resources</directory> 
-		<filtering>true</filtering> </resource> </resources> <plugins> <plugin> <groupId>org.springframework.boot</groupId> 
-		<artifactId>spring-boot-maven-plugin</artifactId> <executions> <execution> 
-		<goals> <goal>repackage</goal> </goals> </execution> </executions> </plugin> 
-		</plugins> </build> -->
 </project>

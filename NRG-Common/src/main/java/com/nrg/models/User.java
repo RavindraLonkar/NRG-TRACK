@@ -44,6 +44,7 @@ public class User {
 	@Column private Date LastModifiedDate;	
 	@Column private Integer TCSignOffFlag;		
 	@Column private Integer TCSignOffContentID;
+	
 	public long getUserID() {
 		return UserID;
 	}
