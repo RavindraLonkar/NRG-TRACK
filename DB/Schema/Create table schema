@@ -36,6 +36,12 @@ CONSTRAINT Txn_TrackingData_pkey PRIMARY KEY (Id),
 FOREIGN KEY(trackerId) REFERENCES mst_Tracker
 )
 
+create table MST_Role(
+Id 	        serial not null,
+roleId 	    int not null,
+roleName 	varchar(100) NULL,
+CONSTRAINT MST_Role_pkey PRIMARY KEY (Id)
+)
 
 
 create table Txn_User(
@@ -68,8 +74,9 @@ LastModifiedBy		int,
 LastModifiedDate	timestamp,
 TCSignOffFlag		bit,
 TCSignOffContentID	int,
-CONSTRAINT Txn_User_pkey PRIMARY KEY (UserID) 
-
+CONSTRAINT Txn_User_pkey PRIMARY KEY (UserID) ,
+FOREIGN KEY(RoleID) REFERENCES MST_Role
 )
+
 
 

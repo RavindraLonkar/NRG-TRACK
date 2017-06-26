@@ -3,23 +3,21 @@ package com.nrg;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 
 @SpringBootApplication
-//@PropertySource("classpath:urls.properties")
-@EnableAutoConfiguration(exclude={SecurityAutoConfiguration.class})
-public class TrackingApplication extends SpringBootServletInitializer {
-	
+@EnableAutoConfiguration
+public class TrackingApplicationAPP extends SpringBootServletInitializer {
+		
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(TrackingApplication.class);
+        return application.sources(TrackingApplicationAPP.class);
     }
 	
 	public static void main(String[] args) {
-		SpringApplication.run(TrackingApplication.class, args);
+		SpringApplication.run(TrackingApplicationAPP.class, args);
 	}	
 	
 }

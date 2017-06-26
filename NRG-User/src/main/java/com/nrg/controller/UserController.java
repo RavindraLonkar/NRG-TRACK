@@ -17,7 +17,7 @@ public class UserController {
 	 
 	    User tXN_User = new User();
 	    tXN_User.setAge(22);
-	    tXN_User.setFirstName("Namdev");
+	    tXN_User.setFirstname("Namdev");
 	    
 	    RestTemplate restTemplate = new RestTemplate();
 	    User result = restTemplate.postForObject( uri, tXN_User, User.class);

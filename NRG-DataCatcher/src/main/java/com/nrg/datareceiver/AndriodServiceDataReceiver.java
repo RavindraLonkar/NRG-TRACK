@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.nrg.models.TrackingData;
 import com.nrg.utils.Response;
@@ -20,8 +21,8 @@ public class AndriodServiceDataReceiver {
 	public Response saveAndroidServiceData(@RequestBody TrackingData trackingData){
 		Response response = null;
 		String url=SAVE_ANDROID_SERVICEDATA;
-		
-		
+		RestTemplate rs=new RestTemplate();
+		TrackingData data=rs.postForObject(url, trackingData, TrackingData.class);
 		return response;
 	}
 }
