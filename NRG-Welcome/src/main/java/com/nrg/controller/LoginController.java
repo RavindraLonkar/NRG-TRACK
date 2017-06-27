@@ -1,9 +1,13 @@
 package com.nrg.controller;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +21,18 @@ import com.nrg.models.User;
 @RestController
 public class LoginController {
 	
-	@Value("${REDIRECT_URL}")
-	private String REDIRECT_URL;
+	@Value("${REDIRECT_USER_URL}")
+	private String REDIRECT_USER_URL;
+	
+	@Value("${REDIRECT_ADMIN_URL}")
+	private String REDIRECT_ADMIN_URL;
+	
+	@Value("${USER_NAME_KEY}")
+	private String USER_NAME_KEY;
+	
+	
+	
+	
 	
 
 	@RequestMapping(value={"/", "/login.htm"}, method = RequestMethod.GET)
@@ -41,7 +55,7 @@ public class LoginController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		String url=REDIRECT_URL;
+		String url="";
 		RestTemplate rest=new RestTemplate();
 		User userExists = rest.postForObject(url, user, User.class);
 		if (userExists != null) {
@@ -62,10 +76,33 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login/sucessfull", method = RequestMethod.GET)
-	public String loginSucessfull(){
+	public ModelAndView loginSucessfull(HttpRequest req){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String url=REDIRECT_URL;
-		return "redirect:"+url+"";
+		String url=determineTargetUrl(auth);
+		return new ModelAndView("redirect:"+url);
+	}
+	
+	protected String determineTargetUrl(Authentication authentication) {
+		boolean isAdmin = false;
+		boolean isUser = false;
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		for (GrantedAuthority grantedAuthority : authorities) {
+			if (grantedAuthority.getAuthority().equals("ADMIN")) {
+				isAdmin = true;
+				break;
+			} else if (grantedAuthority.getAuthority().equals("USER")) {
+				isUser = true;
+				break;
+			}
+		}
+
+		if (isAdmin) {
+			return REDIRECT_ADMIN_URL;
+		} else if (isUser) {
+			return REDIRECT_USER_URL;
+		} else {
+			throw new IllegalStateException();
+		}
 	}
 	
 

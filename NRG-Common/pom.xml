@@ -22,12 +22,5 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.1.1</version><!--$NO-MVN-MAN-VER$ -->
-		</dependency>
 	</dependencies>
 </project>

@@ -77,7 +77,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8080</api_server_path>
+				<api_server_path>http://localhost:8080</api_server_path>
 				<build.profile.id>dev</build.profile.id>
 			</properties>
 		</profile>
