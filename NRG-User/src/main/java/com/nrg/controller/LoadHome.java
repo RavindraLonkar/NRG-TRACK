@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/home")
 public class LoadHome {
+	
 
 	@RequestMapping(value="/build/session", method=RequestMethod.GET)
 	public ModelAndView buildsession(){

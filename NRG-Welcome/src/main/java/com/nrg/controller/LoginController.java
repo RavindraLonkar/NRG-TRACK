@@ -17,72 +17,70 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nrg.models.User;
+import com.nrg.security.token.NRGToken;
 
 @RestController
 public class LoginController {
-	
+
 	@Value("${REDIRECT_USER_URL}")
 	private String REDIRECT_USER_URL;
-	
+
 	@Value("${REDIRECT_ADMIN_URL}")
 	private String REDIRECT_ADMIN_URL;
-	
-	@Value("${USER_NAME_KEY}")
-	private String USER_NAME_KEY;
-	
-	
-	
-	
-	
 
-	@RequestMapping(value={"/", "/login.htm"}, method = RequestMethod.GET)
-	public ModelAndView login(){
+	@Value("${MATCH_USER_KEY}")
+	private String MATCH_USER_KEY;
+
+	@Value("${ENCY_USER_KEY}")
+	private String ENCY_USER_KEY;
+
+	@RequestMapping(value = { "/", "/login.htm" }, method = RequestMethod.GET)
+	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
-	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
-	public ModelAndView registration(){
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		String url="";
-		RestTemplate rest=new RestTemplate();
+		String url = "";
+		RestTemplate rest = new RestTemplate();
 		User userExists = rest.postForObject(url, user, User.class);
 		if (userExists != null) {
-			bindingResult
-					.rejectValue("email", "error.user",
-							"There is already a user registered with the email provided");
+			bindingResult.rejectValue("email", "error.user",
+					"There is already a user registered with the email provided");
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
 		} else {
-			//userService.saveUser(user);
+			// userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
-			
+
 		}
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="/login/sucessfull", method = RequestMethod.GET)
-	public ModelAndView loginSucessfull(HttpRequest req){
+
+	@RequestMapping(value = "/login/sucessfull", method = RequestMethod.GET)
+	public ModelAndView loginSucessfull(HttpRequest req) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String usernName=((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
-		String url=determineTargetUrl(auth);
-		return new ModelAndView("redirect:"+url+"?userName="+usernName);
+		String usernName = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
+		String encryptkey=NRGToken.encrypt(usernName+"|"+MATCH_USER_KEY, ENCY_USER_KEY);
+		String url = determineTargetUrl(auth);
+		return new ModelAndView("redirect:" + url + "?userName=" + encryptkey);
 	}
-	
+
 	protected String determineTargetUrl(Authentication authentication) {
 		boolean isAdmin = false;
 		boolean isUser = false;
@@ -105,7 +103,5 @@ public class LoginController {
 			throw new IllegalStateException();
 		}
 	}
-	
 
 }
-
