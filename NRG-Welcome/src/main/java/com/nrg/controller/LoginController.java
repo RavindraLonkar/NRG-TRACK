@@ -78,8 +78,9 @@ public class LoginController {
 	@RequestMapping(value="/login/sucessfull", method = RequestMethod.GET)
 	public ModelAndView loginSucessfull(HttpRequest req){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String usernName=((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
 		String url=determineTargetUrl(auth);
-		return new ModelAndView("redirect:"+url);
+		return new ModelAndView("redirect:"+url+"?userName="+usernName);
 	}
 	
 	protected String determineTargetUrl(Authentication authentication) {
