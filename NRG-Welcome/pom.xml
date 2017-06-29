@@ -27,6 +27,12 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->		
+ 		<dependency>		
+ 			<groupId>org.postgresql</groupId>		
+ 		<artifactId>postgresql</artifactId>		
+ 			<version>42.1.1</version><!--$NO-MVN-MAN-VER$ -->		
+ 		</dependency>
 	</dependencies>
 	<build>
 		<resources>
