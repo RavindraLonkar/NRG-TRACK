@@ -8,6 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
@@ -38,19 +40,37 @@ public class SecurityFilter implements Filter {
   
 	@Override  
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {  
-    	String userName = request.getParameter("userName");
-    	String decryKey=NRGToken.decrypt(userName, ENCY_USER_KEY);
-    	if(decryKey==null){
-    		CommonUtils.redirectUrl(REDIRECT_LOGIN_URL);
-    	}else{
-    		String UserKey[]=decryKey.split("|");
-    		if(UserKey[1].equals(MATCH_USER_KEY)){
-    			 chain.doFilter(request,response);  
-    		}else{
+    	HttpServletRequest req=(HttpServletRequest) request;
+		String userName = request.getParameter("userName");
+		String url=req.getRequestURL().toString();
+    	
+    	HttpSession session=req.getSession();
+    	if(url.contains("build/session")){
+    		String decryKey=NRGToken.decrypt(userName, ENCY_USER_KEY);
+    		if(decryKey!=null && decryKey.contains(MATCH_USER_KEY) && session.isNew()){
+    			
+    			session.setAttribute(userName, userName);
+    			
+    			chain.doFilter(request, response);
+    		}
+    		else{
+    			session.invalidate();
+    			//Redirect to welcome page
     			CommonUtils.redirectUrl(REDIRECT_LOGIN_URL);
     		}
-    		
     	}
+    	else{
+    		if(req.getSession(false)!=null && !session.isNew()){
+    			chain.doFilter(request, response);
+    		}
+    		else{
+    			//Redirect to welcome page
+    			CommonUtils.redirectUrl(REDIRECT_LOGIN_URL);
+    		}
+    	}
+    	
+    	
+
   
     }  
   

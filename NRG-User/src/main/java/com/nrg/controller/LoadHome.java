@@ -21,7 +21,10 @@ public class LoadHome {
 	public ModelAndView buildsession(){
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("index");
+		modelAndView.setViewName("userView");
+		System.out.println("incide controller");
+		
+		
 		return modelAndView;
 	}
 }
