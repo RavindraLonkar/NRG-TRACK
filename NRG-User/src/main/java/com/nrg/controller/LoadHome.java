@@ -20,11 +20,16 @@ public class LoadHome {
 	@RequestMapping(value="/build/session", method=RequestMethod.GET)
 	public ModelAndView buildsession(){
 		
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("userView");
 		System.out.println("incide controller");
+		return new ModelAndView("redirect:" + "/home/loadHome");
+	}
+	
+	@RequestMapping(value="/loadHome", method=RequestMethod.GET)
+	public ModelAndView loadHome(){
 		
-		
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("index");
+		System.out.println("incide controller");
 		return modelAndView;
 	}
 }
