@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.nrg.security.token.NRGToken;
-import com.nrg.utils.CommonUtils;
 
 @Component  
 @Order(Ordered.HIGHEST_PRECEDENCE)  
@@ -41,6 +41,7 @@ public class SecurityFilter implements Filter {
 	@Override  
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {  
     	HttpServletRequest req=(HttpServletRequest) request;
+    	HttpServletResponse res=(HttpServletResponse) response;
 		String userName = request.getParameter("userName");
 		String url=req.getRequestURL().toString();
     	
@@ -56,7 +57,7 @@ public class SecurityFilter implements Filter {
     		else{
     			session.invalidate();
     			//Redirect to welcome page
-    			CommonUtils.redirectUrl(REDIRECT_LOGIN_URL);
+    			res.sendRedirect("/NRG-Welcome");
     		}
     	}
     	else{
@@ -65,8 +66,7 @@ public class SecurityFilter implements Filter {
     		}
     		else{
     			//Redirect to welcome page
-    			CommonUtils.redirectUrl(REDIRECT_LOGIN_URL);
-    		}
+    			res.sendRedirect("/NRG-Welcome");    		}
     	}
     	
     	
