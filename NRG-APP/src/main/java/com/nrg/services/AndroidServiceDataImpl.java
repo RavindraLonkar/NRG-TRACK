@@ -16,6 +16,9 @@ public class AndroidServiceDataImpl implements AndriodServiceData {
 	@Override
 	public Response saveAndroidServiceData(TrackingData data) {
 		Response response=null;
+	/*	Tracker t=new Tracker();
+		t.setDeviceId("11");
+		data.setTracker(t);*/
 		TrackingData reponseData= androidServiceDataRepository.save(data);
 		response=new Response("sucess",reponseData,"");
 		return response;

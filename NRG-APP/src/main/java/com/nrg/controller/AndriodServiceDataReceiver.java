@@ -20,7 +20,12 @@ public class AndriodServiceDataReceiver {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Response saveAndroidServiceData(@RequestBody TrackingData data){
 		Response response=null;
-		response=andriodServiceData.saveAndroidServiceData(data);
+		try {
+			response=andriodServiceData.saveAndroidServiceData(data);	
+		} catch (Exception e) {
+			response=new Response("fail",null,"");
+		}
+		
 		return response;
 		
 	} 

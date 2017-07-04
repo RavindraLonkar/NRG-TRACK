@@ -1,15 +1,17 @@
 package com.nrg.models;
 
-import javax.persistence.CascadeType;
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 
 @Entity
@@ -29,8 +31,8 @@ public class TrackingData {
 	private String latitude;
 	@Column
 	private String longitude;
-	/*@Column
-	private String createddate;*/
+	@Column
+	private Date createddate;
 	
 	
 	public Integer getId() {
@@ -57,12 +59,13 @@ public class TrackingData {
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
-//	public String getCreateddate() {
-//		return createddate;
-//	}
-//	public void setCreateddate(String createddate) {
-//		this.createddate = createddate;
-//	}
+	
+	public Date getCreateddate() {
+		return createddate;
+	}
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
