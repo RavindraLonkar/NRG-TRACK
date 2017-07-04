@@ -28,13 +28,13 @@ FOREIGN KEY(vechicleId) REFERENCES mst_Vechicle
 
 create table TXN_TrackingData(
 Id 	        serial not null,
-trackerId 	int not null,
+deviceId 	int not null,
 latitude 	float8 NOT NULL,
 longitude 	float8 NOT NULL,
 createdDate 	timestamp NOT NULL,
 CONSTRAINT Txn_TrackingData_pkey PRIMARY KEY (Id),
-FOREIGN KEY(trackerId) REFERENCES mst_Tracker
-)
+FOREIGN KEY(deviceId) REFERENCES mst_Tracker(id)
+) 
 
 create table MST_Role(
 Id 	        serial not null,
