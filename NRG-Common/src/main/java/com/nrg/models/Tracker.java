@@ -11,79 +11,98 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="mst_tracker")
+@Table(name = "mst_tracker")
 public class Tracker {
-	
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private Integer Id;
-	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="Id")
+	private Integer id;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Id")
 	private Vechicle vechicle;
 	@Column
-	private String deviceId;
+	private String deviceid;
 	@Column
-	private String trackerName;
+	private String trackername;
 	@Column
-	private Integer CreatedBy;
+	private Integer Createdby;
 	@Column
-	private Date CreatedDate;
+	private Date Createddate;
 	@Column
-	private Integer LastModifiedBy;
+	private Integer LastModifiedby;
 	@Column
-	private Date LastModifiedDate;
+	private Date LastModifieddate;
+
 	public Integer getId() {
-		return Id;
+		return id;
 	}
+
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
+
 	public Vechicle getVechicle() {
 		return vechicle;
 	}
+
 	public void setVechicle(Vechicle vechicle) {
 		this.vechicle = vechicle;
 	}
-	public String getDeviceId() {
-		return deviceId;
+
+
+	public String getDeviceid() {
+		return deviceid;
 	}
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
+
+	public void setDeviceid(String deviceid) {
+		this.deviceid = deviceid;
 	}
-	public String getTrackerName() {
-		return trackerName;
+
+	public String getTrackername() {
+		return trackername;
 	}
-	public void setTrackerName(String trackerName) {
-		this.trackerName = trackerName;
+
+	public void setTrackername(String trackername) {
+		this.trackername = trackername;
 	}
-	public Integer getCreatedBy() {
-		return CreatedBy;
+
+	public Integer getCreatedby() {
+		return Createdby;
 	}
-	public void setCreatedBy(Integer createdBy) {
-		CreatedBy = createdBy;
+
+	public void setCreatedby(Integer createdby) {
+		Createdby = createdby;
 	}
-	public Date getCreatedDate() {
-		return CreatedDate;
+
+	public Date getCreateddate() {
+		return Createddate;
 	}
-	public void setCreatedDate(Date createdDate) {
-		CreatedDate = createdDate;
+
+	public void setCreateddate(Date createddate) {
+		Createddate = createddate;
 	}
-	public Integer getLastModifiedBy() {
-		return LastModifiedBy;
+
+	public Integer getLastModifiedby() {
+		return LastModifiedby;
 	}
-	public void setLastModifiedBy(Integer lastModifiedBy) {
-		LastModifiedBy = lastModifiedBy;
+
+	public void setLastModifiedby(Integer lastModifiedby) {
+		LastModifiedby = lastModifiedby;
 	}
-	public Date getLastModifiedDate() {
-		return LastModifiedDate;
+
+	public Date getLastModifieddate() {
+		return LastModifieddate;
 	}
-	public void setLastModifiedDate(Date lastModifiedDate) {
-		LastModifiedDate = lastModifiedDate;
+
+	public void setLastModifieddate(Date lastModifieddate) {
+		LastModifieddate = lastModifieddate;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

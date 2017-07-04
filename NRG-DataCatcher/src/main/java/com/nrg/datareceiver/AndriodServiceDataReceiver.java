@@ -22,7 +22,7 @@ public class AndriodServiceDataReceiver {
 		Response response = null;
 		String url=SAVE_ANDROID_SERVICEDATA;
 		RestTemplate rs=new RestTemplate();
-		TrackingData data=rs.postForObject(url, trackingData, TrackingData.class);
+		response=rs.postForObject(url, trackingData, Response.class);
 		return response;
 	}
 }
