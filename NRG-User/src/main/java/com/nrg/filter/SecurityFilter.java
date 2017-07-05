@@ -60,6 +60,11 @@ public class SecurityFilter implements Filter {
     			res.sendRedirect("/NRG-Welcome");
     		}
     	}
+    	else if(url.contains("logout")){
+	    		session.invalidate();
+				//Redirect to welcome page
+				res.sendRedirect("/NRG-Welcome");
+    	}
     	else{
     		if(req.getSession(false)!=null && !session.isNew()){
     			chain.doFilter(request, response);
