@@ -22,7 +22,7 @@ public class AndroidDataServiceImpl implements AndriodDataService {
 	public Response saveAndroidServiceData(TrackingData data) {
 		Response response=null;
 		Tracker trackerData=new Tracker();
-		trackerData=trackerRepository.findBydeviceid(data.getTracker().getDeviceid());
+		trackerData=trackerRepository.findBydeviceid(data.getTdeviceid());
 		if(trackerData!=null){
 			data.setTracker(trackerData);;
 		}else{

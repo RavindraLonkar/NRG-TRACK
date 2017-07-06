@@ -34,6 +34,8 @@ public class TrackingData {
 	private String longitude;
 	@Column
 	private Date createddate;
+	@Column
+	private String tdeviceid;
 	
 	
 	public Integer getId() {
@@ -66,6 +68,14 @@ public class TrackingData {
 	}
 	public void setCreateddate(Date createddate) {
 		this.createddate = createddate;
+	}
+	
+	
+	public String getTdeviceid() {
+		return tdeviceid;
+	}
+	public void setTdeviceid(String tdeviceid) {
+		this.tdeviceid = tdeviceid;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
