@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nrg.models.TrackingData;
-import com.nrg.services.AndriodServiceData;
+import com.nrg.services.AndriodDataService;
 import com.nrg.utils.Response;
 
 @RestController
@@ -15,7 +15,7 @@ import com.nrg.utils.Response;
 public class AndriodServiceDataReceiver {
 	
 	@Autowired
-	AndriodServiceData andriodServiceData;
+	AndriodDataService andriodServiceData;
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Response saveAndroidServiceData(@RequestBody TrackingData data){

@@ -10,7 +10,7 @@ import com.nrg.repositories.TrackerRepository;
 import com.nrg.utils.Response;
 
 @Service
-public class AndroidServiceDataImpl implements AndriodServiceData {
+public class AndroidDataServiceImpl implements AndriodDataService {
 
 	@Autowired
 	AndroidServiceDataRepository androidServiceDataRepository;
