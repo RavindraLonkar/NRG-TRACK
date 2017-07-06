@@ -34,7 +34,7 @@ public class LoginController {
 	@Value("${ENCY_USER_KEY}")
 	private String ENCY_USER_KEY;
 
-	@RequestMapping(value = { "/", "/login.htm" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
