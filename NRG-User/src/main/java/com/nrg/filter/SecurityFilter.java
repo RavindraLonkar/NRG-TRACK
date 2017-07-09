@@ -63,7 +63,7 @@ public class SecurityFilter implements Filter {
     	else if(url.contains("logout")){
 	    		session.invalidate();
 				//Redirect to welcome page
-				res.sendRedirect("/NRG-Welcome");
+				res.sendRedirect("/NRG-Welcome/login");
     	}
     	else{
     		if(req.getSession(false)!=null && !session.isNew()){
@@ -71,12 +71,8 @@ public class SecurityFilter implements Filter {
     		}
     		else{
     			//Redirect to welcome page
-    			res.sendRedirect("/NRG-Welcome");    		}
+    			res.sendRedirect("/NRG-Welcome/login");    		}
     	}
-    	
-    	
-
-  
     }  
   
     @Override  

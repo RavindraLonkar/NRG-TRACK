@@ -21,7 +21,7 @@ public class WelcomeController {
 	public ModelAndView buildsession(){
 		
 		System.out.println("incide controller");
-		return new ModelAndView("redirect:" + "/home/loadHome");
+		return new ModelAndView("redirect:" + "/home");
 	}
 	
 	@RequestMapping(value="/home", method=RequestMethod.GET)
