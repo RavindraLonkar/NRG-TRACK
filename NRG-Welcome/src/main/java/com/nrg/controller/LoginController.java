@@ -55,14 +55,15 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		String url = "";
 		RestTemplate rest = new RestTemplate();
-		User userExists = rest.postForObject(url, user, User.class);
-		if (userExists != null) {
-			bindingResult.rejectValue("email", "error.user",
-					"There is already a user registered with the email provided");
-		}
+		
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
 		} else {
+			User userExists = rest.postForObject(url, user, User.class);
+			if (userExists != null) {
+				bindingResult.rejectValue("emailid", "error.user",
+						"There is already a user registered with the email provided");
+			}
 			// userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());

@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "TXN_User")
 public class User {
@@ -56,7 +59,10 @@ public class User {
 	private Role role;
 	@Column
 	private Integer isactive;
-	@Column
+	
+	@Column(name = "emailid")
+	@Email(message = "*Please provide a valid Email")
+	@NotEmpty(message = "*Please provide an email")
 	private String emailid;
 	@Column
 	private Integer isemailidconfirmed;

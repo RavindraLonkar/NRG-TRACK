@@ -45,7 +45,7 @@
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center"></div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-			<form th:action="@{/registration}" method="POST" class="signup-form">
+			<form th:action="@{/registration}" method="POST" class="signup-form" th:object="${user}" role="form">
 				<div class="login-wrap">
 					<legend>
 						Registration Form <i class="fa fa-pencil pull-right"></i>
@@ -65,8 +65,11 @@
 
 					<div class="input-group">
 						<span class="input-group-addon"><i class="icon_mail"></i></span> <input
-							type="text" class="form-control" id="email" name="email"
-							th:placeholder="email" autofocus="true"></input>
+							type="text" class="form-control" id="emailid" name="emailid"
+							th:placeholder="email" th:field="*{emailid}" autofocus="true"></input>
+							<label
+								th:if="${#fields.hasErrors('emailid')}" th:errors="*{emailid}"
+								class="validation-message"></label>
 					</div>
 
 					<div class="input-group">
