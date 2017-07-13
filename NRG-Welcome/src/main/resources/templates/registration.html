@@ -10,7 +10,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal"></meta>
 <link rel="shortcut icon" th:href="@{/img/favicon.png}"></link>
 
-<title>login page</title>
+<title>Registration Form</title>
 
 <!-- Bootstrap CSS -->
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
@@ -29,40 +29,27 @@
 
 	<div class="container">
 
-		<form th:action="@{/login}" method="POST" class="login-form">
+		<form th:action="@{/registration}" method="POST" class="login-form">
 			<div class="login-wrap">
-				<p class="login-img">
-					<i class="icon_lock_alt"></i>
-				</p>
+
 				<div class="input-group">
-					<span class="input-group-addon"><i class="icon_profile"></i></span>
 					<input type="text" class="form-control" id="username"
 						name="username" th:placeholder="username" autofocus="true"></input>
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"><i class="icon_key_alt"></i></span>
 					<input type="password" th:placeholder="Password" id="password"
 						name="password" class="form-control"></input>
 				</div>
-				<label class="checkbox"> <input type="checkbox"
-					value="remember-me"> Remember me</input> <span class="pull-right">
-						<a href="#"> Forgot Password?</a>
-				</span>
-				</label>
 
-				<button class="btn btn-lg btn-primary btn-block" name="Login"
-					value="Login" type="Submit" th:text="Login"></button>
-				<div align="center" th:if="${param.error}">
-					<p style="font-size: 20; color: #FF1C19;">Email or Password
-						invalid, please verify</p>
-				</div>
+				<button class="btn btn-lg btn-primary btn-block" name="Add"
+					value="Add" type="Submit" th:text="Add"></button>
 			</div>
 		</form>
 
-		<form th:action="@{/registration}" method="get" class="signup-link">
+		<form th:action="@{/login}" method="get" class="signup-link">
 			<div class="login-wrap">
 				<button class="btn btn-info btn-lg btn-block" type="Submit"
-					name="Signup" value="Signup" th:text="Signup"></button>
+					name="Login" value="Login" th:text="Login"></button>
 			</div>
 		</form>
 
