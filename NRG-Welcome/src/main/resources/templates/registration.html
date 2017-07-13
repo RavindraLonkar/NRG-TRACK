@@ -26,32 +26,78 @@
 </head>
 
 <body class="login-img3-body">
+	<div id="custom-bootstrap-menu" class="navbar"
+		role="navigation">
+		<div class="container">
+			<div class="collapse navbar-collapse navbar-menubuilder">
+				<ul class="nav navbar-nav navbar-right">
+					<div class="login-wrap">
+						<form th:action="@{/login}" method="get">
+								<button class="btn btn-info btn-lg btn-block "  style="width: 240%;" type="Submit">Login</button>
+						</form>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center"></div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-		<form th:action="@{/registration}" method="POST" class="login-form">
-			<div class="login-wrap">
+			<form th:action="@{/registration}" method="POST" class="signup-form">
+				<div class="login-wrap">
+					<legend>
+						Registration Form <i class="fa fa-pencil pull-right"></i>
+					</legend>
 
-				<div class="input-group">
-					<input type="text" class="form-control" id="username"
-						name="username" th:placeholder="username" autofocus="true"></input>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="icon_profile"></i></span>
+						<input type="text" class="form-control" id="firstname"
+							name="firstname" th:placeholder="firstname" autofocus="true"></input>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="icon_profile"></i></span>
+						<input type="text" class="form-control" id="lastname"
+							name="lastname" th:placeholder="lastname" autofocus="true"></input>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="icon_mail"></i></span> <input
+							type="text" class="form-control" id="email" name="email"
+							th:placeholder="email" autofocus="true"></input>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="icon_phone"></i></span>
+						<input type="text" class="form-control" id="contactNo"
+							name="contactNo" th:placeholder="contactNo" autofocus="true"></input>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="icon_lock-open"></i></span>
+						<input type="text" class="form-control" id="password"
+							name="password" th:placeholder="password" autofocus="true"></input>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon"><i class="icon_lock-open"></i></span>
+						<input type="text" class="form-control" id="confirmpassword"
+							name="confirmpassword" th:placeholder="confirmpassword"
+							autofocus="true"></input>
+					</div>
+
+					<button class="btn btn-lg btn-primary btn-block" name="SignUp"
+						value="SignUp" type="Submit" th:text="SignUp"></button>
 				</div>
-				<div class="input-group">
-					<input type="password" th:placeholder="Password" id="password"
-						name="password" class="form-control"></input>
-				</div>
-
-				<button class="btn btn-lg btn-primary btn-block" name="Add"
-					value="Add" type="Submit" th:text="Add"></button>
-			</div>
-		</form>
-
-		<form th:action="@{/login}" method="get" class="signup-link">
+			</form>
+		</div>
+		<!-- 	<form th:action="@{/login}" method="get" class="signup-link">
 			<div class="login-wrap">
-				<button class="btn btn-info btn-lg btn-block" type="Submit"
-					name="Login" value="Login" th:text="Login"></button>
+				<button class="btn btn-info btn-lg btn-block" type="Submit">Login</button>
 			</div>
-		</form>
+		</form> -->
 
 	</div>
 </body>

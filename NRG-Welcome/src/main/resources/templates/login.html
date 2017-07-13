@@ -26,6 +26,20 @@
 </head>
 
 <body class="login-img3-body">
+<div id="custom-bootstrap-menu" class="navbar"
+		role="navigation">
+		<div class="container">
+			<div class="collapse navbar-collapse navbar-menubuilder">
+				<ul class="nav navbar-nav navbar-right">
+					<div class="login-wrap">
+						<form th:action="@{/registration}" method="get">
+								<button class="btn btn-info btn-lg btn-block "  style="width: 240%;" type="Submit">Sign Up</button>
+						</form>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
 
@@ -59,12 +73,11 @@
 			</div>
 		</form>
 
-		<form th:action="@{/registration}" method="get" class="signup-link">
+		<!-- <form th:action="@{/registration}" method="get" class="signup-link">
 			<div class="login-wrap">
-				<button class="btn btn-info btn-lg btn-block" type="Submit"
-					name="Signup" value="Signup" th:text="Signup"></button>
+				<button class="btn btn-info btn-lg btn-block" type="Submit">SignUp</button>
 			</div>
-		</form>
+		</form> -->
 
 	</div>
 </body>
