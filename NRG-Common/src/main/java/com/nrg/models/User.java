@@ -63,9 +63,10 @@ public class User {
 	@Column
 	private String securityanswer;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "roleid")
 	private Role role;
+	
 	@Column
 	private Integer isactive;
 	
