@@ -3,10 +3,15 @@
  */
 package com.nrg.controller;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.nrg.models.User;
 
 /**
  * @author Namdev
@@ -21,8 +26,13 @@ public class WelcomeController {
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView loadHome() {
+	public ModelAndView loadHome(ServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		HttpServletRequest req=(HttpServletRequest) request;
+		req.getSession();
+		User user=(User) req.getSession().getAttribute("usersession");
+		modelAndView.addObject("usersesson",user.getUsername());
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}

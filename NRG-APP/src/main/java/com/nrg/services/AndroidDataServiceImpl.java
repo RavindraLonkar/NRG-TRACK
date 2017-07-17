@@ -26,7 +26,7 @@ public class AndroidDataServiceImpl implements AndriodDataService {
 		if(trackerData!=null){
 			data.setTracker(trackerData);;
 		}else{
-			response=new Response("fail",null,"Need to register device first.");
+			return response=new Response("fail",null,"Need to register device first.");
 		}
 		TrackingData reponseData= androidServiceDataRepository.save(data);
 		response=new Response("sucess",reponseData,"");

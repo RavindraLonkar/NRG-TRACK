@@ -59,7 +59,7 @@ public class SecurityFilter implements Filter {
     			RestTemplate restTemplate = new RestTemplate();
     			String sessionurl=USER_SESSION_DATA+"?username=namdevarade";
     		    User result = restTemplate.getForObject(sessionurl, User.class);
-    			session.setAttribute("Session", result);
+    			session.setAttribute("usersession", result);
     			
     			chain.doFilter(request, response);
     		}
