@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
+import com.nrg.models.User;
 import com.nrg.security.token.NRGToken;
 
 @Component  
@@ -31,6 +33,10 @@ public class SecurityFilter implements Filter {
 	
 	@Value("${REDIRECT_LOGIN_URL}")
 	private String REDIRECT_LOGIN_URL;
+	
+	@Value("${USER_SESSION_DATA}")
+	private String USER_SESSION_DATA;
+	
 	
   
     @Override  
@@ -50,14 +56,17 @@ public class SecurityFilter implements Filter {
     		String decryKey=NRGToken.decrypt(userName, ENCY_USER_KEY);
     		if(decryKey!=null && decryKey.contains(MATCH_USER_KEY) && session.isNew()){
     			
-    			session.setAttribute(userName, userName);
+    			RestTemplate restTemplate = new RestTemplate();
+    			String sessionurl=USER_SESSION_DATA+"?username=namdevarade";
+    		    User result = restTemplate.getForObject(sessionurl, User.class);
+    			session.setAttribute("Session", result);
     			
     			chain.doFilter(request, response);
     		}
     		else{
     			session.invalidate();
     			//Redirect to welcome page
-    			res.sendRedirect("/NRG-Welcome");
+    			res.sendRedirect("/NRG-Welcome/login");
     		}
     	}
     	else if(url.contains("logout")){

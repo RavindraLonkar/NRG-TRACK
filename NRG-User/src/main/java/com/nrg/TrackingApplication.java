@@ -8,10 +8,11 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.PropertySource;
 
 
 @SpringBootApplication
-//@PropertySource("classpath:urls.properties")
+@PropertySource("classpath:urls.properties")
 @EnableAutoConfiguration(exclude={SecurityAutoConfiguration.class,DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 public class TrackingApplication extends SpringBootServletInitializer {
 	

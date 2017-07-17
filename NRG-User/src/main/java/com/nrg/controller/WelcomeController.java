@@ -14,21 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 public class WelcomeController {
-	
 
-	@RequestMapping(value="/build/session", method=RequestMethod.GET)
-	public ModelAndView buildsession(){
-		
-		System.out.println("incide controller");
+	@RequestMapping(value = "/build/session", method = RequestMethod.GET)
+	public ModelAndView buildsession() {
 		return new ModelAndView("redirect:" + "/home");
 	}
-	
-	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public ModelAndView loadHome(){
-		
-		ModelAndView modelAndView=new ModelAndView();
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public ModelAndView loadHome() {
+		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
-	
+
 }

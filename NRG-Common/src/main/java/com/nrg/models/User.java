@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -25,13 +26,21 @@ public class User {
 	private long userid;
 	@Column
 	private String username;
-	@Column
+	
+	
+	@Column(name = "password")
+	@Length(min = 8, message = "*Your password must have at least 8 characters")
+	@NotEmpty(message = "*Please provide your password")
 	private String password;
-	@Column
+	
+	@Column(name = "lastname")
+	@NotEmpty(message = "*Please provide an lastname")
 	private String lastname;
 	@Column
 	private String middlename;
-	@Column
+	
+	@Column(name = "firstname")
+	@NotEmpty(message = "*Please provide an firstname")
 	private String firstname;
 	@Column
 	private Integer salutationid;
@@ -64,6 +73,7 @@ public class User {
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
 	private String emailid;
+	
 	@Column
 	private Integer isemailidconfirmed;
 	@Column
