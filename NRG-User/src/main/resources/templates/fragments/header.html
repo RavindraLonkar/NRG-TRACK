@@ -12,11 +12,11 @@
 		</div>
 
 		<!--logo start-->
-		<a href="index.html" class="logo">NRG <span class="lite"></span></a>
+		<a href="#" class="logo">NRG <span class="lite"></span></a>
 		<!--logo end-->
 
-		<div class="nav search-row" id="top_menu">
-			<!--  search form start -->
+		<!-- <div class="nav search-row" id="top_menu">
+			 search form start
 			<ul class="nav top-menu">
 				<li>
 					<form class="navbar-form">
@@ -24,15 +24,15 @@
 					</form>
 				</li>
 			</ul>
-			<!--  search form end -->
-		</div>
+			 search form end
+		</div> -->
 
 		<div class="top-nav notification-row">
 			<!-- notificatoin dropdown start-->
 			<ul class="nav pull-right top-menu">
 
 				<!-- alert notification start-->
-				<li id="alert_notificatoin_bar" class="dropdown"><a
+				<!-- <li id="alert_notificatoin_bar" class="dropdown"><a
 					data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
 						class="icon-bell-l"></i> <span class="badge bg-important">7</span>
 				</a>
@@ -58,13 +58,14 @@
 								class="small italic pull-right"> Today</span>
 						</a></li>
 						<li><a href="#">See all notifications</a></li>
-					</ul></li>
+					</ul></li> -->
 				<!-- alert notification end-->
+				
 				<!-- user login dropdown start-->
 				<li class="dropdown"><a data-toggle="dropdown"
 					class="dropdown-toggle" href="#"> <span class="profile-ava">
-							<img alt="" th:src="@{/img/avatar1_small.jpg}"></img>
-					</span> <span class="username" th:text="${username}"></span> <b class="caret"></b>
+							<img alt="" th:src="@{/img/user_img.png}"></img>
+					</span> <span class="username" th:text="${session.username}"></span> <b class="caret"></b>
 				</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
@@ -85,7 +86,7 @@
 		<div id="sidebar" class="nav-collapse ">
 			<!-- sidebar menu start-->
 			<ul class="sidebar-menu">
-				<li class="active"><a class="" href="index.html"> <i
+				<li class="active"><a class="" href="home.html"> <i
 						class="icon_house_alt"></i> <span>Dashboard</span>
 				</a></li>
 				<li class="sub-menu"><a href="javascript:;" class=""> <i

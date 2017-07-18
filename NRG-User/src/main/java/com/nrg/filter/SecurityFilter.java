@@ -16,76 +16,63 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
-import com.nrg.models.User;
 import com.nrg.security.token.NRGToken;
 
-@Component  
-@Order(Ordered.HIGHEST_PRECEDENCE)  
-public class SecurityFilter implements Filter {  
-  
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class SecurityFilter implements Filter {
+
 	@Value("${MATCH_USER_KEY}")
 	private String MATCH_USER_KEY;
 
 	@Value("${ENCY_USER_KEY}")
 	private String ENCY_USER_KEY;
-	
+
 	@Value("${REDIRECT_LOGIN_URL}")
 	private String REDIRECT_LOGIN_URL;
-	
-	@Value("${USER_SESSION_DATA}")
-	private String USER_SESSION_DATA;
-	
-	
-  
-    @Override  
-    public void init(FilterConfig filterConfig) throws ServletException {  
-  
-    }  
-  
-	@Override  
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {  
-    	HttpServletRequest req=(HttpServletRequest) request;
-    	HttpServletResponse res=(HttpServletResponse) response;
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+
+	}
+
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
 		String userName = request.getParameter("userName");
-		String url=req.getRequestURL().toString();
-    	
-    	HttpSession session=req.getSession();
-    	if(url.contains("build/session")){
-    		String decryKey=NRGToken.decrypt(userName, ENCY_USER_KEY);
-    		if(decryKey!=null && decryKey.contains(MATCH_USER_KEY) && session.isNew()){
-    			
-    			RestTemplate restTemplate = new RestTemplate();
-    			String sessionurl=USER_SESSION_DATA+"?username=namdevarade";
-    		    User result = restTemplate.getForObject(sessionurl, User.class);
-    			session.setAttribute("usersession", result);
-    			
-    			chain.doFilter(request, response);
-    		}
-    		else{
-    			session.invalidate();
-    			//Redirect to welcome page
-    			res.sendRedirect("/NRG-Welcome/login");
-    		}
-    	}
-    	else if(url.contains("logout")){
-	    		session.invalidate();
-				//Redirect to welcome page
+		String url = req.getRequestURL().toString();
+
+		HttpSession session = req.getSession();
+		if (url.contains("build/session")) {
+			String decryKey = NRGToken.decrypt(userName, ENCY_USER_KEY);
+			if (decryKey != null && decryKey.contains(MATCH_USER_KEY) && session.isNew()) {
+
+				session.setAttribute("username", decryKey.split("\\|")[0]);
+				chain.doFilter(request, response);
+			} else {
+				session.invalidate();
+				// Redirect to welcome page
 				res.sendRedirect("/NRG-Welcome/login");
-    	}
-    	else{
-    		if(req.getSession(false)!=null && !session.isNew()){
-    			chain.doFilter(request, response);
-    		}
-    		else{
-    			//Redirect to welcome page
-    			res.sendRedirect("/NRG-Welcome/login");    		}
-    	}
-    }  
-  
-    @Override  
-    public void destroy() {  
-  
-    }  
-}  
+			}
+		} else if (url.contains("logout")) {
+			session.invalidate();
+			// Redirect to welcome page
+			res.sendRedirect("/NRG-Welcome/login");
+		} else {
+			if (req.getSession(false) != null && !session.isNew()) {
+				chain.doFilter(request, response);
+			} else {
+				// Redirect to welcome page
+				res.sendRedirect("/NRG-Welcome/login");
+			}
+		}
+	}
+
+	@Override
+	public void destroy() {
+
+	}
+}
