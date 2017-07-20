@@ -31,6 +31,11 @@ public class SecurityFilter implements Filter {
 
 	@Value("${REDIRECT_LOGIN_URL}")
 	private String REDIRECT_LOGIN_URL;
+	
+	@Value("${SESSION_TIMEOUT_SECONDS}")
+	private String SESSION_TIMEOUT_SECONDS;
+	
+	
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -51,6 +56,7 @@ public class SecurityFilter implements Filter {
 			if (decryKey != null && decryKey.contains(MATCH_USER_KEY) && session.isNew()) {
 
 				session.setAttribute("username", decryKey.split("\\|")[0]);
+				session.setMaxInactiveInterval(Integer.parseInt(SESSION_TIMEOUT_SECONDS));
 				chain.doFilter(request, response);
 			} else {
 				session.invalidate();
@@ -66,6 +72,7 @@ public class SecurityFilter implements Filter {
 				chain.doFilter(request, response);
 			} else {
 				// Redirect to welcome page
+				session.invalidate();
 				res.sendRedirect("/NRG-Welcome/login");
 			}
 		}

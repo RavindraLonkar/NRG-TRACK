@@ -33,7 +33,7 @@ public class WelcomeController {
 			User result = restTemplate.getForObject(sessionurl, User.class);
 			request.getSession().setAttribute("usersession", result);
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 	
 		return new ModelAndView("redirect:" + "/home");
