@@ -26,10 +26,9 @@
 <script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/assets/login.js}"></script>
+<script th:src="@{/js/assets/forgot-password-validation.js}"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		passwordRequest();
-	});
+	passwordRequest();
 </script>
 </head>
 
@@ -87,9 +86,6 @@
 				<div class="wrapper-popup">
 					<!-- Modal content-->
 					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">×</button>
-						</div>
 						<form th:action="@{/passwordrequest}" method="POST" class="login"
 							id="emailIdForm" role="form">
 							<div class="modal-body">
@@ -98,19 +94,15 @@
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-envelope"></i></span> <input type="text"
 										id="emailid" name="emailid" class="form-control"
-										placeholder="Enter E-mail Address"></input> <label
-										class="validation-message text-danger" id="email_error"></label>
+										placeholder="Enter E-mail Address"></input>
 								</div>
+								<div class="help-block hide" id="email_error"></div>
+							</div>
+							
+							<div class="modal-footer">
 								<div class="space-20"></div>
-								<div>
-									<span id="resMsg"
-										style="padding: 8px 10px; float: left; font-size: 14px; margin: 14px 0px;"></span>
-									<button class="btn btn-lg btn-primary btn-block"
-										name="Passwordrequest" value="Passwordrequest" type="Submit"
-										th:text="Send"></button>
-								</div>
-								<div class="space-20"></div>
-
+								<button class="btn btn-md btn-primary" id="Passwordrequest"
+									type="button" th:text="Send"></button>
 							</div>
 						</form>
 						<div class="clearfix"></div>
