@@ -17,14 +17,45 @@ function myMap() {
 	/* marker.setMap(map); */
 }
 
-var beaches = [ [ 'Bondi Beach', 22.890542, 77.274856, 4 ],
+/*var beaches = [ [ 'Bondi Beach', 22.890542, 77.274856, 4 ],
 		[ 'Coogee Beach', 22.00, 77.259052, 5 ],
 		[ 'Cronulla Beach', 22.028249, 77.157507, 3 ],
 		[ 'Manly Beach', 22.80010128657071, 77.28747820854187, 2 ],
 		[ 'Maroubra Beach', 22.950198, 77.259302, 1 ] ];
+*/
+//var vehicles = "${vehicleList}";
 
 function setMarkers(map) {
-	// Adds markers to the map.
+	
+	var url = window.location;
+	//var data;
+	 $.ajax({
+         type : "GET",
+         url : url + "GetVehicleList",
+         //data : data,
+         processData: false, //prevent jQuery from automatically transforming the data into a query string
+         contentType: false,
+         cache: false,
+         timeout: 600000,
+         success : function(result) {
+          if(result.status=='success'){
+           if(jQuery.isEmptyObject(result))
+               return;
+            
+           loadMap(result.data,map);
+          }else{
+          // BootstrapDialog.alert(result.resonCode);
+          } 
+         },
+         error : function(e) {
+          $("#"+objectName+"").hide();
+             console.log("ERROR: ", e);
+         }
+     });
+	
+}
+	function loadMap(list,map){
+	 // Adds markers to the map.
 
 	// Marker sizes are expressed as a Size of X,Y where the origin of the image
 	// (0,0) is located in the top left of the image.
@@ -49,22 +80,22 @@ function setMarkers(map) {
 		coords : [ 1, 1, 1, 20, 18, 20, 18, 1 ],
 		type : 'poly'
 	};
-	for (var i = 0; i < beaches.length; i++) {
-		var beach = beaches[i];
+	for (var i = 0; i < list.length; i++) {
+		var vehicle = list[i];
 		var marker = new google.maps.Marker({
 			position : {
-				lat : beach[1],
-				lng : beach[2]
+				lat : parseFloat(vehicle.longitude),
+				lng : parseFloat(vehicle.latitude)
 			},
 			map : map,
 			icon : image,
 			shape : shape,
-			title : beach[0],
-			zIndex : beach[3]
+			title : vehicle.vehicleNumber,
+			zIndex :parseInt(vehicle.index)
 		});
 
 		marker.infowindow = new google.maps.InfoWindow({
-			content : beach[0]
+			content : vehicle.vehicleNumber
 		});
 		google.maps.event.addListener(marker, 'click', function() {
 			this.infowindow.open(map, this);
