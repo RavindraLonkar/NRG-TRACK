@@ -21,5 +21,10 @@ public class UserServiceImpl implements UserService {
 	public User session(String username) {
 		return userRepository.findAllByusername(username);
 	}
+	
+	@Override
+	public User findUserByemailid(String email) {
+		return userRepository.findUserByemailid(email);
+	}
 
 }

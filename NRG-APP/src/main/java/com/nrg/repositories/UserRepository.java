@@ -9,5 +9,6 @@ import com.nrg.models.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	 User findUserByusername(String username);
 	 User findAllByusername(String username);
+	 User findUserByemailid(String email);
 	 
 }

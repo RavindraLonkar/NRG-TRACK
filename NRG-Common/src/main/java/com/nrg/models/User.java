@@ -12,10 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 @Table(name = "TXN_User")
 public class User {
@@ -26,21 +22,16 @@ public class User {
 	private long userid;
 	@Column
 	private String username;
-	
-	
+
 	@Column(name = "password")
-	@Length(min = 8, message = "*Your password must have at least 8 characters")
-	@NotEmpty(message = "*Please provide your password")
 	private String password;
-	
+
 	@Column(name = "lastname")
-	@NotEmpty(message = "*Please provide an lastname")
 	private String lastname;
 	@Column
 	private String middlename;
-	
+
 	@Column(name = "firstname")
-	@NotEmpty(message = "*Please provide an firstname")
 	private String firstname;
 	@Column
 	private Integer salutationid;
@@ -66,15 +57,13 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "roleid")
 	private Role role;
-	
+
 	@Column
 	private Integer isactive;
-	
+
 	@Column(name = "emailid")
-	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
 	private String emailid;
-	
+
 	@Column
 	private Integer isemailidconfirmed;
 	@Column
@@ -184,7 +173,6 @@ public class User {
 		this.genderid = genderid;
 	}
 
-	
 	public Integer getMaritalstatusid() {
 		return maritalstatusid;
 	}
