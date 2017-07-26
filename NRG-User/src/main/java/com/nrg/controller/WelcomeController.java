@@ -56,7 +56,7 @@ public class WelcomeController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/homeGetVehicleList", method = RequestMethod.GET)
+	@RequestMapping(value = "/vehicleList", method = RequestMethod.GET)
 	public Response getVehicleList() {
 		
 		List<VehiclePosition> list=new ArrayList<VehiclePosition>(); 
