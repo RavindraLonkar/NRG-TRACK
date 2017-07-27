@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.nrg.models.User;
 import com.nrg.utils.Response;
@@ -22,7 +21,6 @@ public class ForgotPasswordController {
 
 	@RequestMapping(value = "/passwordrequest", method = RequestMethod.GET)
 	public Response saveAndroidServiceData(ServletRequest req) {
-		ModelAndView modelAndView = new ModelAndView();
 		RestTemplate rs = new RestTemplate();
 		User userData = new User();
 		String emailId = req.getParameter("emailid");

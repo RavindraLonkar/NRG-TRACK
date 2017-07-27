@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nrg.models.User;
 import com.nrg.security.token.NRGToken;
+import com.nrg.utils.CommonConstants;
+import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
 
 @RestController
@@ -35,6 +36,12 @@ public class LoginController {
 	@Value("${ENCY_USER_KEY}")
 	private String ENCY_USER_KEY;
 
+	@Value("${FIND_USER_BY_EMAIL}")
+	private String FIND_USER_BY_EMAIL;
+
+	@Value("${SAVE_CLIENT}")
+	private String SAVE_CLIENT;
+
 	Response response = new Response();
 
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
@@ -47,24 +54,28 @@ public class LoginController {
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
-		User user = new User();
-		modelAndView.addObject("user", user);
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/registration", method = RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
-	public Response createNewUser(User user) {
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	@ResponseBody
+	public Response createNewUser(@RequestBody User user) {
 		ModelAndView modelAndView = new ModelAndView();
-		String url = "";
 		RestTemplate rest = new RestTemplate();
-
-		User userExists = rest.postForObject(url, user, User.class);
-
-		// userService.saveUser(user);
-		modelAndView.addObject("successMessage", "User has been registered successfully");
-		modelAndView.addObject("user", new User());
-		modelAndView.setViewName("registration");
+		String url = FIND_USER_BY_EMAIL;
+		try {
+			response = rest.postForObject(url, user, Response.class);
+			if (response.getStatus().equals(CommonConstants.NRG_SCUCESS)) {
+				return response = new Response(CommonConstants.NRG_FAIL, null,
+						CommonUserMessages.NRG_USER_FOUND_ENTER_DIFF_EMAIL);
+			} else {
+				String saveUrl = SAVE_CLIENT;
+				response = rest.postForObject(saveUrl, user, Response.class);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 		return response;
 

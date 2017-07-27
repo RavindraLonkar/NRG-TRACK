@@ -23,8 +23,10 @@
 <!-- Custom styles -->
 <link th:href="@{/css/style.css}" rel="stylesheet"></link>
 <link th:href="@{/css/style-responsive.css}" rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/css/bootstrap-dialog.min.css}"></link>
 <script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap-dialog.min.js}"></script>	
 <script th:src="@{/js/assets/common-validations.js}"></script>
 <script th:src="@{/js/assets/registration.js}"></script>
 <script th:src="@{/js/assets/registration-validation.js}"></script>
@@ -85,7 +87,7 @@
 					<div class="input-group">
 						<span class="input-group-addon"><i class="icon_phone"></i></span>
 						<input type="text" class="form-control" id="contactNo"
-							name="contactNo" th:placeholder="contactNo"
+							name="contactmobile" th:placeholder="contactNo"
 							onkeydown="allowIntegersOnly(id,event)" maxlength="10"
 							autofocus="true"></input>
 					</div>
