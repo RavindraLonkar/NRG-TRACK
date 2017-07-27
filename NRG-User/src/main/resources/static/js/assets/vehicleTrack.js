@@ -76,7 +76,7 @@ function initMap() {
                 totalDist=totalDist+parseInt(route.legs[i].distance.value);
             }
             
-            summaryPanel.innerHTML ='<h3>Total Dist cover:-'+totalDist/1000+'</h3>';
+            summaryPanel.innerHTML ='<h3>Total Dist cover:-'+totalDist/1000+'Km</h3>';
           } else {
             window.alert('Directions request failed due to ' + status);
           }
