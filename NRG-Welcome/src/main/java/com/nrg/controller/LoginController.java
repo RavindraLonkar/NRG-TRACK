@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nrg.models.User;
 import com.nrg.security.token.NRGToken;
@@ -61,13 +62,12 @@ public class LoginController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	@ResponseBody
 	public Response createNewUser(@RequestBody User user) {
-		ModelAndView modelAndView = new ModelAndView();
 		RestTemplate rest = new RestTemplate();
 		String url = FIND_USER_BY_EMAIL;
 		try {
 			response = rest.postForObject(url, user, Response.class);
 			if (response.getStatus().equals(CommonConstants.NRG_SCUCESS)) {
-				return response = new Response(CommonConstants.NRG_FAIL, null,
+				return response = new Response(CommonConstants.NRG_USER_EXISTS, null,
 						CommonUserMessages.NRG_USER_FOUND_ENTER_DIFF_EMAIL);
 			} else {
 				String saveUrl = SAVE_CLIENT;

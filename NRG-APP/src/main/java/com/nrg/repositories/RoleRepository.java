@@ -8,5 +8,6 @@ import com.nrg.models.Role;
 @Repository("roleRepository")
 public interface RoleRepository extends CrudRepository<Role, Integer> {
 	Role findByroleid(Integer roleid);
+	Role findByrolename(String roleName);
 
 }

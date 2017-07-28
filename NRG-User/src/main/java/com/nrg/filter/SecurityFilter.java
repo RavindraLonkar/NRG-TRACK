@@ -1,6 +1,7 @@
 package com.nrg.filter;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.nrg.security.token.NRGToken;
 
@@ -23,22 +25,14 @@ import com.nrg.security.token.NRGToken;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SecurityFilter implements Filter {
 
-	@Value("${MATCH_USER_KEY}")
-	private String MATCH_USER_KEY;
-
-	@Value("${ENCY_USER_KEY}")
-	private String ENCY_USER_KEY;
-
 	@Value("${REDIRECT_LOGIN_URL}")
 	private String REDIRECT_LOGIN_URL;
-	
+
 	@Value("${SESSION_TIMEOUT_SECONDS}")
 	private String SESSION_TIMEOUT_SECONDS;
-	
+
 	@Value("${LOGIN_URL}")
 	private String LOGIN_URL;
-	
-	
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -50,15 +44,10 @@ public class SecurityFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		String userName = request.getParameter("userName");
 		String url = req.getRequestURL().toString();
-
 		HttpSession session = req.getSession();
 		if (url.contains("build/session")) {
-			String decryKey = NRGToken.decrypt(userName, ENCY_USER_KEY);
-			if (decryKey != null && decryKey.contains(MATCH_USER_KEY) && session.isNew()) {
-
-				session.setAttribute("username", decryKey.split("\\|")[0]);
+			if (session.isNew()) {
 				session.setMaxInactiveInterval(Integer.parseInt(SESSION_TIMEOUT_SECONDS));
 				chain.doFilter(request, response);
 			} else {
