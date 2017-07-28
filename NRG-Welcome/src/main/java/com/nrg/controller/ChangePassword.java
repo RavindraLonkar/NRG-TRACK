@@ -25,8 +25,9 @@ public class ChangePassword {
 	@RequestMapping(value = {"/changepassword" }, method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		String token=request.getParameter("token");
+		String token=request.getParameter("token").replace(' ', '+');
 		modelAndView.setViewName("changepassword");
+		modelAndView.addObject("token", token);
 		return modelAndView;
 	}
 	
