@@ -1,4 +1,4 @@
-/*package com.nrg.utils;
+package com.nrg.utils;
 
 import java.util.Locale;
 
@@ -26,7 +26,7 @@ public class EmailService {
 	private TemplateEngine htmlTemplateEngine;
 
 	
-	 * Common Mail Sender.
+	/* Common Mail Sender.*/
 	 
 	public void sendMail(final Email email, final Locale locale) throws Exception {
 
@@ -43,7 +43,7 @@ public class EmailService {
 
 		// Create the HTML body using Thymeleaf
 		final String htmlContent = this.htmlTemplateEngine.process(email.getTemplateUri(), ctx);
-		message.setText(htmlContent, true  isHtml );
+		message.setText(htmlContent, true);
 
 		// Add the inline image, referenced from the HTML code as
 		// "cid:${imageResourceName}"
@@ -64,4 +64,3 @@ public class EmailService {
 	}
 
 }
-*/

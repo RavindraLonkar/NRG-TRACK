@@ -1,4 +1,4 @@
-/*package com.nrg.configuration;
+package com.nrg.configuration;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -55,7 +55,7 @@ public class SpringMailConfig implements ApplicationContextAware, EnvironmentAwa
 
 
     
-     * SPRING + JAVAMAIL: JavaMailSender instance, configured via .properties files.
+    /* SPRING + JAVAMAIL: JavaMailSender instance, configured via .properties files.*/
      
     @Bean
     public JavaMailSender mailSender() throws IOException {
@@ -80,7 +80,7 @@ public class SpringMailConfig implements ApplicationContextAware, EnvironmentAwa
 
 
     
-     *  Message externalization/internationalization for emails.
+     /*  Message externalization/internationalization for emails.
      *
      *  NOTE we are avoiding the use of the name 'messageSource' for this bean because that
      *       would make the MessageSource defined in SpringWebConfig (and made available for the
@@ -90,7 +90,8 @@ public class SpringMailConfig implements ApplicationContextAware, EnvironmentAwa
      *
      *  NOTE also that given we want this specific message source to be used by our
      *       SpringTemplateEngines for emails (and not by the web one), we will set it explicitly
-     *       into each of the TemplateEngine objects with 'setTemplateEngineMessageSource(...)'
+     *       into each of the TemplateEngine objects with 'setTemplateEngineMessageSource(...)' 
+     */
      
     @Bean
     public ResourceBundleMessageSource emailMessageSource() {
@@ -100,12 +101,12 @@ public class SpringMailConfig implements ApplicationContextAware, EnvironmentAwa
     }
 
 
-     ******************************************************************** 
+    /******************************************************************** 
       THYMELEAF-SPECIFIC ARTIFACTS FOR EMAIL                              
       TemplateResolver(3) <- TemplateEngine                               
-     ******************************************************************** 
+     ********************************************************************/ 
 
-    @Bean
+   /* @Bean
     public TemplateEngine emailTemplateEngine() {
         final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         // Resolver for TEXT emails
@@ -117,7 +118,7 @@ public class SpringMailConfig implements ApplicationContextAware, EnvironmentAwa
         // Message source, internationalization specific to emails
         templateEngine.setTemplateEngineMessageSource(emailMessageSource());
         return templateEngine;
-    }
+    }*/
 
     private ITemplateResolver textTemplateResolver() {
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -153,4 +154,3 @@ public class SpringMailConfig implements ApplicationContextAware, EnvironmentAwa
     }
 
 }
-*/
