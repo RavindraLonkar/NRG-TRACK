@@ -35,6 +35,9 @@ public class SecurityFilter implements Filter {
 	@Value("${SESSION_TIMEOUT_SECONDS}")
 	private String SESSION_TIMEOUT_SECONDS;
 	
+	@Value("${LOGIN_URL}")
+	private String LOGIN_URL;
+	
 	
 
 	@Override
@@ -61,19 +64,19 @@ public class SecurityFilter implements Filter {
 			} else {
 				session.invalidate();
 				// Redirect to welcome page
-				res.sendRedirect("/NRG-Welcome/login");
+				res.sendRedirect(LOGIN_URL);
 			}
 		} else if (url.contains("logout")) {
 			session.invalidate();
 			// Redirect to welcome page
-			res.sendRedirect("/NRG-Welcome/login");
+			res.sendRedirect(LOGIN_URL);
 		} else {
 			if (req.getSession(false) != null && !session.isNew()) {
 				chain.doFilter(request, response);
 			} else {
 				// Redirect to welcome page
 				session.invalidate();
-				res.sendRedirect("/NRG-Welcome/login");
+				res.sendRedirect(LOGIN_URL);
 			}
 		}
 	}

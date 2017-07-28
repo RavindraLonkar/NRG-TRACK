@@ -10,6 +10,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.PropertySource;
 
+import com.tcp.track.main.MainCatcher;
+
 
 @SpringBootApplication
 @PropertySource("classpath:urls.properties")
@@ -22,7 +24,23 @@ public class TrackingApplication extends SpringBootServletInitializer {
     }
 	
 	public static void main(String[] args) {
-		SpringApplication.run(TrackingApplication.class, args);
+		
+		System.out.println("main1***************************************************************************");
+		//SpringApplication.run(TrackingApplication.class, args);
+		
+		
+			try {
+				 System.out.println("main2***************************************************************************");
+				Class.forName("MainCatche").newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}	
-	
 }

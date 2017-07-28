@@ -16,12 +16,20 @@
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i>Home</li>
 						<li><i class="fa fa-laptop"></i>Dashboard</li>
+						<li><b>Vehicle No:</b>&nbsp; <select id="start">
+								<option value="1234">1234</option>
+								<option value="2345">2345</option>
+								<option value="3456">3456</option>
+								<option value="4567">4567</option>
+						</select></li>
+						<li><b>startDate</b>&nbsp;<input type="text" id="startDate"></li>
+						<li><input type="submit" id="submit"></li>
 					</ol>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div id="googleMap"  style="width: 100%; height: 611px;"></div>
+					<div id="map"  style="width: 100%; height: 611px;"></div>
 				</div>
 			</div>
 
@@ -31,7 +39,7 @@
 	
 	<!-- JS Paths -->
 	<div th:replace="fragments/commonJs :: commonJs"></div>
-	<script th:src="@{/js/assets/dashboard.js}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbpCegnFJk679xIcs34FzNhMOokwZPS9Y&callback=myMap"></script>
+	<script th:src="@{/js/assets/VehiclePosition.js}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlhEyIB0wJDgigqwoVyA8LAVCET5KyCU&libraries=places&callback=myMap"></script>
 </body>
 </html>
