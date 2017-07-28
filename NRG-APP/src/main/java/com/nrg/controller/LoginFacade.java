@@ -1,12 +1,14 @@
 package com.nrg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nrg.models.User;
+import com.nrg.security.token.NRGToken;
 import com.nrg.services.UserService;
 import com.nrg.utils.CommonConstants;
 import com.nrg.utils.CommonUserMessages;
@@ -18,6 +20,12 @@ public class LoginFacade {
 
 	@Autowired
 	UserService userService;
+
+	@Value("${CHANGE_PASSSWORD_URL}")
+	private String CHANGE_PASSSWORD_URL;
+
+	@Value("${ENCY_USER_KEY}")
+	private String ENCY_USER_KEY;
 
 	Response response = new Response();
 
@@ -35,8 +43,11 @@ public class LoginFacade {
 		if (UserDataForEmail == null) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.NRG_USER_NOT_FOUND);
 		} else {
-			
-			response = new Response(CommonConstants.NRG_SCUCESS, UserDataForEmail, CommonUserMessages.NRG_USER_FOUND_CONFIRMATION_EMAIL_MSG);
+			String changePasswordToken = NRGToken.encrypt(CHANGE_PASSSWORD_URL, ENCY_USER_KEY);
+			String changePasswordURL = CHANGE_PASSSWORD_URL + "?token=" + changePasswordToken;
+
+			response = new Response(CommonConstants.NRG_SCUCESS, UserDataForEmail,
+					CommonUserMessages.NRG_USER_FOUND_CONFIRMATION_EMAIL_MSG);
 		}
 		return response;
 	}
