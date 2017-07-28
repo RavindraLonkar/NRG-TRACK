@@ -35,6 +35,7 @@ public class LoginFacade {
 		if (UserDataForEmail == null) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.NRG_USER_NOT_FOUND);
 		} else {
+			
 			response = new Response(CommonConstants.NRG_SCUCESS, UserDataForEmail, CommonUserMessages.NRG_USER_FOUND_CONFIRMATION_EMAIL_MSG);
 		}
 		return response;
