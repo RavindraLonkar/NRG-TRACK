@@ -13,70 +13,94 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MST_Vechicle")
+@Table(name = "MST_Vechicle")
 public class Vechicle {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private Integer Id;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="userId")
-	private User user;
-	@Column private String vechicleName;
-	@Column private String vechicleNumber;
+	private Integer id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId")
+	private User userid;
 	@Column
-	private Integer CreatedBy;
+	private String vechiclename;
 	@Column
-	private Date CreatedDate;
+	private String vechiclenumber;
 	@Column
-	private Integer LastModifiedBy;
+	private Integer createdby;
 	@Column
-	private Date LastModifiedDate;
-	
+	private Date createddate;
+	@Column
+	private Integer lastmodifiedby;
+	@Column
+	private Date lastmodifieddate;
+
 	public Integer getId() {
-		return Id;
+		return id;
 	}
+
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
-	public User getUser() {
-		return user;
+
+	public User getUserid() {
+		return userid;
 	}
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setUserid(User userid) {
+		this.userid = userid;
 	}
-	public String getVechicleName() {
-		return vechicleName;
+
+	public String getVechiclename() {
+		return vechiclename;
 	}
-	public void setVechicleName(String vechicleName) {
-		this.vechicleName = vechicleName;
+
+	public void setVechiclename(String vechiclename) {
+		this.vechiclename = vechiclename;
 	}
-	public Integer getCreatedBy() {
-		return CreatedBy;
+
+	public String getVechiclenumber() {
+		return vechiclenumber;
 	}
-	public void setCreatedBy(Integer createdBy) {
-		CreatedBy = createdBy;
+
+	public void setVechiclenumber(String vechiclenumber) {
+		this.vechiclenumber = vechiclenumber;
 	}
-	public Date getCreatedDate() {
-		return CreatedDate;
+
+	public Integer getCreatedby() {
+		return createdby;
 	}
-	public void setCreatedDate(Date createdDate) {
-		CreatedDate = createdDate;
+
+	public void setCreatedby(Integer createdby) {
+		this.createdby = createdby;
 	}
-	public Integer getLastModifiedBy() {
-		return LastModifiedBy;
+
+	public Date getCreateddate() {
+		return createddate;
 	}
-	public void setLastModifiedBy(Integer lastModifiedBy) {
-		LastModifiedBy = lastModifiedBy;
+
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
 	}
-	public Date getLastModifiedDate() {
-		return LastModifiedDate;
+
+	public Integer getLastmodifiedby() {
+		return lastmodifiedby;
 	}
-	public void setLastModifiedDate(Date lastModifiedDate) {
-		LastModifiedDate = lastModifiedDate;
+
+	public void setLastmodifiedby(Integer lastmodifiedby) {
+		this.lastmodifiedby = lastmodifiedby;
 	}
+
+	public Date getLastmodifieddate() {
+		return lastmodifieddate;
+	}
+
+	public void setLastmodifieddate(Date lastmodifieddate) {
+		this.lastmodifieddate = lastmodifieddate;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

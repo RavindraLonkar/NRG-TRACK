@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:replace="fragments/commonCss :: commonCss" />
+</head>
+
+<body>
+	
+	<div th:replace="fragments/header :: header"></div>
+
+	<section id="main-content">
+		<section class="wrapper">
+			<!--overview start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i>Vehicle</li>
+						<li><i class="fa fa-laptop"></i>Registration</li>
+					</ol>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="col-md-12" id="dataTableDiv"></div>
+				</div>
+			</div>
+
+		</section>
+	</section>
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<!-- JS Paths -->
+	<div th:replace="fragments/commonJs :: commonJs"></div>
+	<script th:src="@{/js/assets/dataBinding.js}"></script>
+	<script th:src="@{/js/assets/tableHeaders.js}"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbpCegnFJk679xIcs34FzNhMOokwZPS9Y&callback=myMap"></script>
+	<script type="text/javascript">
+		
+		$( document ).ready(function() {
+			var data = null;
+			var objectName = "VEHICLE";
+			var dataTableHeader = tableHeaderObject.VEHICLE_HEADER;
+			var tableName = "VEHICLE";
+			
+			ajaxPost(data, objectName, dataTableHeader, tableName)
+		});
+		
+		function ajaxPost(data, objectName, dataTableHeader, tableName) {
+			
+			$.ajax({
+				type : "GET",
+				url : "http://localhost:8080/NRG-User/vehicle/list",
+				data : data,
+				processData : false, //prevent jQuery from automatically transforming the data into a query string
+				contentType : false,
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result.status == '1') {
+						var dataSet = result.data;
+						if (jQuery.isEmptyObject(dataSet))
+							return;
+						DataTableHeaderBind(dataTableHeader, objectName);
+						hideDataTable();
+						datasetToDataTable(dataSet, objectName,
+								dataTableColumns(dataTableHeader), tableName);
+						BootstrapDialog.alert(result.resonCode);
+					} else {
+						BootstrapDialog.alert(result.resonCode);
+					}
+				},
+				error : function(e) {
+					$("#" + objectName + "").hide();
+					console.log("ERROR: ", e);
+				}
+			});	
+			
+		}
+		
+	</script>
+</body>
+</html>

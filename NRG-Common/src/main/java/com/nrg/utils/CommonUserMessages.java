@@ -11,9 +11,12 @@ public class CommonUserMessages {
 	public static final String NRG_USER_FOUND_ENTER_DIFF_EMAIL = "User Already Exists With This Email.Please Enter Different Email Id.";
 	public static final String NRG_USER_SAVE_SUCCESS = "Register Successfully.Please confirm Your Email For login.";
 	public static final String USER_PASSWORD_UPDATE_SUCCESS = "Password Changed Successfully.";
-	
 
 	public static final String CHANGE_PASSWORD_TOKEN_EXPIRE = "Change Password Link has expired. please Regenerate Link From Forgot Password.";
 	public static final String CHANGE_PASSWORD_TOKEN_INVALID = "Change Password Link Is Not Valid.please Regenerate Link From Forgot Password.";
+
+	public static final String SYSTEM_ERROR = "System Error!";
+
+	public static final String RECORD_NOT_FOUND = "Record Not Found!";
 
 }

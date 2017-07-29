@@ -48,11 +48,13 @@ public class WelcomeController {
 			String decryKey = NRGToken.decrypt(userName, ENCY_USER_KEY);
 			HttpSession session = request.getSession();
 			if (decryKey != null && decryKey.contains(MATCH_USER_KEY)) {
-				session.setAttribute("username", decryKey.split("\\|")[0]);
+				String decryUser=decryKey.split("\\|")[0];
+				session.setAttribute("username", decryUser);
 				RestTemplate restTemplate = new RestTemplate();
-				String sessionurl = USER_SESSION_DATA + "?username=" + userName;
+				String sessionurl = USER_SESSION_DATA + "?username=" + decryUser;
 				User result = restTemplate.getForObject(sessionurl, User.class);
-				request.getSession().setAttribute("usersession", result);
+				//request.getSession().setAttribute("usersession", result);
+				session.setAttribute("usersession", result);
 			} else {
 				session.invalidate();
 				response.sendRedirect(LOGIN_URL);
