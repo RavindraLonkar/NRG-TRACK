@@ -25,6 +25,7 @@ public class Vechicle {
 	@JoinColumn(name="userId")
 	private User user;
 	@Column private String vechicleName;
+	@Column private String vechicleNumber;
 	@Column
 	private Integer CreatedBy;
 	@Column
