@@ -1,7 +1,5 @@
 package com.nrg.controller;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -19,6 +17,7 @@ import com.nrg.security.token.NRGToken;
 import com.nrg.services.UserService;
 import com.nrg.utils.CommonConstants;
 import com.nrg.utils.CommonUserMessages;
+import com.nrg.utils.CommonUtils;
 import com.nrg.utils.EmailService;
 import com.nrg.utils.Response;
 
@@ -38,6 +37,8 @@ public class LoginFacade {
 	@Value("${ENCY_USER_KEY}")
 	private String ENCY_USER_KEY;
 
+	@Value("${MATCH_USER_KEY}")
+	private String MATCH_USER_KEY;
 	Response response = new Response();
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
@@ -47,14 +48,29 @@ public class LoginFacade {
 
 	}
 
-	@RequestMapping(value = "/email", method = RequestMethod.POST)
+	@RequestMapping(value = "/Email", method = RequestMethod.POST)
+	public Response findUserByEmailidForRegistration(@RequestBody User user, final Locale locale) {
+		User userDataForEmail = new User();
+		userDataForEmail = userService.findUserByemailid(user.getEmailid());
+		if (userDataForEmail != null) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.NRG_USER_FOUND_ENTER_DIFF_EMAIL);
+		} else {
+
+			response = new Response(CommonConstants.NRG_SCUCESS, userDataForEmail,
+					CommonUserMessages.NRG_USER_NOT_FOUND);
+		}
+		return response;
+	}
+
+	@RequestMapping(value = "/passwordRequestEmail", method = RequestMethod.POST)
 	public Response findUserByemailid(@RequestBody User user, final Locale locale) {
 		User userDataForEmail = new User();
 		userDataForEmail = userService.findUserByemailid(user.getEmailid());
 		if (userDataForEmail == null) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.NRG_USER_NOT_FOUND);
 		} else {
-			String changePasswordToken = NRGToken.encrypt(CHANGE_PASSSWORD_URL, ENCY_USER_KEY);
+			String keyToEncrypt = userDataForEmail.getUserid() + "|" + CommonUtils.getDate() + "|" + MATCH_USER_KEY;
+			String changePasswordToken = NRGToken.encrypt(keyToEncrypt, ENCY_USER_KEY);
 			String changePasswordURL = CHANGE_PASSSWORD_URL + "?token=" + changePasswordToken;
 
 			Email email = new Email();
@@ -80,4 +96,5 @@ public class LoginFacade {
 		}
 		return response;
 	}
+	
 }

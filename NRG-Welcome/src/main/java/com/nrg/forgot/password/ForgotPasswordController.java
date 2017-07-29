@@ -14,8 +14,8 @@ import com.nrg.utils.Response;
 @RestController
 public class ForgotPasswordController {
 
-	@Value("${FIND_USER_BY_EMAIL}")
-	private String FIND_USER_BY_EMAIL;
+	@Value("${FIND_USER_BY_EMAIL_PASSWORD_CHANGE}")
+	private String FIND_USER_BY_EMAIL_PASSWORD_CHANGE;
 	
 	Response response = new Response();
 	
@@ -26,7 +26,7 @@ public class ForgotPasswordController {
 		User userData = new User();
 		String emailId = req.getParameter("emailid");
 		userData.setEmailid(emailId);
-		String url = FIND_USER_BY_EMAIL;
+		String url = FIND_USER_BY_EMAIL_PASSWORD_CHANGE;
 		try {
 			response = rs.postForObject(url, userData, Response.class);
 		} catch (Exception e) {

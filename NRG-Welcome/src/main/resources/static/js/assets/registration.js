@@ -27,7 +27,7 @@ $(document).ready(function() {
 						$('#email_error').removeClass('hide');
 						$('#email_error').html(result.resonCode);
 					} else {
-						BootstrapDialog.alert(result.resonCode);
+						bootMessage('Information',result.resonCode);
 					}
 				},
 				error : function(e) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:remove="all">Change Password Mail</title>
+        <title th:remove="all">Confirm Email Mail</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
     <body>
@@ -9,11 +9,12 @@
         <p> Dear <span th:text="${name}"></span>,</p>
                
         <p>
-            Please click on below link to change password.<br></br>
+            Please click on below link to confirm Email.<br></br>
             <br></br>
-            <a th:href="${changePasswordLink}" th:text="${changePasswordLink}"></a>
+            <a th:href="${confirmEmailLink}" th:text="${confirmEmailLink}"></a>
             <br></br>
-            Note:Link will be active for only 24 hours.
+            <br></br>
+            Note:This Link will be active for only 24 hours.
         </p>
         <p>
             Regards, <br />

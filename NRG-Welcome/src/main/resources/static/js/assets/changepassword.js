@@ -5,9 +5,10 @@ $(document).ready(function() {
 		var validation = changePasswordFormValidation();
 		if (validation == true) {
 
-			var user = new Object();
-			user.token = $('#token').val();
-			user.password = $('#password').val();
+			var user = {
+				token : $('#token').val(),
+				password : $('#password').val()
+			}
 
 			var jsonUser = JSON.stringify(user);
 			$.ajax({
@@ -15,16 +16,14 @@ $(document).ready(function() {
 				url : url.origin + "/NRG-Welcome/changepassword",
 				contentType : 'application/json',
 				data : jsonUser,
-				processData : false, // prevent jQuery from automatically
-				// transforming the data into a query string
+				processData : false,
 				cache : false,
 				timeout : 600000,
 				success : function(result) {
-					if (result.status == '1') {
-						$('#email_error').removeClass('hide');
-						$('#email_error').html(result.resonCode);
+					if (result.status == '0') {
+						bootMessage('Error',result.resonCode);
 					} else {
-						BootstrapDialog.alert(result.resonCode);
+						bootMessageRedirect('sucess','Ok',url.origin + "/NRG-Welcome/login")
 					}
 				},
 				error : function(e) {
@@ -34,4 +33,5 @@ $(document).ready(function() {
 		}
 
 	});
+
 });

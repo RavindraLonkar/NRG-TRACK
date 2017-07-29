@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nrg.models.User;
 import com.nrg.security.token.NRGToken;
@@ -37,8 +36,8 @@ public class LoginController {
 	@Value("${ENCY_USER_KEY}")
 	private String ENCY_USER_KEY;
 
-	@Value("${FIND_USER_BY_EMAIL}")
-	private String FIND_USER_BY_EMAIL;
+	@Value("${FIND_USER_BY_EMAIL_REGISTRATION}")
+	private String FIND_USER_BY_EMAIL_REGISTRATION;
 
 	@Value("${SAVE_CLIENT}")
 	private String SAVE_CLIENT;
@@ -63,7 +62,7 @@ public class LoginController {
 	@ResponseBody
 	public Response createNewUser(@RequestBody User user) {
 		RestTemplate rest = new RestTemplate();
-		String url = FIND_USER_BY_EMAIL;
+		String url = FIND_USER_BY_EMAIL_REGISTRATION;
 		try {
 			response = rest.postForObject(url, user, Response.class);
 			if (response.getStatus().equals(CommonConstants.NRG_SCUCESS)) {

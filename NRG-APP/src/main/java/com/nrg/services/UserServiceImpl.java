@@ -1,5 +1,7 @@
 package com.nrg.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	RoleRepository roleRepository;
+
 
 	Response response = new Response();
 
@@ -39,22 +42,35 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Response saveClient(User user) {
+	public User saveClient(User user) {
 		User userResponse = new User();
 		Role userRole = new Role();
 		String encryptPassword = CommonUtils.createPassword(user.getPassword());
-		userRole=roleRepository.findByrolename(CommonUserMessages.NRG_USER_ROLE);
+		userRole = roleRepository.findByrolename(CommonUserMessages.NRG_USER_ROLE);
 		user.setRole(userRole);
 		user.setIsactive(CommonConstants.NRG_ISACTIVE);
 		user.setUsername(user.getEmailid());
 		user.setPassword(encryptPassword);
+		user.setCreatedby(1);
+		user.setLastmodifiedby(1);
+		user.setCreateddate(new Date());
+		user.setLastmodifieddate(new Date());
+		user.setIsemailidconfirmed(0);
 		userResponse = userRepository.save(user);
-		if (userResponse != null) {
-			return new Response(CommonConstants.NRG_SCUCESS, userResponse, CommonUserMessages.NRG_USER_SAVE_SUCCESS);
-		} else {
-			return new Response(CommonConstants.NRG_FAIL, null, "");
-		}
+		return userResponse;
 
+	}
+
+	@Override
+	public User updatePassword(User user) {
+		Role userRole = new Role();
+		userRole = roleRepository.findByrolename(CommonUserMessages.NRG_USER_ROLE);
+		user.setRole(userRole);
+		User userResponse = new User();
+		userResponse = userRepository.findUserByuserid(user.getUserid());
+		userResponse.setPassword(user.getPassword());
+		userResponse.setLastmodifieddate(new Date());
+		return userResponse = userRepository.save(userResponse);
 	}
 
 }

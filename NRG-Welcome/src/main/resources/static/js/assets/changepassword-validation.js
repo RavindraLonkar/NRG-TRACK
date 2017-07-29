@@ -1,15 +1,12 @@
 function changePasswordFormValidation() {
 	addclassHide();
-	var validation = false;
+	var validation = true;
 
 	// password
 	if ($('#password').val() == '') {
 		$('#password_error').removeClass('hide');
 		$('#password_error').html("Please enter New Password.");
 		validation = false;
-	} else {
-		$('#password_error').addClass('hide');
-		validation = true;
 	}
 
 	// confirm password
@@ -19,7 +16,7 @@ function changePasswordFormValidation() {
 		validation = false;
 	} else if ($('#confirmpassword').val() !== '' && $('#password').val() != '') {
 		if ($('#password').val().length < 8) {
-			isValidated = false;
+			Validated = false;
 			$('#password_error').removeClass('hide');
 			$('#password_error').html(
 					"Please enter Strong password with minimum 8 length");
@@ -28,13 +25,7 @@ function changePasswordFormValidation() {
 			$('#confirmpassword_error').html(
 					"Confirm Password Not match with password.");
 			validation = false;
-		} else {
-			$('#confirmpassword_error').addClass('hide');
-			validation = true;
 		}
-	} else {
-		$('#confirmpassword_error').addClass('hide');
-		validation = true;
 	}
 
 	return validation;
@@ -44,4 +35,6 @@ function addclassHide() {
 	$('#password_error').addClass('hide');
 	$('#confirmpassword_error').addClass('hide');
 
+	$('#password_error').html('');
+	$('#confirmpassword_error').html('');
 }
