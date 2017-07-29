@@ -22,8 +22,8 @@ public class Vechicle {
 	@Column
 	private Integer id;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId")
-	private User userid;
+	@JoinColumn(name = "userid")
+	private User user;
 	@Column
 	private String vechiclename;
 	@Column
@@ -45,12 +45,12 @@ public class Vechicle {
 		this.id = id;
 	}
 
-	public User getUserid() {
-		return userid;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserid(User userid) {
-		this.userid = userid;
+	public void setUser(User userid) {
+		this.user = userid;
 	}
 
 	public String getVechiclename() {
