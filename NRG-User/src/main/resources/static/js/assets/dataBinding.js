@@ -1,4 +1,4 @@
-function datasetToDataTable(dataSet,objectName,dataTableHeader,tableName){
+function datasetToDataTable(dataSet,objectName,dataTableColumns,tableName){
 
 	$('#tableName').empty();
 	$('#tableName').append("<h4><b>"+tableName+"</b></h4>");
@@ -8,14 +8,14 @@ function datasetToDataTable(dataSet,objectName,dataTableHeader,tableName){
         "scrollX": true,
         "bDestroy": true,
         "bLengthChange": false,
-        "columns": dataTableHeader,
+        "columns": dataTableColumns,
     });
 	
 }
 
-function dataTableColumns(dataTableHeader) {
+function dataTableColumnsBind(dataTableColumns) {
 
-	var dataColumns = dataTableHeader.split(',');
+	var dataColumns = dataTableColumns.VEHICLE_COLUMNS.split(',');
 	var dataArray = new Array();
 	for (column = 0; column < dataColumns.length; column++) {
 		var obj={
@@ -30,7 +30,7 @@ function DataTableHeaderBind(dataTableHeader,objectName){
 	
 	$('#dataTableDiv').empty();
 
-	var tableHtml="<table id='"+objectName+"' class='table table-striped table-bordered' " +
+	var tableHtml="<table id='"+objectName+"' class='table table-bordered ' " +
 			"cellspacing='0' width='100%' th:fragment='"+objectName+'1'+"'><thead><tr>";
 	var dataHeaders = dataTableHeader.split(',');
 	for (header = 0; header < dataHeaders.length; header++) {

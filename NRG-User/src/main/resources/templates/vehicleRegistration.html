@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link th:replace="fragments/commonCss :: commonCss" />
+<link th:href="@{/css/datatable.css}" rel="stylesheet"></link>
+
 </head>
 
 <body>
@@ -33,20 +35,21 @@
 	<div th:replace="fragments/commonJs :: commonJs"></div>
 	<script th:src="@{/js/assets/dataBinding.js}"></script>
 	<script th:src="@{/js/assets/tableHeaders.js}"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbpCegnFJk679xIcs34FzNhMOokwZPS9Y&callback=myMap"></script>
+	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	
 	<script type="text/javascript">
 		
 		$( document ).ready(function() {
 			var data = null;
 			var objectName = "VEHICLE";
-			var dataTableHeader = tableHeaderObject.VEHICLE_HEADER;
+			var dataTableHeader = tableHeaderObject.VEHICLE_HEADERS;
+			var dataTableColumns = tableColumnObject.VEHICLE_COLUMNS;
 			var tableName = "VEHICLE";
 			
-			ajaxPost(data, objectName, dataTableHeader, tableName)
+			ajaxPost(data, objectName, dataTableHeader, tableColumnObject, tableName)
 		});
 		
-		function ajaxPost(data, objectName, dataTableHeader, tableName) {
+		function ajaxPost(data, objectName, dataTableHeader, dataTableColumns, tableName) {
 			
 			$.ajax({
 				type : "GET",
@@ -62,9 +65,9 @@
 						if (jQuery.isEmptyObject(dataSet))
 							return;
 						DataTableHeaderBind(dataTableHeader, objectName);
-						hideDataTable();
+						//hideDataTable();
 						datasetToDataTable(dataSet, objectName,
-								dataTableColumns(dataTableHeader), tableName);
+								dataTableColumnsBind(dataTableColumns), tableName);
 						BootstrapDialog.alert(result.resonCode);
 					} else {
 						BootstrapDialog.alert(result.resonCode);
