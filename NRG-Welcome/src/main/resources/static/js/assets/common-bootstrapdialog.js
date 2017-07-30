@@ -1,7 +1,7 @@
-function bootMessageRedirect(title, label, redirectUrl) {
+function bootMessageRedirect(title, label, redirectUrl,message) {
 	BootstrapDialog.show({
 		title : title,
-		message : result.resonCode,
+		message : message,
 		buttons : [ {
 			label : label,
 			action : function(dialog) {

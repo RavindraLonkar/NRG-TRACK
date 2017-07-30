@@ -1,4 +1,4 @@
-package com.nrg.forgot.password;
+package com.nrg.controller;
 
 import javax.servlet.ServletRequest;
 

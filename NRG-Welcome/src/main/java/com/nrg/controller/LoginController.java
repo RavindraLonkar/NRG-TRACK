@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nrg.models.User;
 import com.nrg.security.token.NRGToken;
 import com.nrg.utils.CommonConstants;
-import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
 
 @RestController
@@ -42,7 +41,7 @@ public class LoginController {
 	@Value("${SAVE_CLIENT}")
 	private String SAVE_CLIENT;
 
-	Response response = new Response();
+	Response response = null;
 
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -65,9 +64,8 @@ public class LoginController {
 		String url = FIND_USER_BY_EMAIL_REGISTRATION;
 		try {
 			response = rest.postForObject(url, user, Response.class);
-			if (response.getStatus().equals(CommonConstants.NRG_SCUCESS)) {
-				return response = new Response(CommonConstants.NRG_USER_EXISTS, null,
-						CommonUserMessages.NRG_USER_FOUND_ENTER_DIFF_EMAIL);
+			if (response.getStatus().equals(CommonConstants.NRG_FAIL)) {
+				return response;
 			} else {
 				String saveUrl = SAVE_CLIENT;
 				response = rest.postForObject(saveUrl, user, Response.class);

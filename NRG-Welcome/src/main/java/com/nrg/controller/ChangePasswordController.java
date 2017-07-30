@@ -32,7 +32,7 @@ public class ChangePasswordController {
 	@Value("${TOKEN_VALIDATION_TIME_IN_HRS}")
 	private String TOKEN_VALIDATION_TIME_IN_HRS;
 
-	Response response = new Response();
+	Response response = null;
 
 	@RequestMapping(value = { "/changepassword" }, method = RequestMethod.GET)
 	public ModelAndView changePassword(HttpServletRequest request) {
@@ -45,15 +45,14 @@ public class ChangePasswordController {
 			boolean valid = CommonUtils.validatedTokenForTimePeriod(tokensendTime, TOKEN_VALIDATION_TIME_IN_HRS);
 			if (valid == true) {
 				modelAndView.setViewName("changepassword");
-				modelAndView.addObject("token", token);
 			} else {
 				modelAndView.setViewName("changepassworderror");
-				modelAndView.addObject("error", CommonUserMessages.CHANGE_PASSWORD_TOKEN_EXPIRE);
+				modelAndView.addObject("error", CommonUserMessages.CONFIRM_EMAIL_TOKEN_EXPIRE);
 			}
 
 		} else {
 			modelAndView.setViewName("changepassworderror");
-			modelAndView.addObject("error", CommonUserMessages.CHANGE_PASSWORD_TOKEN_INVALID);
+			modelAndView.addObject("error", CommonUserMessages.CONFIRM_EMAIL_TOKEN_INVALID);
 		}
 
 		return modelAndView;

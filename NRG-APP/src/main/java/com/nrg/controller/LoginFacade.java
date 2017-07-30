@@ -48,7 +48,7 @@ public class LoginFacade {
 
 	}
 
-	@RequestMapping(value = "/Email", method = RequestMethod.POST)
+	@RequestMapping(value = "/email", method = RequestMethod.POST)
 	public Response findUserByEmailidForRegistration(@RequestBody User user, final Locale locale) {
 		User userDataForEmail = new User();
 		userDataForEmail = userService.findUserByemailid(user.getEmailid());
@@ -63,7 +63,7 @@ public class LoginFacade {
 	}
 
 	@RequestMapping(value = "/passwordRequestEmail", method = RequestMethod.POST)
-	public Response findUserByemailid(@RequestBody User user, final Locale locale) {
+	public Response findUserByemailidForChangePassword(@RequestBody User user, final Locale locale) {
 		User userDataForEmail = new User();
 		userDataForEmail = userService.findUserByemailid(user.getEmailid());
 		if (userDataForEmail == null) {

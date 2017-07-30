@@ -23,7 +23,7 @@ $(document).ready(function() {
 					if (result.status == '0') {
 						bootMessage('Error',result.resonCode);
 					} else {
-						bootMessageRedirect('sucess','Ok',url.origin + "/NRG-Welcome/login")
+						bootMessageRedirect('sucess','Ok',url.origin + "/NRG-Welcome/login",result.resonCode)
 					}
 				},
 				error : function(e) {

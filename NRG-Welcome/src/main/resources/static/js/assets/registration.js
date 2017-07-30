@@ -27,7 +27,7 @@ $(document).ready(function() {
 						$('#email_error').removeClass('hide');
 						$('#email_error').html(result.resonCode);
 					} else {
-						bootMessage('Information',result.resonCode);
+						bootMessageRedirect('sucess','Ok',url.origin + "/NRG-Welcome/login",result.resonCode)
 					}
 				},
 				error : function(e) {
