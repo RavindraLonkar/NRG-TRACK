@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nrg.models.CoordinateDetail;
 import com.nrg.models.Tracker;
 import com.nrg.models.TrackingData;
 import com.nrg.services.TrackerService;
@@ -24,9 +25,9 @@ public class TrackerFacade {
 	TrackerService trackerService;
 
 	@RequestMapping(value = "/trackingData", method = RequestMethod.GET)
-	public List<TrackingData> getTrackingData(HttpServletRequest request) {
+	public List<CoordinateDetail> getTrackingData(HttpServletRequest request) {
 		Response response = null;
-		List<TrackingData> list=new ArrayList<TrackingData>();
+		List<CoordinateDetail> list=new ArrayList<CoordinateDetail>();
 		try{
 			//String userid = request.getParameter("userId");
 			//User user=new User();

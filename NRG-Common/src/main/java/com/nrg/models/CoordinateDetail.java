@@ -1,50 +1,64 @@
 package com.nrg.models;
 
+import javax.persistence.Column;
+
 public class CoordinateDetail {
   
-   private String vehicleNo;
-   private String date;
-   private String longitude;
+   private Integer trackerid;
+   private Integer trackingdataid;
    private String latitude;
- 
-public CoordinateDetail() {
-super();
-}
-public String getLongitude() {
-	return longitude;
+   private String longitude;
+	
+   public CoordinateDetail() {
+		super();
+	}
+
+public CoordinateDetail(Integer trackerid, Integer trackingdataid, String latitude, String longitude) {
+	super();
+	this.trackerid = trackerid;
+	this.trackingdataid = trackingdataid;
+	this.latitude = latitude;
+	this.longitude = longitude;
 }
 
-public CoordinateDetail(String vehicleNo, String longitude, String latitude) {
-	super();
-	this.vehicleNo = vehicleNo;
-	this.longitude = longitude;
-	this.latitude = latitude;
+public Integer getTrackerid() {
+	return trackerid;
 }
-public void setLongitude(String longitude) {
-	this.longitude = longitude;
+
+public void setTrackerid(Integer trackerid) {
+	this.trackerid = trackerid;
 }
+
+public Integer getTrackingdataid() {
+	return trackingdataid;
+}
+
+public void setTrackingdataid(Integer trackingdataid) {
+	this.trackingdataid = trackingdataid;
+}
+
 public String getLatitude() {
 	return latitude;
 }
+
 public void setLatitude(String latitude) {
 	this.latitude = latitude;
 }
 
-public String getVehicleNo() {
-	return vehicleNo;
+public String getLongitude() {
+	return longitude;
 }
-public void setVehicleNo(String vehicleNo) {
-	this.vehicleNo = vehicleNo;
+
+public void setLongitude(String longitude) {
+	this.longitude = longitude;
 }
-public String getDate() {
-	return date;
-}
-public void setDate(String date) {
-	this.date = date;
-}
+
 @Override
 public String toString() {
-	return "CoordinateDetails [longitude=" + longitude + ", latitude=" + latitude + "]";
+	return "CoordinateDetail [trackerid=" + trackerid + ", trackingdataid=" + trackingdataid + ", latitude=" + latitude
+			+ ", longitude=" + longitude + "]";
 }
+   
+  
    
 }
