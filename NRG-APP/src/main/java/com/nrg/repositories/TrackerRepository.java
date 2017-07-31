@@ -7,4 +7,6 @@ import com.nrg.models.Tracker;
 public interface TrackerRepository extends CrudRepository<Tracker, Integer>{
 
 	 Tracker findBydeviceid(String deviceid);
+	 
+	 
 }

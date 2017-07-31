@@ -20,7 +20,7 @@ public class Vechicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private Integer id;
+	private Integer vehicleid;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userid")
 	private User user;
@@ -37,12 +37,13 @@ public class Vechicle {
 	@Column
 	private Date lastmodifieddate;
 
-	public Integer getId() {
-		return id;
+
+	public Integer getVehicleid() {
+		return vehicleid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setVehicleid(Integer vehicleid) {
+		this.vehicleid = vehicleid;
 	}
 
 	public User getUser() {
