@@ -22,8 +22,8 @@ import com.nrg.utils.EmailService;
 import com.nrg.utils.Response;
 
 @RestController
-@RequestMapping("/service/login")
-public class LoginFacade {
+@RequestMapping("/login")
+public class LoginController {
 
 	@Autowired
 	UserService userService;

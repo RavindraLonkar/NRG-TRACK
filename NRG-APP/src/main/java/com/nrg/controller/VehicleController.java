@@ -17,8 +17,8 @@ import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
 
 @RestController
-@RequestMapping("/service/vehicle")
-public class VehicleFacade {
+@RequestMapping("/vehicle")
+public class VehicleController {
 	@Autowired
 	VehicleService vehicleService;
 
