@@ -50,14 +50,14 @@ public class VehicleController {
 	public Response trackingCoordinates(HttpServletRequest request) {
 		
 		List<CoordinateDetail> list=new ArrayList<CoordinateDetail>();
-		list.add(new CoordinateDetail("1234","21.486934","86.924600"));
+		/*list.add(new CoordinateDetail("1234","21.486934","86.924600"));
 		list.add(new CoordinateDetail("1234","28.704059","77.102490"));
 		//list.add(new CoordinateDetail("1234","28.704059","77.102490"));
 		//list.add(new CoordinateDetail("1234","28.734059","78.102490"));
 		//list.add(new CoordinateDetail("1234","28.454405","78.102490"));
 		//list.add(new CoordinateDetail("1234","66.704059","77.102490"));
 		list.add(new CoordinateDetail("1234","21.145800","79.088155"));
-		list.add(new CoordinateDetail("1234","18.520430","73.856744"));
+		list.add(new CoordinateDetail("1234","18.520430","73.856744"));*/
 		
 		Response res=new Response("success",list,"");
 		return res;

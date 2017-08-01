@@ -20,10 +20,10 @@ public class Tracker {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private Integer id;
+	private Integer trackerid;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "Id")
+	@JoinColumn(name = "vehicleid")
 	private Vechicle vechicle;
 	@Column
 	private String deviceid;
@@ -38,12 +38,12 @@ public class Tracker {
 	@Column
 	private Date LastModifieddate;
 
-	public Integer getId() {
-		return id;
+	public Integer getTrackerid() {
+		return trackerid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setTrackerid(Integer trackerid) {
+		this.trackerid = trackerid;
 	}
 
 	public Vechicle getVechicle() {

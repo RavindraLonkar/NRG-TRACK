@@ -22,10 +22,10 @@ public class TrackingData {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer trackingdataid;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="deviceid")
+	@JoinColumn(name="trackerid")
 	private Tracker tracker;
 	
 	@Column
@@ -38,11 +38,11 @@ public class TrackingData {
 	private String tdeviceid;
 	
 	
-	public Integer getId() {
-		return id;
+	public Integer getTrackingdataid() {
+		return trackingdataid;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setTrackingdataid(Integer trackingdataid) {
+		this.trackingdataid = trackingdataid;
 	}
 	public Tracker getTracker() {
 		return tracker;

@@ -11,7 +11,7 @@ import com.nrg.services.AndriodDataService;
 import com.nrg.utils.Response;
 
 @RestController
-@RequestMapping("/serviceData")
+@RequestMapping("/Data")
 public class AndriodServiceDataReceiver {
 	
 	@Autowired
