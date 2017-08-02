@@ -22,14 +22,15 @@ public class VehicleController {
 	@Autowired
 	VehicleService vehicleService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/lists", method = RequestMethod.GET)
 	public Response getVehiclesOfUser(HttpServletRequest request) {
 		Response response = null;
 		try{
 			String userid = request.getParameter("userId");
 			User user=new User();
-			user.setUserid( Long.parseLong(userid, 10)  );
-			List<VehicleDetails> vehicle = vehicleService.getVehiclesOfUser(user);
+			//user.setUserid( Long.parseLong(userid, 1)  );
+			List<VehicleDetails> vehicle = vehicleService.getVehiclesOfUser(Long.parseLong(userid));
 			
 			if (vehicle.isEmpty()) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);

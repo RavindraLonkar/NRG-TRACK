@@ -41,6 +41,14 @@ public class TrackerServiceImpl implements TrackerService {
 		
 		return list;
 	}
+
+	@Override
+	public List<TrackingData> findLatestPosition(Integer userid) {
+		
+		List<TrackingData> list=findLatestPosition(userid);
+		
+		return null;
+	}
 	
 
 }

@@ -13,10 +13,11 @@ function initMap() {
       }
 
 		function getCoordinates(directionsService, directionsDisplay){
-			 $.ajax({
+			var vehicleId=document.getElementById("vehicleId"); 
+			$.ajax({
     	         type : "GET",
     	        // url : url.host + "/NRG-User/vehicleList",
-    	         url : "http://localhost:8080/NRG-User/trackingCoordinates",
+    	         url : "http://localhost:8080/NRG-User/vehicles/trackingCoordinates?vehicleId="+vehicleId,
     	         //data : data,
     	         processData: false, //prevent jQuery from automatically transforming the data into a query string
     	         contentType: false,

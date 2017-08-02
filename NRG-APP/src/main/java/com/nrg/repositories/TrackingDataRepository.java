@@ -21,4 +21,15 @@ public interface TrackingDataRepository extends CrudRepository<TrackingData, Int
 	
 	 	// List<TrackingData> findBycreateddateBetween(Date start, Date arrival);
 	 	 //List<TrackingData> findBytrackingdataidBetween(Integer start, Date arrival);
+	 	
+	 	/*@Query("select a from("
+			 	+" select *,"
+				+" ROW_NUMBER() OVER(PARTITION BY trackerid order by createddate desc)rn "
+				+" from txn_trackingdata t order by createddate desc"
+				+" )a "
+			 	+" where rn=1)")		*/	 			 	
+		//List<CoordinateDetail> findLatestPosition(@Param("trackerid") Integer trackerid);
+			 	
+
+
 }
