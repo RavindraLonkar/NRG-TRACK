@@ -24,48 +24,99 @@
 								<div id="edit-profile" class="tab-pane active">
 									<section class="panel">
 										<div class="panel-body bio-graph-info">
-											<h1>Profile Info</h1>
 											<form class="form-horizontal" role="form">
-												<div class="form-group">
-													<label class="col-lg-2 control-label">First Name</label>
-													<div class="col-lg-6">
-														<input type="text" class="form-control" id="firstname"
-															placeholder=" ">
+												<div class="row form-group">
+													<h1>Profile Photo</h1>
+													<div class="col-md-2 col-sm-12 col-xs-12">
+														<span class="profile-ava"> <img alt=""
+															src="/NRG-User/img/user_profile.png"> <img
+															name="cancel" id="image_click" onClick=""
+															class="edit-photo img-responsive center-block pencil-edit"
+															src="/NRG-User/img/icons/user_profile.png"> <img
+															name="removePhoto" id="image_click1"
+															onClick="cancelLogo(0)"
+															class="edit-photo img-responsive center-block pencil-edit-remove"
+															src="/NRG-User/img/icons/user_profile.png">
+														</span>
+													</div>
+													<div class="col-md-10"></div>
+													<div class="col-md-12"></div>
+													<div class="col-md-6 col-xs-12 col-sm-6"
+														style="display: none !important;">
+														<input type="file" name="image" id="file_click"
+															style="width: 235px;">
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="col-lg-2 control-label">Middle Name</label>
-													<div class="col-lg-6">
-														<input type="text" class="form-control" id="lastname"
-															placeholder=" ">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-lg-2 control-label">Last Name</label>
-													<div class="col-lg-6">
-														<input type="text" class="form-control" id="middlename"
-															placeholder=" ">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-lg-2 control-label">Birthday</label>
-													<div class="col-lg-6">
-														<input type="text" class="form-control" id="dob"
-															placeholder=" ">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-lg-2 control-label">Alternate Email</label>
-													<div class="col-lg-6">
-														<input type="text" class="form-control" id="email"
-															placeholder=" ">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-lg-2 control-label">Contact No</label>
-													<div class="col-lg-6">
-														<input type="text" class="form-control" id="contactmobile2"
-															placeholder=" ">
+												<div class="row">
+													<h1>Profile Info</h1>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Salutation</label>
+															<div class="col-lg-6">
+																<select class="form-control m-bot15" id="salutationId"
+																	name="salutationId" style="cursor: pointer"><option
+																		value="0">--Select--</select>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">First Name</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control" id="firstname"
+																	placeholder=" ">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Middle Name</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control" id="lastname"
+																	placeholder=" ">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Last Name</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control" id="middlename"
+																	placeholder=" ">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Gender</label>
+															<div class="col-lg-6">
+																<select class="form-control m-bot15" id="gender"
+																	name="gender" style="cursor: pointer"><option
+																		value="0">--Select--</select>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Contact No</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control"
+																	id="contactmobile" placeholder=" ">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Alternate
+																Contact No</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control"
+																	id="contactmobile2" placeholder=" ">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Birth Date</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control" id="dob"
+																	placeholder=" ">
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-lg-2 control-label">Alternate
+																Email</label>
+															<div class="col-lg-8">
+																<input type="text" class="form-control" id="email"
+																	placeholder=" ">
+															</div>
+														</div>
 													</div>
 												</div>
 												<div class="form-group">
