@@ -49,18 +49,13 @@ $('#file_click')
 													'\\') + 1));
 
 							isImageSelected = 1;
-							$('#isphotoattached').val('1');
 						} else {
-							b(
-									"Error",
-									"Please select a valid Image Extension like .JPG, .PNG, .JPEG, .BMP",
-									"error", doNothing);
+							bootMessage('Error','Please select a valid Image Extension like .JPG')
 							$('#file_click').val('');
 							$('#photoFileName').val('');
 							isImageSelected = 0;
-							$('#isphotoattached').val('0');
 						}
 					} else {
-						location.reload();
+						windows.location.reload();
 					}
 				});

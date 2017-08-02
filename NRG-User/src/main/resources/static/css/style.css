@@ -1,9 +1,3 @@
-/*
-    Theme Name: NiceAdmin
-    Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-*/
 /* Import fonts */
 @import
 	url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic)
@@ -3534,9 +3528,29 @@ ul.inbox-pagination li {
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%
 0;
@@ -3546,9 +3560,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%
 100%;
@@ -3558,9 +3592,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 0
 100%;
@@ -3570,9 +3624,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 0
 0;
@@ -3588,9 +3662,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%
 0;
@@ -3600,9 +3694,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%
 100%;
@@ -3612,9 +3726,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 0
 100%;
@@ -3624,9 +3758,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 0
 0;
@@ -3642,9 +3796,29 @@ keyframes square { 0% {
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%
 0;
@@ -3654,9 +3828,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%
 100%;
@@ -3666,9 +3860,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 0
 100%;
@@ -3678,9 +3892,29 @@ background-position
 background-position
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 0
 0;
@@ -5430,4 +5664,26 @@ span.customSelect.changed {
 	border-top: none !important;
 	position: static;
 	line-height: 29px;
+}
+
+.pencil-edit-remove {
+	cursor: pointer;
+	position: absolute;
+	top: 64%;
+	left: 5%;
+}
+
+.pencil-edit {
+	cursor: pointer;
+	position: absolute;
+	top: 64%;
+	left: 33%;
+}
+
+.li-width-line {
+	border-right: 1px solid #F0F0F0 !important;
+}
+
+.empty-padding {
+	padding-bottom: 57px;
 }
