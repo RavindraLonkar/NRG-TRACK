@@ -22,7 +22,19 @@ $( document ).ready(function() {
 			console.log("ERROR: ", e);
 		}
 	});	
+
+	 $('#datetimepicker6').datetimepicker();
+     $('#datetimepicker7').datetimepicker({
+         useCurrent: false
+     });
+     $("#datetimepicker6").on("dp.change", function (e) {
+         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+     });
+     $("#datetimepicker7").on("dp.change", function (e) {
+         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+     });
 });
+
 
 function initMap() {
         var directionsService = new google.maps.DirectionsService;
