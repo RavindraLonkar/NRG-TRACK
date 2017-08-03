@@ -8,6 +8,6 @@ import com.nrg.models.VehicleDetails;
 
 public interface VehicleService {
 
-	List<VehicleDetails> getVehiclesOfUser(User user);
+	List<VehicleDetails> getVehiclesOfUser(Long userId);
 	
 }

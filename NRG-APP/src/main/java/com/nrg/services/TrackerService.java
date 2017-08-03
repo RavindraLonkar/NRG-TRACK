@@ -10,5 +10,5 @@ import com.nrg.models.Vechicle;
 public interface TrackerService {
 
 	List<CoordinateDetail> getTrackingData(Tracker tracker);
-	
+	List<TrackingData> findLatestPosition(Integer userid);
 }
