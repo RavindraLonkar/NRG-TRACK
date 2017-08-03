@@ -1,3 +1,29 @@
+$( document ).ready(function() {
+	var url = window.location;
+	$.ajax({
+		type : "GET",
+		url : url.origin + "/NRG-User/vehicles/list",
+		processData : false,
+		contentType : false,
+		cache : false,
+		timeout : 600000,
+		success : function(result) {
+			if (result.status == '1') {
+				var dataSet = result.data;
+				$(dataSet).each(function(i,obj) {
+    				var vehicleid=obj.vehicleid;
+    				var vechiclename=obj.vechiclename;
+    				var vechiclenumber=obj.vechiclenumber;		
+    					$('#vehicleId').append('<option value="'+vehicleid+'">'+vechiclename+ '/ '+ vechiclenumber+'</option>');
+    			});	
+			} 
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});	
+});
+
 function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -18,8 +44,10 @@ function initMap() {
     	         type : "GET",
     	        // url : url.host + "/NRG-User/vehicleList",
     	         url : "http://localhost:8080/NRG-User/vehicles/trackingCoordinates?vehicleId="+vehicleId,
-    	         //data : data,
-    	         processData: false, //prevent jQuery from automatically transforming the data into a query string
+    	         // data : data,
+    	         processData: false, // prevent jQuery from automatically
+										// transforming the data into a query
+										// string
     	         contentType: false,
     	         cache: false,
     	         timeout: 600000,
@@ -34,10 +62,10 @@ function initMap() {
     	          // BootstrapDialog.alert(result.resonCode);
     	          } 
     	         },
-    	         /*error : function(e) {
-    	          $("#"+objectName+"").hide();
-    	             console.log("ERROR: ", e);
-    	         }*/
+    	         /*
+					 * error : function(e) { $("#"+objectName+"").hide();
+					 * console.log("ERROR: ", e); }
+					 */
     	     });
 		}
 

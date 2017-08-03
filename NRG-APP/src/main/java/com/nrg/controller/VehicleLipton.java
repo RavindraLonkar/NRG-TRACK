@@ -18,7 +18,7 @@ import com.nrg.utils.Response;
 
 @RestController
 @RequestMapping("/vehicle")
-public class VehicleController {
+public class VehicleLipton {
 	@Autowired
 	VehicleService vehicleService;
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link th:replace="fragments/commonCss :: commonCss" />
-<link th:href="@{/css/assests/VehicleTrack.css}" rel="stylesheet"></link>
+<link th:href="@{/css/assets/VehicleTrack.css}" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -15,9 +15,6 @@
 					<ol class="breadcrumb">
 						<li><b>Vehicle No:</b>&nbsp;
 						<select id="vehicleId">
-             				<option th:each="vehicle : ${vlist}"
-                             th:value="${vehicle.vehicleid}"
-                             th:text="${vehicle.vechiclename}" />
         				 </select>
 						</li>
 						<li><b>startDate</b>&nbsp;<input type="text" id="startDate"></li>
