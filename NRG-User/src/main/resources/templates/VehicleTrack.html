@@ -12,12 +12,16 @@
 			<!--overview start-->
 			<ol class="breadcrumb vehicletrackform">
 				<div class="row">
-					<div class="col-lg-3">
-						<li><b>Vehicle No:</b>&nbsp; <select id="vehicleId" class="selectpicker">
-						</select></li>
+					<div class="">
+						<label class="col-lg-2 control-label"><b>Vehicle No:</b></label>
+						<div class="col-lg-3">
+							<select class="form-control m-bot15" id="vehicleId"
+								name="vehicleId" style="cursor: pointer"><option
+									value="0">--Select--</option></select>
+						</div>
 					</div>
-					<div class="col-lg-3">
-						<div class="form-group">
+					<div class="">
+						<div class="col-lg-2">
 							<div class='input-group date' id='datetimepicker6'>
 								<input type='text' class="form-control" /> <span
 									class="input-group-addon"> <span
@@ -26,8 +30,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
-						<div class="form-group">
+					<div class="">
+						<div class="col-lg-2">
 							<div class='input-group date' id='datetimepicker7'>
 								<input type='text' class="form-control" /> <span
 									class="input-group-addon"> <span
@@ -36,20 +40,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
-			<div class="row">
-				<div class="col-lg-12">
-					<ol class="breadcrumb">
-						<li><b>Vehicle No:</b>&nbsp;
-						<select id="vehicleId">
-        				 </select>
-						</li>
-						<li><b>startDate</b>&nbsp;<input type="text" id="startDate"></li>
-						<li><b>endDate</b>&nbsp;<input type="text" id="endDate"></li>
-						<li><input type="submit" id="submit"></li>
-					</ol>
+					<div class="">
+						<div class="col-lg-2">
+							<button class="btn btn-primary" id="vehicletrack" type="button">Submit</button>
+						</div>
+					</div>
 				</div>
-			</div>
+			</ol>
 			<div class="row">
 				<div class="col-lg-12">
 					<div id="directions-panel"></div>

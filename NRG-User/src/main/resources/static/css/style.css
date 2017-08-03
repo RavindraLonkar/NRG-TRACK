@@ -5691,4 +5691,5 @@ span.customSelect.changed {
 
 .vehicletrackform {
 	height: 53px;
+	overflow: visible;
 }
