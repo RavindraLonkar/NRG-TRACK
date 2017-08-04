@@ -19,7 +19,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private long userid;
+	private Integer userid;
 	@Column
 	private String username;
 
@@ -85,11 +85,11 @@ public class User {
 	@Column
 	private Integer tcsignoffcontentid;
 
-	public long getUserid() {
+	public Integer getUserid() {
 		return userid;
 	}
 
-	public void setUserid(long userid) {
+	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
 

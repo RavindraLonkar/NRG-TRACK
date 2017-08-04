@@ -9,38 +9,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nrg.models.User;
-import com.nrg.models.VehicleDetails;
-import com.nrg.services.VehicleService;
+import com.nrg.models.Codevalue;
+import com.nrg.services.CommonService;
 import com.nrg.utils.CommonConstants;
 import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
 
 @RestController
-@RequestMapping("/vehicle")
-public class VehicleLipton {
-	@Autowired
-	VehicleService vehicleService;
+@RequestMapping("/commonlipton")
+public class CommonLipton {
 
-	
-	@RequestMapping(value = "/lists", method = RequestMethod.GET)
+	@Autowired
+	CommonService commonService;
+
+	@RequestMapping(value = "/codevalue", method = RequestMethod.GET)
 	public Response getVehiclesOfUser(HttpServletRequest request) {
 		Response response = null;
-		try{
-			String userid = request.getParameter("userId");
-			User user=new User();
-			//user.setUserid( Long.parseLong(userid, 1)  );
-			List<VehicleDetails> vehicle = vehicleService.getVehiclesOfUser(Integer.parseInt(userid));
-			
-			if (vehicle.isEmpty()) {
+		try {
+			Integer codetypeid = Integer.parseInt(request.getParameter("codetypeId"));
+			List<Codevalue> Codevalue = commonService.getCodevalues(codetypeid);
+
+			if (Codevalue.isEmpty()) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
-			}else{
-				response = new Response(CommonConstants.NRG_SCUCESS, vehicle, null);
+			} else {
+				response = new Response(CommonConstants.NRG_SCUCESS, Codevalue, null);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
-				
+
 		return response;
 	}
+
 }

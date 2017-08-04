@@ -132,4 +132,24 @@ public class UserServiceImpl implements UserService {
 		return userResponse = userRepository.save(userResponse);
 	}
 
+	@Override
+	public User saveClientProfile(User user) {
+		User userProfileSave = new User();
+		userProfileSave = userRepository.findUserByuserid(user.getUserid());
+		userProfileSave.setIsactive(CommonConstants.NRG_ISACTIVE);
+		userProfileSave.setSalutationid(user.getSalutationid());
+		userProfileSave.setFirstname(user.getFirstname());
+		userProfileSave.setMiddlename(user.getMiddlename());
+		userProfileSave.setLastname(user.getLastname());
+		userProfileSave.setGenderid(user.getGenderid());
+		userProfileSave.setContactmobile(user.getContactmobile());
+		userProfileSave.setContactmobile2(user.getContactmobile2());
+		userProfileSave.setDob(user.getDob());
+		userProfileSave.setCreatedby(user.getUserid());
+		userProfileSave.setLastmodifiedby(user.getUserid());
+		userProfileSave.setLastmodifieddate(new Date());
+		return userRepository.save(user);
+
+	}
+
 }

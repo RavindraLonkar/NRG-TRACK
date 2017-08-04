@@ -11,5 +11,6 @@ public interface UserService {
 	public User saveClient(User user,final Locale locale);
 	public User updatePassword(User user);
 	public User comfirmEmail(User user);
+	public User saveClientProfile(User user);
 
 }

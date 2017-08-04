@@ -75,7 +75,11 @@ LastModifiedDate	timestamp,
 TCSignOffFlag		bit,
 TCSignOffContentID	int,
 CONSTRAINT Txn_User_pkey PRIMARY KEY (UserID) ,
-FOREIGN KEY(RoleID) REFERENCES MST_Role
+FOREIGN KEY(RoleID) REFERENCES MST_Role,
+FOREIGN KEY(SalutationID) REFERENCES CFG_CodeValue(CodeValueID),
+FOREIGN KEY(GenderID) REFERENCES CFG_CodeValue(CodeValueID),
+FOREIGN KEY(MaritalStatusID) REFERENCES CFG_CodeValue(CodeValueID),
+FOREIGN KEY(TCSignOffContentID) REFERENCES CFG_CodeValue(CodeValueID)
 )
 
 

@@ -20,6 +20,8 @@ public class CommonUserMessages {
 	public static final String CONFIRM_EMAIL_TOKEN_EXPIRE = "Confirm Email Link has expired. please Confirm Email By Forgot Password.";
 	public static final String CONFIRM_EMAIL_TOKEN_INVALID = "Confirm Email Link Is Not Valid.please Confirm Email By Forgot Password.";
 	
+	public static final String CLIENT_PROFILE_SAVE_SUCCESS = "Profile Save Successfully.";
+	
 	public static final String SYSTEM_ERROR = "System Error!";
 	public static final String RECORD_NOT_FOUND = "Record Not Found!";
 

@@ -14,6 +14,6 @@ import com.nrg.models.VehicleDetails;
 public interface VehicleRepository extends CrudRepository<Vechicle, Long> {
 
 	@Query("select new com.nrg.models.VehicleDetails(v.vehicleid,v.user.userid,v.vechiclename,v.vechiclenumber) from Vechicle v where v.user.userid=:userid")
-	List<VehicleDetails> findByUserId(@Param("userid") Long userid);
+	List<VehicleDetails> findByUserId(@Param("userid") Integer userid);
 
 }

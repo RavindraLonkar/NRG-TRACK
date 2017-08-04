@@ -13,7 +13,7 @@ public class VehicleDetails {
 	}
 
 
-	public VehicleDetails(Integer vehicleid, long userid, String vechiclename, String vechiclenumber) {
+	public VehicleDetails(Integer vehicleid, Integer userid, String vechiclename, String vechiclenumber) {
 		super();
 		this.vehicleid = vehicleid;
 		this.userid = userid;
