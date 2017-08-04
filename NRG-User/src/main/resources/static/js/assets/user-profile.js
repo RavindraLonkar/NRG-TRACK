@@ -104,7 +104,7 @@ $(document).ready(
 			// for salutation call
 			$.ajax({
 				type : "GET",
-				url : url.origin + "/NRG-User/common/codevalue?codetypeId="+3,
+				url : url.origin + "/NRG-User/common/codevalue?codetypeId=3",
 				processData : false,
 				contentType : false,
 				cache : false,
@@ -131,7 +131,7 @@ $(document).ready(
 			// for gender call
 			$.ajax({
 				type : "GET",
-				url : url.origin + "/NRG-User/common/codevalue?codetypeId="+4,
+				url : url.origin + "/NRG-User/common/codevalue?codetypeId=4",
 				processData : false,
 				contentType : false,
 				cache : false,
