@@ -2,6 +2,8 @@ package com.nrg.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +70,17 @@ public class UserController {
 	public Response profile(@RequestBody User user) {
 		User userResponse = new User();
 		userResponse = userService.saveClientProfile(user);
+		if (userResponse != null) {
+			return new Response(CommonConstants.NRG_SCUCESS, userResponse, CommonUserMessages.CLIENT_PROFILE_SAVE_SUCCESS);
+		} else {
+			return new Response(CommonConstants.NRG_FAIL, null, "");
+		}
+	}
+	@RequestMapping(value = "/profile/get", method = RequestMethod.GET)
+	public Response profile(HttpServletRequest request) {
+		User userResponse=new User();
+		Integer userId=Integer.parseInt(request.getParameter("userId"));
+		userResponse = userService.findUserByuserid(userId);
 		if (userResponse != null) {
 			return new Response(CommonConstants.NRG_SCUCESS, userResponse, CommonUserMessages.CLIENT_PROFILE_SAVE_SUCCESS);
 		} else {

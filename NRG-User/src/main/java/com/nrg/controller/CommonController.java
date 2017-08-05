@@ -3,14 +3,11 @@ package com.nrg.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.nrg.models.CodeType;
-import com.nrg.models.User;
 import com.nrg.utils.CommonConstants;
 import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;

@@ -25,4 +25,6 @@ public class CommonUserMessages {
 	public static final String SYSTEM_ERROR = "System Error!";
 	public static final String RECORD_NOT_FOUND = "Record Not Found!";
 
+	public static final String FILE_UPLOAD_SUCCESSFULLY = "File Save successfully.";
+
 }

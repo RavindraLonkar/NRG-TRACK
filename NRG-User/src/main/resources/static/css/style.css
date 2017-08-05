@@ -5671,7 +5671,7 @@ span.customSelect.changed {
 	cursor: pointer;
 	position: absolute;
 	top: 64%;
-	left: 5%;
+	right: -75px;
 }
 
 .pencil-edit {
@@ -5692,4 +5692,9 @@ span.customSelect.changed {
 .vehicletrackform {
 	height: 53px;
 	overflow: visible;
+}
+
+.help-block {
+	color: #d16e6c;
+	margin-top: -13px;
 }

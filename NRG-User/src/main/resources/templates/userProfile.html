@@ -24,7 +24,8 @@
 								<div id="edit-profile" class="tab-pane active">
 									<section class="panel">
 										<div class="panel-body bio-graph-info">
-											<form class="form-horizontal" role="form">
+											<form method="POST" enctype="multipart/form-data"
+												id="uploadFile" class="form-inline">
 												<div class="row form-group">
 													<h1>Profile Photo</h1>
 													<div class="col-md-2 col-sm-12 col-xs-12">
@@ -34,7 +35,6 @@
 															class="edit-photo img-responsive center-block pencil-edit"
 															src="/NRG-User/img/icons/user_change_icon.png"> <img
 															name="removePhoto" id="image_click1"
-															onClick="cancelLogo(0)"
 															class="edit-photo img-responsive center-block pencil-edit-remove"
 															src="/NRG-User/img/icons/user_cross_icon.png">
 
@@ -44,10 +44,12 @@
 													<div class="col-md-12"></div>
 													<div class="col-md-6 col-xs-12 col-sm-6"
 														style="display: none !important;">
-														<input type="file" name="image" id="file_click"
+														<input type="file" name="file" id="file_click"
 															style="width: 235px;">
 													</div>
 												</div>
+											</form>
+											<form class="form-horizontal" role="form">
 												<div class="row">
 													<h1>Profile Info</h1>
 													<div class="col-md-6 li-width-line">
@@ -56,14 +58,18 @@
 															<div class="col-lg-6">
 																<select class="form-control m-bot15" id="salutationId"
 																	name="salutationId" style="cursor: pointer"><option
-																		value="0">--Select--</select>
+																		value="0">--Select--</select> <label
+																	class="help-block" id="salutationId_error"></label>
 															</div>
 														</div>
+
 														<div class="form-group">
 															<label class="col-lg-2 control-label">First Name</label>
 															<div class="col-lg-8">
 																<input type="text" class="form-control" id="firstname"
-																	placeholder=" ">
+																	placeholder=" "
+																	onkeypress="return onlyAlphabetsWithSpace(event,this);">
+																<label class="help-block" id="firstname_error"></label>
 															</div>
 														</div>
 
@@ -71,7 +77,9 @@
 															<label class="col-lg-2 control-label">Middle Name</label>
 															<div class="col-lg-8">
 																<input type="text" class="form-control" id="lastname"
-																	placeholder=" ">
+																	placeholder=" "
+																	onkeypress="return onlyAlphabetsWithSpace(event,this);">
+																<label class="help-block" id="lastname_error"></label>
 															</div>
 														</div>
 
@@ -79,7 +87,9 @@
 															<label class="col-lg-2 control-label">Last Name</label>
 															<div class="col-lg-8">
 																<input type="text" class="form-control" id="middlename"
-																	placeholder=" ">
+																	placeholder=" "
+																	onkeypress="return onlyAlphabetsWithSpace(event,this);">
+																<label class="help-block" id="middlename_error"></label>
 															</div>
 														</div>
 														<div class="form-group">
@@ -87,14 +97,17 @@
 															<div class="col-lg-6">
 																<select class="form-control m-bot15" id="gender"
 																	name="gender" style="cursor: pointer"><option
-																		value="0">--Select--</select>
+																		value="0">--Select--</select> <label
+																	class="help-block" id="gender_error"></label>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Contact No</label>
 															<div class="col-lg-8">
 																<input type="text" class="form-control"
-																	id="contactmobile" placeholder=" ">
+																	id="contactmobile" placeholder=" "
+																	onkeydown="allowIntegersOnly(id,event)" maxlength="10">
+																<label class="help-block" id="contactmobile_error"></label>
 															</div>
 														</div>
 														<div class="form-group">
@@ -102,29 +115,26 @@
 																Contact No</label>
 															<div class="col-lg-8">
 																<input type="text" class="form-control"
-																	id="contactmobile2" placeholder=" ">
+																	id="contactmobile2" placeholder=" "
+																	onkeydown="allowIntegersOnly(id,event)" maxlength="10">
+																<label class="help-block" id="contactmobile2_error"></label>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Birth Date</label>
-															<div class="col-lg-8">
-																<input type="text" class="form-control" id="dob"
-																	placeholder=" ">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-lg-2 control-label">Alternate
-																Email</label>
-															<div class="col-lg-8">
-																<input type="text" class="form-control" id="email"
-																	placeholder=" ">
+															<div id="dobdatetimepicker"
+																class="col-lg-8 input-group date">
+																<input type="text" class="form-control"> <span
+																	class="input-group-addon"> <span
+																	class="glyphicon glyphicon-calendar"></span>
+																</span>
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="form-group">
 													<div class="col-lg-offset-2 col-lg-10">
-														<button id="userprofile" type="button" th:text="Save"</button>
+														<button id="clientprofile" type="button" th:text="Save"</button>
 													</div>
 												</div>
 											</form>
@@ -142,5 +152,6 @@
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/commonJs :: commonJs"></div>
 	<script th:src="@{/js/assets/user-profile.js}"></script>
+	<script th:src="@{/js/assets/user-profile-validation.js}"></script>
 </body>
 </html>

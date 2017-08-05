@@ -16,11 +16,14 @@ import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/client")
 public class ClientController {
 
 	@Value("${SAVE_CLIENT_PROFILE}")
 	private String SAVE_CLIENT_PROFILE;
+
+	@Value("${GET_CLIENT_PROFILE}")
+	private String GET_CLIENT_PROFILE;
 
 	Response response = null;
 
@@ -30,7 +33,22 @@ public class ClientController {
 		modelAndView.setViewName("userProfile");
 		return modelAndView;
 	}
-		
+
+	@RequestMapping(value = "/get/profile", method = RequestMethod.GET)
+	public Response getprofile(HttpServletRequest request) {
+		RestTemplate rest = new RestTemplate();
+		User user = (User) request.getSession().getAttribute("usersession");
+		String url = GET_CLIENT_PROFILE + "?userId=" + user.getUserid();
+		try {
+			response = rest.getForObject(url, Response.class);
+		} catch (
+
+		Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+		}
+
+		return response;
+	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public Response profileSave(@RequestBody User userProfile, HttpServletRequest request) {
@@ -39,7 +57,7 @@ public class ClientController {
 		try {
 			User user = (User) request.getSession().getAttribute("usersession");
 			userProfile.setUserid(user.getUserid());
-			response = rest.postForObject(url, user, Response.class);
+			response = rest.postForObject(url, userProfile, Response.class);
 		} catch (
 
 		Exception e) {

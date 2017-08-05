@@ -148,7 +148,13 @@ public class UserServiceImpl implements UserService {
 		userProfileSave.setCreatedby(user.getUserid());
 		userProfileSave.setLastmodifiedby(user.getUserid());
 		userProfileSave.setLastmodifieddate(new Date());
-		return userRepository.save(user);
+		return userRepository.save(userProfileSave);
+
+	}
+
+	@Override
+	public User findUserByuserid(Integer userId) {
+		return userRepository.findUserByuserid(userId);
 
 	}
 

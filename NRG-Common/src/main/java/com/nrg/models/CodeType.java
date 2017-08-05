@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CFG_CodeType")
+@Table(name = "CFG_Codetype")
 public class CodeType {
 
 	@Id

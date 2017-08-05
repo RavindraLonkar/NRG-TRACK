@@ -12,5 +12,6 @@ public interface UserService {
 	public User updatePassword(User user);
 	public User comfirmEmail(User user);
 	public User saveClientProfile(User user);
+	public User findUserByuserid(Integer userId);
 
 }
