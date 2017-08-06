@@ -9,26 +9,24 @@
 		<section class="wrapper">
 			<div class="row">
 				<div class="col-lg-12">
+					<h3 class="page-header">
+						<i class="fa fa-user-md"></i> Profile
+					</h3>
 					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 						<li><i class="fa fa-user-md"></i>Profile</li>
 					</ol>
 				</div>
 			</div>
-			<!-- page start-->
 			<div class="row">
+				<!-- profile-widget -->
 				<div class="col-lg-12">
-					<section class="panel">
+					<div class="profile-widget profile-widget-info">
 						<div class="panel-body">
-							<div class="tab-content">
-								<!-- edit-profile -->
-								<div id="edit-profile" class="tab-pane active">
-									<section class="panel">
-										<div class="panel-body bio-graph-info">
-											<form method="POST" enctype="multipart/form-data"
+							<form method="POST" enctype="multipart/form-data"
 												id="uploadFile" class="form-inline">
-												<div class="row form-group">
-													<h1>Profile Photo</h1>
-													<div class="col-md-2 col-sm-12 col-xs-12">
+													<div class="col-lg-2 col-sm-2">
+													 <h4 id="clientname"></h4> 
 														<span class="profile-ava"> <img alt=""
 															src="/NRG-User/img/user_profile.png"> <img
 															name="cancel" id="image_click" onClick=""
@@ -47,19 +45,86 @@
 														<input type="file" name="file" id="file_click"
 															style="width: 235px;">
 													</div>
-												</div>
 											</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- page start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading tab-bg-info">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#profile">
+										<i class="icon-user"></i> Profile
+								</a></li>
+								<li><a data-toggle="tab" href="#edit-profile"> <i
+										class="icon-envelope"></i> Edit Profile
+								</a></li>
+							</ul>
+						</header>
+						<div class="panel-body">
+							<div class="tab-content">
+								<!-- profile -->
+								<div id="profile" class="tab-pane active">
+									<section class="panel">
+										<div class="panel-body bio-graph-info">
+											<h1>Bio Graph</h1>
+											<div class="row">
+												<div class="bio-row">
+													<p>
+														<span >First Name </span>:<label id="infofirstname"></label>
+													</p>
+												</div>
+												<div class="bio-row">
+													<p>
+														<span>Last Name </span>: <label id="infolastname"></label>
+													</p>
+												</div>
+												<div class="bio-row">
+													<p>
+														<span>Birthday</span>:<label id="infodob"></label>
+													</p>
+												</div>
+												<div class="bio-row">
+													<p>
+														<span>Email </span>:<label id="infoemailid"></label>
+													</p>
+												</div>
+												<div class="bio-row">
+													<p>
+														<span>Mobile </span>: <label id="infocontactmobile"></label>
+													</p>
+												</div>
+												<div class="bio-row">
+													<p>
+														<span>Alt. Mobile</span>: <label id="infocontactmobile2"></label>
+													</p>
+												</div>
+											</div>
+										</div>
+									</section>
+									<section>
+										<div class="row"></div>
+									</section>
+								</div>
+								<!-- edit-profile -->
+								<div id="edit-profile" class="tab-pane">
+									<section class="panel">
+										<div class="panel-body bio-graph-info">
 											<form class="form-horizontal" role="form">
-												<div class="row">
+												<div class="row form-group">
 													<h1>Profile Info</h1>
 													<div class="col-md-6 li-width-line">
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Salutation</label>
-															<div class="col-lg-6">
+															<div class="col-lg-4">
 																<select class="form-control m-bot15" id="salutationId"
 																	name="salutationId" style="cursor: pointer"><option
 																		value="0">--Select--</select> <label
-																	class="help-block" id="salutationId_error"></label>
+																	class="help-block select-help-block"
+																	id="salutationId_error"></label>
 															</div>
 														</div>
 
@@ -76,7 +141,7 @@
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Middle Name</label>
 															<div class="col-lg-8">
-																<input type="text" class="form-control" id="lastname"
+																<input type="text" class="form-control" id="middlename"
 																	placeholder=" "
 																	onkeypress="return onlyAlphabetsWithSpace(event,this);">
 																<label class="help-block" id="lastname_error"></label>
@@ -86,7 +151,7 @@
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Last Name</label>
 															<div class="col-lg-8">
-																<input type="text" class="form-control" id="middlename"
+																<input type="text" class="form-control" id="lastname"
 																	placeholder=" "
 																	onkeypress="return onlyAlphabetsWithSpace(event,this);">
 																<label class="help-block" id="middlename_error"></label>
@@ -94,16 +159,16 @@
 														</div>
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Gender</label>
-															<div class="col-lg-6">
+															<div class="col-lg-4">
 																<select class="form-control m-bot15" id="gender"
 																	name="gender" style="cursor: pointer"><option
 																		value="0">--Select--</select> <label
-																	class="help-block" id="gender_error"></label>
+																	class="help-block select-help-block" id="gender_error"></label>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Contact No</label>
-															<div class="col-lg-8">
+															<div class="col-lg-4">
 																<input type="text" class="form-control"
 																	id="contactmobile" placeholder=" "
 																	onkeydown="allowIntegersOnly(id,event)" maxlength="10">
@@ -113,7 +178,7 @@
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Alternate
 																Contact No</label>
-															<div class="col-lg-8">
+															<div class="col-lg-4">
 																<input type="text" class="form-control"
 																	id="contactmobile2" placeholder=" "
 																	onkeydown="allowIntegersOnly(id,event)" maxlength="10">
@@ -123,8 +188,9 @@
 														<div class="form-group">
 															<label class="col-lg-2 control-label">Birth Date</label>
 															<div id="dobdatetimepicker"
-																class="col-lg-8 input-group date">
-																<input type="text" class="form-control"> <span
+																class="col-lg-4 input-group date">
+																<input type="text" class="form-control" name="dob"
+																	id="dob" readonly> <span
 																	class="input-group-addon"> <span
 																	class="glyphicon glyphicon-calendar"></span>
 																</span>
@@ -134,7 +200,8 @@
 												</div>
 												<div class="form-group">
 													<div class="col-lg-offset-2 col-lg-10">
-														<button id="clientprofile" type="button" th:text="Save"</button>
+														<button id="clientprofile" type="button"
+															class="btn btn-primary" th:text="Save"></button>
 													</div>
 												</div>
 											</form>
@@ -146,9 +213,11 @@
 					</section>
 				</div>
 			</div>
+
+			<!-- page end-->
 		</section>
 	</section>
-
+	<!--main content end-->
 	<div th:replace="fragments/footer :: footer"></div>
 	<div th:replace="fragments/commonJs :: commonJs"></div>
 	<script th:src="@{/js/assets/user-profile.js}"></script>

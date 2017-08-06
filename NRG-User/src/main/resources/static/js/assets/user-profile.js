@@ -85,8 +85,13 @@ $(document).ready(function() {
 
 	$("#dobdatetimepicker").datetimepicker({
 		format : 'DD-MM-YYYY',
+		ignoreReadonly: true,
 	});
-
+	  $("#dobdatetimepicker").on("dp.change", function (e) {
+		  jQuery('#dobdatetimepicker').data("DateTimePicker").maxDate(new Date());
+	     });
+	
+	
 	var validation = false;
 	var url = window.location;
 	$("#clientprofile").click(function(event) {
@@ -143,30 +148,42 @@ function getprofile(url) {
 			if (result.status == '1') {
 				var dataSet = result.data;
 
+				//edit page
 				if (dataSet.salutationid != null) {
 					$('#salutationId').val(dataSet.salutationid);
 				}
 				if (dataSet.firstname != null) {
 					$('#firstname').val(dataSet.firstname);
+					$('#infofirstname').html(dataSet.firstname);
+					$('#clientname').html(dataSet.firstname+' '+dataSet.lastname);
 				}
 				if (dataSet.middlename != null) {
 					$('#middlename').val(dataSet.middlename);
 				}
 				if (dataSet.lastname != null) {
 					$('#lastname').val(dataSet.lastname);
+					$('#infolastname').html(dataSet.lastname);
 				}
 				if (dataSet.genderid != null) {
 					$('#gender').val(dataSet.genderid);
 				}
+				if (dataSet.emailid != null) {
+					$('#infoemailid').html(dataSet.emailid);
+				}
 				if (dataSet.contactmobile != null) {
 					$('#contactmobile').val(dataSet.contactmobile);
+					$('#infocontactmobile').html(dataSet.contactmobile);
 				}
 				if (dataSet.contactmobile2 != null) {
 					$('#contactmobile2').val(dataSet.contactmobile2);
+					$('#infocontactmobile2').html(dataSet.contactmobile2);
 				}
 				if (dataSet.dob != null) {
 					$('#dob').val(dataSet.dob);
+					$('#infodob').html(dataSet.dob);
 				}
+		
+				
 			}
 		},
 		error : function(e) {

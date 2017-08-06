@@ -2739,13 +2739,6 @@ ul.ft-link li a i {
 	background: #F7F7F7;
 }
 
-.profile-ava img {
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border: 2px solid #688a7e;
-	display: inline-block;
-}
-
 .profile-ava img.simple {
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
@@ -2786,10 +2779,10 @@ ul.ft-link li a i {
 
 .profile-widget img {
 	border-radius: 50%;
-	-webkit-border-radius: 50%;
+	/* -webkit-border-radius: 50%;
 	width: 62px;
 	height: 62px;
-
+ */
 	/*display: inline-block;*/
 }
 
@@ -3538,6 +3531,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3545,7 +3542,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3571,6 +3572,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3578,7 +3583,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3603,6 +3612,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3610,7 +3623,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3635,6 +3652,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3642,7 +3663,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3673,6 +3698,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3680,7 +3709,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3705,6 +3738,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3712,7 +3749,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3737,6 +3778,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3744,7 +3789,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3769,6 +3818,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3776,7 +3829,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3807,6 +3864,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3814,7 +3875,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3839,6 +3904,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3846,7 +3915,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3871,6 +3944,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3878,7 +3955,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -3903,6 +3984,10 @@ background-position
 
 
 
+
+
+
+
 :
 
 
@@ -3910,7 +3995,11 @@ background-position
 
 
 
+
+
  
+
+
 
 
 
@@ -4057,7 +4146,7 @@ background-position
 .bio-graph-info h1 {
 	font-size: 22px;
 	font-weight: 300;
-	margin: 0 0 20px;
+	margin: 13px 21px 20px;
 }
 
 .bio-row {
@@ -5670,14 +5759,14 @@ span.customSelect.changed {
 .pencil-edit-remove {
 	cursor: pointer;
 	position: absolute;
-	top: 64%;
-	right: -75px;
+	top: 77%;
+	right: 72px;
 }
 
 .pencil-edit {
 	cursor: pointer;
 	position: absolute;
-	top: 64%;
+	top: 77%;
 	left: 33%;
 }
 
@@ -5695,6 +5784,11 @@ span.customSelect.changed {
 }
 
 .help-block {
+	color: #d16e6c;
+	margin-top: 0px;
+}
+
+.select-help-block {
 	color: #d16e6c;
 	margin-top: -13px;
 }
