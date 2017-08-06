@@ -2,10 +2,16 @@ package com.nrg.services;
 
 import java.util.List;
 
-import com.nrg.models.VehicleDetails;
+import com.nrg.models.Vechicle;
 
 public interface VehicleService {
 
-	List<VehicleDetails> getVehiclesOfUser(Integer userId);
+	List<Vechicle> getVehiclesList(Integer userId);
+	
+	Vechicle updateVehicle(Vechicle vehicle);
+
+	void deleteVehicle(Vechicle vehicle);
+
+	Vechicle addVehicle(Vechicle vehicle, Integer userid);
 	
 }

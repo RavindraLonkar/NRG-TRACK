@@ -7,13 +7,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.nrg.models.User;
 import com.nrg.models.Vechicle;
-import com.nrg.models.VehicleDetails;
+import com.nrg.utils.CommonSqlQueries;
 
 @Repository
 public interface VehicleRepository extends CrudRepository<Vechicle, Long> {
 
-	@Query("select new com.nrg.models.VehicleDetails(v.vehicleid,v.user.userid,v.vechiclename,v.vechiclenumber) from Vechicle v where v.user.userid=:userid")
-	List<VehicleDetails> findByUserId(@Param("userid") Integer userid);
+	@Query(CommonSqlQueries.GET_VEHICLES)
+	List<Vechicle> findByUserId(@Param(value = "userid") Integer userid);
+
+	Vechicle findVechicleByvehicleid(Integer vehicleid);
 
 }

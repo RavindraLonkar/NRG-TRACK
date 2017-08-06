@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nrg.models.VehicleDetails;
+import com.nrg.models.User;
+import com.nrg.models.Vechicle;
 import com.nrg.repositories.VehicleRepository;
 
 @Service
@@ -15,8 +16,32 @@ public class VehicleServiceImpl implements VehicleService {
 	VehicleRepository vehicleRepository;
 	
 	@Override
-	public List<VehicleDetails> getVehiclesOfUser(Integer userId) {
+	public List<Vechicle> getVehiclesList(Integer userId) {	
+		User user = new User();
+		user.setUserid(userId);
+		
 		return vehicleRepository.findByUserId(userId);
 	}
+	
+	@Override
+	public Vechicle addVehicle(Vechicle vehicle, Integer userid) {
+		User user = new User();
+		user.setUserid(userid);
+		vehicle.setUser(user);
+		return vehicleRepository.save(vehicle);
+	}
 
+	@Override
+	public Vechicle updateVehicle(Vechicle vehicle) {
+		Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
+		newVehicle.setVechiclename(vehicle.getVechiclename());
+		newVehicle.setVechiclenumber(vehicle.getVechiclenumber());
+		newVehicle.setVechiclename(vehicle.getVechiclename());
+		return vehicleRepository.save(newVehicle);
+	}
+
+	@Override
+	public void deleteVehicle(Vechicle vehicle) {		
+		vehicleRepository.delete(vehicle);
+	}
 }

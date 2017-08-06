@@ -8,15 +8,24 @@ function datasetToDataTable(dataSet,objectName,dataTableColumns,tableName){
         "scrollX": true,
         "bDestroy": true,
         "bLengthChange": false,
-        "columns": dataTableColumns,
+        "columns": dataTableColumns
     });
 	
 }
 
-function dataTableColumnsBind(dataTableColumns) {
-
-	var dataColumns = dataTableColumns.VEHICLE_COLUMNS.split(',');
+function dataTableColumnsBind(dataTableColumns, icons) {
+	
 	var dataArray = new Array();
+	
+	var dataColumns = dataTableColumns.ICONS.split(',');
+	for (column = 0; column < dataColumns.length; column++) {
+		var obj={
+			"render" :""+dataColumns[column]+""
+		};
+		dataArray.push(obj);
+	}
+	
+	var dataColumns = dataTableColumns.VEHICLE_COLUMNS.split(',');
 	for (column = 0; column < dataColumns.length; column++) {
 		var obj={
 			"data" :""+dataColumns[column]+""
@@ -39,3 +48,4 @@ function DataTableHeaderBind(dataTableHeader,objectName){
 	tableHtml+="</tr></thead><tbody></tbody></table>";
 	$('#dataTableDiv').append(tableHtml);
 }
+

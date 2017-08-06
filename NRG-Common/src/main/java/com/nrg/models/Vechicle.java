@@ -2,6 +2,7 @@ package com.nrg.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +22,7 @@ public class Vechicle {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Integer vehicleid;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY ,cascade=CascadeType.REMOVE)
 	@JoinColumn(name = "userid")
 	private User user;
 	@Column
@@ -36,7 +37,6 @@ public class Vechicle {
 	private Integer lastmodifiedby;
 	@Column
 	private Date lastmodifieddate;
-
 
 	public Integer getVehicleid() {
 		return vehicleid;
