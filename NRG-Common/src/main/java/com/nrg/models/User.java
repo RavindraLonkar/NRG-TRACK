@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "TXN_User")
 public class User {
@@ -37,7 +39,9 @@ public class User {
 	private Integer salutationid;
 	@Column
 	private String companyname;
+	
 	@Column
+	@JsonFormat(pattern="dd-MM-yyyy")
 	private Date dob;
 	@Column
 	private Integer age;
