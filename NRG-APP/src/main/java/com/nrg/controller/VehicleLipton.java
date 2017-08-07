@@ -24,20 +24,17 @@ public class VehicleLipton {
 	@Autowired
 	VehicleService vehicleService;
 
-	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Response getVehiclesOfUser(HttpServletRequest request) {
 		Response response = null;
 		try{
 			String userid = request.getParameter("userId");
-			User user=new User();
-			//user.setUserid( Long.parseLong(userid, 1)  );
 			List<Vechicle> vehicle = vehicleService.getVehiclesList(Integer.parseInt(userid));
 			
 			if (vehicle.isEmpty()) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
 			}else{
-				response = new Response(CommonConstants.NRG_SCUCESS, vehicle, null);
+				response = new Response(CommonConstants.NRG_SCUCESS, vehicle, CommonUserMessages.VEHICLE_LOADED);
 			}
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -56,7 +53,7 @@ public class VehicleLipton {
 			if (addedVehicle == null) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
 			}else{
-				response = new Response(CommonConstants.NRG_SCUCESS, addedVehicle, null);
+				response = new Response(CommonConstants.NRG_SCUCESS, addedVehicle, CommonUserMessages.VEHICLE_ADDED);
 			}
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -65,7 +62,7 @@ public class VehicleLipton {
 		return response;
 	}
 		
-	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public Response updateVehicle(@RequestBody Vechicle vehicle, HttpServletRequest request) {
 		Response response = null;
 		try{
@@ -74,7 +71,7 @@ public class VehicleLipton {
 			if (updatedVehicle == null) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
 			}else{
-				response = new Response(CommonConstants.NRG_SCUCESS, updatedVehicle, null);
+				response = new Response(CommonConstants.NRG_SCUCESS, updatedVehicle, CommonUserMessages.VEHICLE_UPDATED);
 			}
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -84,11 +81,12 @@ public class VehicleLipton {
 	}
 	
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public Response deleteVehicle(@RequestBody Vechicle vehicle) {
 		Response response = null;
 		try{
-			vehicleService.deleteVehicle(vehicle);			
+			vehicleService.deleteVehicle(vehicle);	
+			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLE_DELETED);
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}

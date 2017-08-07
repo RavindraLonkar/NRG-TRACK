@@ -26,5 +26,10 @@ public class CommonUserMessages {
 	public static final String RECORD_NOT_FOUND = "Record Not Found!";
 
 	public static final String FILE_UPLOAD_SUCCESSFULLY = "File Save successfully.";
+	
+	public static final String VEHICLE_UPDATED = "Vehicle information updated successfully.";
+	public static final String VEHICLE_ADDED = "Vehicle information added successfully.";
+	public static final String VEHICLE_DELETED = "Vehicle information deleted successfully.";
+	public static final String VEHICLE_LOADED = "Vehicle information loaded successfully.";
 
 }

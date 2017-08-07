@@ -142,7 +142,6 @@ public class VehicleController {
 			RestTemplate restTemplate = new RestTemplate();
 			String vehicleListUrl = UPDATE_VEHICLE;
 			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
-
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
@@ -158,7 +157,6 @@ public class VehicleController {
 			RestTemplate restTemplate = new RestTemplate();
 			String vehicleListUrl = DELETE_VEHICLE;
 			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
-
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}

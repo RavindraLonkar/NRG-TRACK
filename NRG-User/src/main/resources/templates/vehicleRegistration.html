@@ -3,11 +3,13 @@
 <head>
 <link th:replace="fragments/commonCss :: commonCss" />
 <link th:href="@{/css/datatable.css}" rel="stylesheet"></link>
+<link th:href="@{/css/buttons.dataTables.min.css}" rel="stylesheet"></link>
+<link th:href="@{/css/assets/custom.css}" rel="stylesheet"></link>
 
 </head>
 
 <body>
-	
+
 	<div th:replace="fragments/header :: header"></div>
 
 	<section id="main-content">
@@ -23,10 +25,54 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="col-md-12" id="dataTableDiv"></div>
+
+					<table id="vehicleDt" class="display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Select</th>
+								<th>Edit</th>
+								<th>Vehicle Number</th>
+								<th>Vehicle name</th>	
+								<th>Delete</th>								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Select</th>
+								<th>Edit</th>
+								<th>Vehicle Number</th>
+								<th>Vehicle name</th>	
+								<th>Delete</th>	
+							</tr>
+						</tfoot>
+					</table>
 				</div>
 			</div>
-
+			
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="addVehicleModal" class="modal fade">
+               <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <button aria-hidden="true" data-dismiss="modal" class="close" type="button">X</button>
+                           <h4 class="modal-title">Edit Vehicle Information</h4>
+                       </div>
+                       <div class="modal-body">
+                           <form role="form" id="addEditVehicle" action="">
+                               <input type="hidden" class="form-control" id="vehicleid">
+                               <div class="form-group">
+                                   <label for="vechiclenumber">Vehicle Number</label>
+                                   <input type="text" class="form-control" id="vechiclenumber" placeholder="Enter Vehicle Number">
+                               </div>
+                               <div class="form-group">
+                                   <label for="vechiclename">Vehicle Name</label>
+                                   <input type="text" class="form-control" id="vechiclename" placeholder="Enter Vehicle Name">
+                               </div>                                                
+                               <button type="submit" class="btn btn-primary" onclick="editVedhicle();">Submit</button>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
 		</section>
 	</section>
 	<div th:replace="fragments/footer :: footer"></div>
@@ -36,24 +82,87 @@
 	<script th:src="@{/js/assets/dataBinding.js}"></script>
 	<script th:src="@{/js/assets/tableHeaders.js}"></script>
 	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/dataTables.buttons.min.js}"></script>
+	<script th:src="@{/js/dataTables.select.min.js}"></script>
 	
+
 	<script type="text/javascript">
-		
-		$( document ).ready(function() {
-			var data = null;
-			var objectName = "VEHICLE";
-			var dataTableHeader = tableHeaderObject.VEHICLE_HEADERS;
-			var dataTableColumns = tableColumnObject.VEHICLE_COLUMNS;
-			var tableName = "VEHICLE";
-			
-			ajaxPost(data, objectName, dataTableHeader, tableColumnObject, tableName)
+		var table;
+		$(document).ready(function() {
+			var events = $('#events');
+			table = $('#vehicleDt').DataTable({
+	            "dom": 'Bfrtip',
+				"processing" : true,
+				"scrollX": true,
+		        "bDestroy": true,
+		        "bLengthChange": false,
+		        "select": true,
+				"ajax" : {
+					"url" : "http://localhost:8080/NRG-User/vehicle/list",
+					"type" : "GET"
+				},
+				"rowId": 'vehicleid',
+				"columns" : [ {
+	                "render": function ( data, type, row ) {
+	                    return "<input class='select-checkbox' type='checkbox' id='" + row.vehicleid + "'></input>";
+	                },
+	                "targets": 0
+	            },  {
+	                "render": function ( data, type, row ) {
+	                    return "<a href='#addVehicleModal' data-toggle='modal'><span class = 'glyphicon glyphicon-edit' id='" + row.vehicleid + "' onclick='setModelData(this.id)'></span></a>";
+	                },
+	                "targets": 1
+	            }, {
+					"data" : "vechiclenumber"
+				}, {
+					"data" : "vechiclename"
+				}, {
+	                "render": function ( data, type, row ) {
+	                    return "<span class = 'glyphicon glyphicon-trash'></span>";
+	                },
+	                "targets": 4
+	            }],
+	            "buttons": [
+	                {
+	                    text: 'My button',
+	                    action: function ( e, dt, node, config ) {
+	                        deleteSelectedVehicles();
+	                    }
+	                }
+	            ]
+			});
 		});
 		
-		function ajaxPost(data, objectName, dataTableHeader, dataTableColumns, tableName) {
+		function deleteSelectedVehicles(){
+			var vehicleIds = table.rows( { selected: true } ).ids().toArray();
 			
 			$.ajax({
 				type : "GET",
-				url : "http://localhost:8080/NRG-User/vehicle/list",
+				url : "http://localhost:8080/NRG-User/vehicle/delete/selected",
+				data : vehicleIds,
+				processData : false, //prevent jQuery from automatically transforming the data into a query string
+				contentType : false,
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result.status == '1') {
+						
+					} else {
+						
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
+			
+		}
+		 
+		function saveVehicle(){
+						
+			$.ajax({
+				type : "POST",
+				url : "http://localhost:8080/NRG-User/vehicle/save",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string
 				contentType : false,
@@ -61,23 +170,50 @@
 				timeout : 600000,
 				success : function(result) {
 					if (result.status == '1') {
-						var dataSet = result.data;
-						if (jQuery.isEmptyObject(dataSet))
-							return;
-						DataTableHeaderBind(dataTableHeader, objectName);
-						//hideDataTable();
-						datasetToDataTable(dataSet, objectName,
-								dataTableColumnsBind(dataTableColumns), tableName);
-						BootstrapDialog.alert(result.resonCode);
+						
 					} else {
-						BootstrapDialog.alert(result.resonCode);
+						
 					}
 				},
 				error : function(e) {
-					$("#" + objectName + "").hide();
 					console.log("ERROR: ", e);
 				}
-			});	
+			});
+			
+		}
+		
+		function setModelData(vehicleid){
+			var data = table.row('#'+vehicleid).data();
+			$("#vehicleid").val(data.vehicleid);
+			$("#vechiclenumber").val(data.vechiclenumber);
+			$("#vechiclename").val(data.vechiclename);
+		}
+		
+		function editVedhicle(){
+			var data = {
+				vehicleid : $("#vehicleid").val(),
+				vechiclenumber : $("#vechiclenumber").val(),
+				vechiclename : $("#vechiclename").val()
+			}
+			$.ajax({
+				type : "PUT",
+				url : "http://localhost:8080/NRG-User/vehicle/update",
+				data : JSON.stringify(data),
+				processData : false, //prevent jQuery from automatically transforming the data into a query string
+				contentType : 'application/json',
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result.status == '1') {
+						bootMessage('sucess', result.resonCode);
+					} else {
+						bootMessage('Error', result.resonCode);
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
 			
 		}
 		
