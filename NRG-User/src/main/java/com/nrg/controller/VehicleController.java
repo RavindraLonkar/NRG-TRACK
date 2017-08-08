@@ -48,7 +48,9 @@ public class VehicleController {
 	@Value("${SAVE_VEHICLE}")
 	private String SAVE_VEHICLE;
 	
-
+	@Value("${DELETE_VEHICLES}")
+	private String DELETE_VEHICLES;
+		
 	@RequestMapping(value = "/tracks", method = RequestMethod.GET)
 	public ModelAndView trackVehicle(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("VehicleTrack");
@@ -123,7 +125,7 @@ public class VehicleController {
 			User user = (User) request.getSession().getAttribute("usersession");
 
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = SAVE_VEHICLE + "?userId=" + user.getUserid();
+			String vehicleListUrl = SAVE_VEHICLE + "?userId=" + 1;
 			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
 
 		} catch (Exception e) {
@@ -157,6 +159,22 @@ public class VehicleController {
 			RestTemplate restTemplate = new RestTemplate();
 			String vehicleListUrl = DELETE_VEHICLE;
 			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+		}
+		return response;
+	}
+	
+	//------------------------------------------------------	
+	@RequestMapping(value = "/delete/ids", method = RequestMethod.DELETE)
+	public Response deleteVehicle(HttpServletRequest request) {
+
+		Response response = null;
+		try {
+			String vehicleIdsString = request.getParameter("vehicleIds");
+			RestTemplate restTemplate = new RestTemplate();
+			String vehicleListUrl = DELETE_VEHICLES + "?vehicleIds=" + vehicleIdsString;
+			response = restTemplate.postForObject(vehicleListUrl, null, Response.class);
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}

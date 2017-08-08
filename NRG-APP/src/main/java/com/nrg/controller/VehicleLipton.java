@@ -79,14 +79,27 @@ public class VehicleLipton {
 				
 		return response;
 	}
-	
-	
+		
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public Response deleteVehicle(@RequestBody Vechicle vehicle) {
 		Response response = null;
 		try{
 			vehicleService.deleteVehicle(vehicle);	
 			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLE_DELETED);
+		}catch(Exception e){
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+		}
+				
+		return response;
+	}
+	
+	@RequestMapping(value = "/delete/ids", method = RequestMethod.POST)
+	public Response deleteMultipleVehicle(HttpServletRequest request) {
+		Response response = null;
+		try{
+			String vehicleIdsString = request.getParameter("vehicleIds");
+			vehicleService.deleteMultipleVehicle(vehicleIdsString);	
+			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLES_DELETED);
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}

@@ -44,4 +44,13 @@ public class VehicleServiceImpl implements VehicleService {
 	public void deleteVehicle(Vechicle vehicle) {		
 		vehicleRepository.delete(vehicle);
 	}
+
+	@Override
+	public void deleteMultipleVehicle(String vehicleIdsString) {
+		String vehicleIds[] = vehicleIdsString.split(",");
+		for(String vehicleId : vehicleIds){
+			vehicleRepository.delete((long) Integer.parseInt(vehicleId));
+		}
+		
+	}
 }

@@ -57,7 +57,32 @@
                            <h4 class="modal-title">Edit Vehicle Information</h4>
                        </div>
                        <div class="modal-body">
-                           <form role="form" id="addEditVehicle" action="">
+                           <form role="form" id="addVehicleForm" action="">
+                               <input type="hidden" class="form-control" id="vehicleid">
+                               <div class="form-group">
+                                   <label for="vechiclenumber">Vehicle Number</label>
+                                   <input type="text" class="form-control" id="vechiclenumber" placeholder="Enter Vehicle Number">
+                               </div>
+                               <div class="form-group">
+                                   <label for="vechiclename">Vehicle Name</label>
+                                   <input type="text" class="form-control" id="vechiclename" placeholder="Enter Vehicle Name">
+                               </div>                                                
+                               <button type="submit" class="btn btn-primary" onclick="addVehicle();">Submit</button>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="editVehicleModal" class="modal fade">
+               <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <button aria-hidden="true" data-dismiss="modal" class="close" type="button">X</button>
+                           <h4 class="modal-title">Edit Vehicle Information</h4>
+                       </div>
+                       <div class="modal-body">
+                           <form role="form" id="editVehicleForm" action="">
                                <input type="hidden" class="form-control" id="vehicleid">
                                <div class="form-group">
                                    <label for="vechiclenumber">Vehicle Number</label>
@@ -109,7 +134,7 @@
 	                "targets": 0
 	            },  {
 	                "render": function ( data, type, row ) {
-	                    return "<a href='#addVehicleModal' data-toggle='modal'><span class = 'glyphicon glyphicon-edit' id='" + row.vehicleid + "' onclick='setModelData(this.id)'></span></a>";
+	                    return "<a href='#editVehicleModal' data-toggle='modal'><span class = 'glyphicon glyphicon-edit' id='" + row.vehicleid + "' onclick='setModelData(this.id)'></span></a>";
 	                },
 	                "targets": 1
 	            }, {
@@ -118,15 +143,21 @@
 					"data" : "vechiclename"
 				}, {
 	                "render": function ( data, type, row ) {
-	                    return "<span class = 'glyphicon glyphicon-trash'></span>";
+	                    return "<a href='#'><span class = 'glyphicon glyphicon-trash' id='" + row.vehicleid + "' onclick='deleteVehicle(this.id)'></span></a>";
 	                },
 	                "targets": 4
 	            }],
 	            "buttons": [
 	                {
-	                    text: 'My button',
+	                    text: 'Add Vehicle',
 	                    action: function ( e, dt, node, config ) {
-	                        deleteSelectedVehicles();
+	                    	$('#addVehicleModal').modal('show');
+	                    }
+	                },
+	                {
+	                    text: 'Delete Selected Vehicles',
+	                    action: function ( e, dt, node, config ) {
+	                    	deleteVehicleByVehicleIds();
 	                    }
 	                }
 	            ]
@@ -157,13 +188,104 @@
 			});
 			
 		}
-		 
-		function saveVehicle(){
-						
+				
+		function addVehicle(){		
+			var data = {
+				vechiclenumber : $("#vechiclenumber").val(),
+				vechiclename : $("#vechiclename").val()
+			}
 			$.ajax({
 				type : "POST",
 				url : "http://localhost:8080/NRG-User/vehicle/save",
-				data : data,
+				data : JSON.stringify(data),
+				processData : false, //prevent jQuery from automatically transforming the data into a query string
+				contentType : 'application/json',
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result.status == '1') {
+
+					} else {
+
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
+
+		}
+
+		function setModelData(vehicleid) {
+			var data = table.row('#' + vehicleid).data();
+			$("#vehicleid").val(data.vehicleid);
+			$("#vechiclenumber").val(data.vechiclenumber);
+			$("#vechiclename").val(data.vechiclename);
+		}
+
+		function editVedhicle() {
+			var data = {
+				vehicleid : $("#vehicleid").val(),
+				vechiclenumber : $("#vechiclenumber").val(),
+				vechiclename : $("#vechiclename").val()
+			}
+			$.ajax({
+				type : "PUT",
+				url : "http://localhost:8080/NRG-User/vehicle/update",
+				data : JSON.stringify(data),
+				processData : false, //prevent jQuery from automatically transforming the data into a query string
+				contentType : 'application/json',
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result.status == '1') {
+						$('#editVehicleModal').modal('hide');
+						bootMessage('sucess', result.resonCode);
+					} else {
+						bootMessage('Error', result.resonCode);
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
+
+		}
+		
+		function deleteVehicle(vehicleid) {
+			var data = table.row('#' + vehicleid).data();
+			
+			$.ajax({
+				type : "DELETE",
+				url : "http://localhost:8080/NRG-User/vehicle/delete",
+				data : JSON.stringify(data),
+				processData : false, //prevent jQuery from automatically transforming the data into a query string
+				contentType : 'application/json',
+				cache : false,
+				timeout : 600000,
+				success : function(result) {
+					if (result.status == '1') {						
+						bootMessage('sucess', result.resonCode);
+					} else {
+						bootMessage('Error', result.resonCode);
+					}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
+
+		}
+		
+		function deleteVehicleByVehicleIds(vehicleid){
+			var data = new Array();
+			table.rows('.selected').every( function ( rowIdx, tableLoop, rowLoop ) {
+			    data.push(this.data().vehicleid);			 
+			});
+						
+			$.ajax({
+				type : "DELETE",
+				url : "http://localhost:8080/NRG-User/vehicle/delete/ids?vehicleIds=" + data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string
 				contentType : false,
 				cache : false,
@@ -181,42 +303,6 @@
 			});
 			
 		}
-		
-		function setModelData(vehicleid){
-			var data = table.row('#'+vehicleid).data();
-			$("#vehicleid").val(data.vehicleid);
-			$("#vechiclenumber").val(data.vechiclenumber);
-			$("#vechiclename").val(data.vechiclename);
-		}
-		
-		function editVedhicle(){
-			var data = {
-				vehicleid : $("#vehicleid").val(),
-				vechiclenumber : $("#vechiclenumber").val(),
-				vechiclename : $("#vechiclename").val()
-			}
-			$.ajax({
-				type : "PUT",
-				url : "http://localhost:8080/NRG-User/vehicle/update",
-				data : JSON.stringify(data),
-				processData : false, //prevent jQuery from automatically transforming the data into a query string
-				contentType : 'application/json',
-				cache : false,
-				timeout : 600000,
-				success : function(result) {
-					if (result.status == '1') {
-						bootMessage('sucess', result.resonCode);
-					} else {
-						bootMessage('Error', result.resonCode);
-					}
-				},
-				error : function(e) {
-					console.log("ERROR: ", e);
-				}
-			});
-			
-		}
-		
 	</script>
 </body>
 </html>
