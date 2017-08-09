@@ -20,12 +20,12 @@ public class TrackerServiceImpl implements TrackerService {
 	TrackingDataRepository trackingDataRepository;
 
 	@Override
-	public List<CoordinateDetail> getTrackingData(Tracker tracker) {
+	public List<CoordinateDetail> getTrackingData(Integer vehicleId,String startDate,String endDate) {
 		Date d1=null;
 		Date d2=null;
 		//return trackingDataRepository.findAllByTracker(tracker);
 		String date_s = " 2011-01-18 00:00:00.0"; 
-		SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd HH:mm:ss"); 
+		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
 		try {
 			 d1 = (Date)dt.parse("2017-07-30 11:05:17");
 			 d2 = (Date)dt.parse("2017-07-30 17:05:17");
@@ -37,7 +37,7 @@ public class TrackerServiceImpl implements TrackerService {
 		}
 		
 	
-		List<CoordinateDetail>  list=trackingDataRepository.findBytrackingdataid(1,d1,d2);
+		List<CoordinateDetail>  list=trackingDataRepository.findBytrackerId(vehicleId,d1,d2);
 		
 		return list;
 	}

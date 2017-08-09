@@ -9,6 +9,6 @@ import com.nrg.models.Vechicle;
 
 public interface TrackerService {
 
-	List<CoordinateDetail> getTrackingData(Tracker tracker);
+	List<CoordinateDetail> getTrackingData(Integer vehicleId,String startDate,String endDate);
 	List<TrackingData> findLatestPosition(Integer userid);
 }

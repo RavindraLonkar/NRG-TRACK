@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	var url = window.location;
 	$.ajax({
 		type : "GET",
-		url : url.origin + "/NRG-User/vehicles/list",
+		url : url.origin + "/NRG-User/vehicle/list",
 		processData : false,
 		contentType : false,
 		cache : false,
@@ -23,15 +23,18 @@ $( document ).ready(function() {
 		}
 	});	
 
-	 $('#datetimepicker6').datetimepicker();
-     $('#datetimepicker7').datetimepicker({
-         useCurrent: false
+	 $('#startDate').datetimepicker({
+		 format: 'DD/MM/YYYY hh:mm:ss'
+	 });
+     $('#endDate').datetimepicker({
+         useCurrent: false,
+         format: 'DD/MM/YYYY hh:mm:ss'
      });
-     $("#datetimepicker6").on("dp.change", function (e) {
-         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+     $("#startDate").on("dp.change", function (e) {
+         $('#endDate').data("DateTimePicker").minDate(e.date);
      });
      $("#datetimepicker7").on("dp.change", function (e) {
-         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+         $('#startDate').data("DateTimePicker").maxDate(e.date);
      });
 });
 
@@ -51,11 +54,14 @@ function initMap() {
       }
 
 		function getCoordinates(directionsService, directionsDisplay){
-			var vehicleId=document.getElementById("vehicleId"); 
+			var url=window.location;
+			var vehicleId=$("#vehicleId").val(); 
+			var startDate=$("#trackStartDate").val(); 
+			var endDate=$("#trackEndDate").val(); 	
 			$.ajax({
     	         type : "GET",
     	        // url : url.host + "/NRG-User/vehicleList",
-    	         url : "http://localhost:8080/NRG-User/vehicles/trackingCoordinates?vehicleId="+vehicleId,
+    	         url : url.origin + "/NRG-User/vehicle/trackingCoordinatesByDate?vehicleId="+vehicleId+"&startDate="+startDate+"&endDate="+endDate,
     	         // data : data,
     	         processData: false, // prevent jQuery from automatically
 										// transforming the data into a query

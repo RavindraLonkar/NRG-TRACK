@@ -27,7 +27,7 @@ public class VehicleLipton {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Response getVehiclesOfUser(HttpServletRequest request) {
 		Response response = null;
-		try{
+		try{									
 			String userid = request.getParameter("userId");
 			List<Vechicle> vehicle = vehicleService.getVehiclesList(Integer.parseInt(userid));
 			

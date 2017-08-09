@@ -50,8 +50,11 @@ public class VehicleController {
 	
 	@Value("${DELETE_VEHICLES}")
 	private String DELETE_VEHICLES;
-		
-	@RequestMapping(value = "/tracks", method = RequestMethod.GET)
+	
+	@Value("${GET_TRACKING_DETAILS_BY_DATE}")
+	private String GET_TRACKING_DETAILS_BY_DATE;
+	
+	@RequestMapping(value = "/track", method = RequestMethod.GET)
 	public ModelAndView trackVehicle(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("VehicleTrack");
 		return mv;
@@ -62,11 +65,16 @@ public class VehicleController {
 		return new ModelAndView("vehicleRegistration");
 	}
 
-	@RequestMapping(value = "/trackingCoordinates", method = RequestMethod.GET)
+	@RequestMapping(value = "/trackingCoordinatesByDate", method = RequestMethod.GET)
 	public Response trackingCoordinates(HttpServletRequest request) {
-
-		Integer vehicle = Integer.parseInt(request.getParameter("vehicleId"));
-		List<CoordinateDetail> list = new ArrayList<CoordinateDetail>();
+		Response response = null;
+		RestTemplate restTemplate = new RestTemplate();
+		
+		Integer vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
+		String startDate=request.getParameter("startDate");
+		String endDate=request.getParameter("endDate");
+		
+		/*List<CoordinateDetail> list = new ArrayList<CoordinateDetail>();
 		list.add(new CoordinateDetail(1, 1, "21.486934", "86.924600"));
 		list.add(new CoordinateDetail(1, 2, "28.704059", "77.102490"));
 		// list.add(new CoordinateDetail("1234","28.704059","77.102490"));
@@ -74,10 +82,13 @@ public class VehicleController {
 		// list.add(new CoordinateDetail("1234","28.454405","78.102490"));
 		// list.add(new CoordinateDetail("1234","66.704059","77.102490"));
 		list.add(new CoordinateDetail(1, 3, "21.145800", "79.088155"));
-		list.add(new CoordinateDetail(1, 4, "18.520430", "73.856744"));
+		list.add(new CoordinateDetail(1, 4, "18.520430", "73.856744"));*/
 
-		Response res = new Response("success", list, "");
-		return res;
+		String url = GET_TRACKING_DETAILS_BY_DATE + "?vehicleId=+"+vehicleId+"&startDate="+startDate+"&endDate="+endDate;
+		response = restTemplate.getForObject(url, Response.class);
+		
+		//Response res = new Response("success", list, "");
+		return response;
 	}
 
 	@RequestMapping(value = "/vehicleReport", method = RequestMethod.GET)

@@ -24,17 +24,22 @@ public class TrackerFacade {
 	@Autowired
 	TrackerService trackerService;
 
-	@RequestMapping(value = "/trackingData", method = RequestMethod.GET)
+	@RequestMapping(value = "/trackingCoordinatesByDate", method = RequestMethod.GET)
 	public List<CoordinateDetail> getTrackingData(HttpServletRequest request) {
+		
+		Integer vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
+		String startDate=request.getParameter("startDate");
+		String endDate=request.getParameter("endDate");
+		
 		Response response = null;
 		List<CoordinateDetail> list=new ArrayList<CoordinateDetail>();
 		try{
 			//String userid = request.getParameter("userId");
 			//User user=new User();
 			//user.setUserid( Long.parseLong(userid, 10)  );
-			 Tracker tracker=new Tracker();
-			 tracker.setTrackerid(1);
-			 list = trackerService.getTrackingData(tracker);
+			// Tracker tracker=new Tracker();
+			 //tracker.setTrackerid(1);
+			 list = trackerService.getTrackingData( vehicleId, startDate, endDate);
 			
 			if (list.isEmpty()) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
