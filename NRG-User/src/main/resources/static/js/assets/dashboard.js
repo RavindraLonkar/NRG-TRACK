@@ -68,6 +68,9 @@ function setMarkers(map) {
 	};
 	for (var i = 0; i < list.length; i++) {
 		var vehicle = list[i];
+		var vehiclenumber=vehicle.vehiclenumber;
+		var vehiclename=vehicle.vehiclename;
+		var title="<html><head><title></title></head><body><p<lable>vehicle No: "+vehiclenumber+" </lable><br><lable>vehicle Name: "+vehiclename+" </lable></p></body></html>";
 		var marker = new google.maps.Marker({
 			position : {
 				lat : parseFloat(vehicle.longitude),
@@ -76,12 +79,12 @@ function setMarkers(map) {
 			map : map,
 			icon : image,
 			shape : shape,
-			title : vehicle.vehiclenumber,
-			zIndex :parseInt(i+1)
+			title : title,
+			zIndex :parseInt(1)
 		});
-
+		 
 		marker.infowindow = new google.maps.InfoWindow({
-			content : vehicle.vehiclenumber
+			content : title
 		});
 		google.maps.event.addListener(marker, 'click', function() {
 			this.infowindow.open(map, this);
