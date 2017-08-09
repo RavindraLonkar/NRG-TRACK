@@ -32,14 +32,14 @@ function setMarkers(map) {
 	 $.ajax({
          type : "GET",
         // url : url.host + "/NRG-User/vehicleList",
-         url : "http://localhost:8080/NRG-User/vehicleList",
+         url : "http://localhost:8080/NRG-User/vehicle/current/Position",
          //data : data,
          processData: false, //prevent jQuery from automatically transforming the data into a query string
          contentType: false,
          cache: false,
          timeout: 600000,
          success : function(result) {
-          if(result.status=='success'){
+          if(result.status=='1'){
            if(jQuery.isEmptyObject(result))
                return;
             
@@ -76,12 +76,12 @@ function setMarkers(map) {
 			map : map,
 			icon : image,
 			shape : shape,
-			title : vehicle.vehicleNumber,
-			zIndex :parseInt(vehicle.index)
+			title : vehicle.vehiclenumber,
+			zIndex :parseInt(i+1)
 		});
 
 		marker.infowindow = new google.maps.InfoWindow({
-			content : vehicle.vehicleNumber
+			content : vehicle.vehiclenumber
 		});
 		google.maps.event.addListener(marker, 'click', function() {
 			this.infowindow.open(map, this);

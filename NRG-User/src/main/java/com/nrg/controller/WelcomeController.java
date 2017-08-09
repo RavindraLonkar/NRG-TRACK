@@ -3,9 +3,6 @@
  */
 package com.nrg.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,9 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nrg.models.User;
-import com.nrg.models.VehiclePosition;
 import com.nrg.security.token.NRGToken;
-import com.nrg.utils.Response;
 
 /**
  * @author Namdev
@@ -72,20 +67,6 @@ public class WelcomeController {
 
 		modelAndView.setViewName("index");
 		return modelAndView;
-	}
-
-	@RequestMapping(value = "/vehicleList", method = RequestMethod.GET)
-	public Response getVehicleList() {
-
-		List<VehiclePosition> list = new ArrayList<VehiclePosition>();
-		list.add(new VehiclePosition("MH12AS2112", "22.890542", "77.274856", 1));
-		list.add(new VehiclePosition("MH12AS2113", "22.00", "77.259052", 2));
-		list.add(new VehiclePosition("MH12AS2114", "22.028249", "77.157507", 3));
-		list.add(new VehiclePosition("MH12AS2115", "22.80010128657071", "77.259302", 4));
-
-		Response res = new Response("success", list, "");
-
-		return res;
 	}
 
 }

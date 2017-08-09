@@ -1,30 +1,54 @@
 package com.nrg.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
+import javax.persistence.Table;
+
+@NamedStoredProcedureQuery(name = "get_vehicleposition", procedureName = "get_vehicleposition", resultClasses = VehiclePosition.class, parameters = {
+		 @StoredProcedureParameter(mode = ParameterMode.IN, type = Integer.class, name = "userid")
+})
+@Entity
+@Table(name="Temp_VehiclePosition")
 public class VehiclePosition {
 
-	private String vehicleNumber;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer vehiclepositionid;
+	
+	private String vehiclenumber;
+	private String vehiclename;
 	private String longitude;
 	private String latitude;
-	private int index;
+
 	
-	public VehiclePosition() {
-		super();
+	
+	public Integer getVehiclepositionid() {
+		return vehiclepositionid;
 	}
 
-	public VehiclePosition(String vehicleNumber, String longitude, String latitude, int index) {
-		super();
-		this.vehicleNumber = vehicleNumber;
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.index = index;
+	public void setVehiclepositionid(Integer vehiclepositionid) {
+		this.vehiclepositionid = vehiclepositionid;
 	}
 
-	public String getVehicleNumber() {
-		return vehicleNumber;
+	public String getVehiclenumber() {
+		return vehiclenumber;
 	}
 
-	public void setVehicleNumber(String vehicleNumber) {
-		this.vehicleNumber = vehicleNumber;
+	public void setVehiclenumber(String vehiclenumber) {
+		this.vehiclenumber = vehiclenumber;
+	}
+
+	public String getVehiclename() {
+		return vehiclename;
+	}
+
+	public void setVehiclename(String vehiclename) {
+		this.vehiclename = vehiclename;
 	}
 
 	public String getLongitude() {
@@ -43,19 +67,4 @@ public class VehiclePosition {
 		this.latitude = latitude;
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	@Override
-	public String toString() {
-		return "VehiclePosition [vehicleNumber=" + vehicleNumber + ", longitude=" + longitude + ", latitude=" + latitude
-				+ ", index=" + index + "]";
-	}
-	
-	
 }

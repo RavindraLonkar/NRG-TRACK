@@ -37,6 +37,8 @@ public class Vechicle {
 	private Integer lastmodifiedby;
 	@Column
 	private Date lastmodifieddate;
+	@Column
+	private Integer isactive;
 
 	public Integer getVehicleid() {
 		return vehicleid;
@@ -106,4 +108,12 @@ public class Vechicle {
 		return serialVersionUID;
 	}
 
+	public Integer getIsactive() {
+		return isactive;
+	}
+
+	public void setIsactive(Integer isactive) {
+		this.isactive = isactive;
+	}
+	
 }

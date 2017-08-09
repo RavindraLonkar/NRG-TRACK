@@ -10,26 +10,10 @@ import org.springframework.data.repository.query.Param;
 import com.nrg.models.CoordinateDetail;
 import com.nrg.models.TrackingData;
 
-public interface TrackingDataRepository extends CrudRepository<TrackingData, Integer>{
+public interface TrackingDataRepository extends CrudRepository<TrackingData, Integer> {
 
-	// List<TrackingData> findAllByTracker(Tracker tracker);
-	 
-	 	@Query("select new com.nrg.models.CoordinateDetail(t.tracker.trackerid,t.trackingdataid,t.latitude,t.longitude) from TrackingData t where t.tracker.vechicle.vehicleid = :vehicleid and t.createddate between :start and :end order by createddate asc")
-	 	List<CoordinateDetail> findBytrackerId(@Param("vehicleid") Integer vehicleid,
-	 											@Param("start") Date start,
-	 											@Param("end") Date end);
-	
-	 	// List<TrackingData> findBycreateddateBetween(Date start, Date arrival);
-	 	 //List<TrackingData> findBytrackingdataidBetween(Integer start, Date arrival);
-	 	
-	 	/*@Query("select a from("
-			 	+" select *,"
-				+" ROW_NUMBER() OVER(PARTITION BY trackerid order by createddate desc)rn "
-				+" from txn_trackingdata t order by createddate desc"
-				+" )a "
-			 	+" where rn=1)")		*/	 			 	
-		//List<CoordinateDetail> findLatestPosition(@Param("trackerid") Integer trackerid);
-			 	
-
+	@Query("select new com.nrg.models.CoordinateDetail(t.tracker.trackerid,t.trackingdataid,t.latitude,t.longitude) from TrackingData t where t.tracker.vechicle.vehicleid = :vehicleid and t.createddate between :start and :end order by createddate asc")
+	List<CoordinateDetail> findBytrackerId(@Param("vehicleid") Integer vehicleid, @Param("start") Date start,
+			@Param("end") Date end);
 
 }

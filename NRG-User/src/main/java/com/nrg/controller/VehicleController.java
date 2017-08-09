@@ -3,24 +3,18 @@
  */
 package com.nrg.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nrg.models.CoordinateDetail;
 import com.nrg.models.User;
 import com.nrg.models.Vechicle;
-import com.nrg.models.VehiclePosition;
 import com.nrg.utils.CommonConstants;
 import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
@@ -53,6 +47,9 @@ public class VehicleController {
 	
 	@Value("${GET_TRACKING_DETAILS_BY_DATE}")
 	private String GET_TRACKING_DETAILS_BY_DATE;
+	
+	@Value("${GET_VEHICLE_CURRENT_LOCATION_LIST}")
+	private String GET_VEHICLE_CURRENT_LOCATION_LIST;
 	
 	@RequestMapping(value = "/track", method = RequestMethod.GET)
 	public ModelAndView trackVehicle(HttpServletRequest request) {
@@ -104,7 +101,8 @@ public class VehicleController {
 		// list.add(new
 		// VehiclePosition("MH12AS2112","22.890542","77.274856",1));
 
-		Response res = new Response("success", new VehiclePosition("MH12AS2112", "22.890542", "77.274856", 1), "");
+		Response res = new Response("success", null,
+				"");
 		return res;
 	}
 	
@@ -177,20 +175,29 @@ public class VehicleController {
 		}
 		
 		//------------------------------------------------------	
-		@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-		public Response deleteVehicle(@RequestBody List<Vechicle> vehicles) {
 
-			Response response = null;
-			try {
-				RestTemplate restTemplate = new RestTemplate();
-				String vehicleListUrl = DELETE_VEHICLES;
-				response = restTemplate.postForObject(vehicleListUrl, vehicles, Response.class);
-			} catch (Exception e) {
-				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
-			}
-			return response;
+	@RequestMapping(value = "/current/Position", method = RequestMethod.GET)
+	public Response vehiclePositions(HttpServletRequest request) {
+		/*
+		 * list.add(new VehiclePosition("MH12AS2112", "22.890542", "77.274856",
+		 * 1)); list.add(new VehiclePosition("MH12AS2113", "22.00", "77.259052",
+		 * 2)); list.add(new VehiclePosition("MH12AS2114", "22.028249",
+		 * "77.157507", 3)); list.add(new VehiclePosition("MH12AS2115",
+		 * "22.80010128657071", "77.259302", 4));
+		 */
+
+		Response response = null;
+		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+			RestTemplate restTemplate = new RestTemplate();
+			String vehicleListUrl = GET_VEHICLE_CURRENT_LOCATION_LIST + "?userId=" + user.getUserid();
+			response = restTemplate.getForObject(vehicleListUrl, Response.class);
+
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
-		
-	//------------------------------------------------------
-	
+
+		return response;
+	}
+
 }
