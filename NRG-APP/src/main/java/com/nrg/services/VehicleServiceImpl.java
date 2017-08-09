@@ -28,6 +28,7 @@ public class VehicleServiceImpl implements VehicleService {
 		User user = new User();
 		user.setUserid(userid);
 		vehicle.setUser(user);
+		vehicle.setIsactive(1);
 		return vehicleRepository.save(vehicle);
 	}
 
@@ -42,15 +43,21 @@ public class VehicleServiceImpl implements VehicleService {
 
 	@Override
 	public void deleteVehicle(Vechicle vehicle) {		
-		vehicleRepository.delete(vehicle);
+		//TODO : for Hard Delete
+		/*vehicleRepository.delete(vehicle);*/
+		Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
+		newVehicle.setIsactive(0);
+		vehicleRepository.save(newVehicle);
 	}
-
+	
 	@Override
-	public void deleteMultipleVehicle(String vehicleIdsString) {
-		String vehicleIds[] = vehicleIdsString.split(",");
-		for(String vehicleId : vehicleIds){
-			vehicleRepository.delete((long) Integer.parseInt(vehicleId));
+	public void deleteVehicles(List<Vechicle> vehicles) {
+		//TODO : for Hard Delete
+		/*vehicleRepository.delete(vehicles);*/
+		for(Vechicle vehicle : vehicles){
+			Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
+			newVehicle.setIsactive(0);
+			vehicleRepository.save(newVehicle);
 		}
-		
 	}
 }

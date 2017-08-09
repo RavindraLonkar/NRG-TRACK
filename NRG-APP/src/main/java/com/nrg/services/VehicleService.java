@@ -14,6 +14,6 @@ public interface VehicleService {
 
 	Vechicle addVehicle(Vechicle vehicle, Integer userid);
 
-	void deleteMultipleVehicle(String vehicleIdsString);
+	void deleteVehicles(List<Vechicle> vehicles);
 	
 }

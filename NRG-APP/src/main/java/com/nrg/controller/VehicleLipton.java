@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nrg.models.User;
 import com.nrg.models.Vechicle;
 import com.nrg.services.VehicleService;
 import com.nrg.utils.CommonConstants;
@@ -93,12 +91,11 @@ public class VehicleLipton {
 		return response;
 	}
 	
-	@RequestMapping(value = "/delete/ids", method = RequestMethod.POST)
-	public Response deleteMultipleVehicle(HttpServletRequest request) {
+	@RequestMapping(value = "/delete/selected", method = RequestMethod.POST)
+	public Response deleteVehicles(@RequestBody List<Vechicle> vehicles) {
 		Response response = null;
 		try{
-			String vehicleIdsString = request.getParameter("vehicleIds");
-			vehicleService.deleteMultipleVehicle(vehicleIdsString);	
+			vehicleService.deleteVehicles(vehicles);	
 			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLES_DELETED);
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);

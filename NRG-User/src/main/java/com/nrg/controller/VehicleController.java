@@ -51,6 +51,9 @@ public class VehicleController {
 	@Value("${DELETE_VEHICLES}")
 	private String DELETE_VEHICLES;
 	
+	@Value("${DELETE_VEHICLES_SELECTED}")
+	private String DELETE_VEHICLES_SELECTED;
+	
 	@Value("${GET_TRACKING_DETAILS_BY_DATE}")
 	private String GET_TRACKING_DETAILS_BY_DATE;
 	
@@ -162,35 +165,34 @@ public class VehicleController {
 	}
 	
 	//------------------------------------------------------	
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public Response deleteVehicle(@RequestBody Vechicle vehicle) {
+		@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+		public Response deleteVehicle(@RequestBody Vechicle vehicle) {
 
-		Response response = null;
-		try {
-			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = DELETE_VEHICLE;
-			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
-		} catch (Exception e) {
-			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+			Response response = null;
+			try {
+				RestTemplate restTemplate = new RestTemplate();
+				String vehicleListUrl = DELETE_VEHICLE;
+				response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
+			} catch (Exception e) {
+				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+			}
+			return response;
 		}
-		return response;
-	}
-	
-	//------------------------------------------------------	
-	@RequestMapping(value = "/delete/ids", method = RequestMethod.DELETE)
-	public Response deleteVehicle(HttpServletRequest request) {
+		
+		//------------------------------------------------------	
+		@RequestMapping(value = "/delete/selected", method = RequestMethod.DELETE)
+		public Response deleteVehicle(@RequestBody List<Vechicle> vehicles) {
 
-		Response response = null;
-		try {
-			String vehicleIdsString = request.getParameter("vehicleIds");
-			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = DELETE_VEHICLES + "?vehicleIds=" + vehicleIdsString;
-			response = restTemplate.postForObject(vehicleListUrl, null, Response.class);
-		} catch (Exception e) {
-			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+			Response response = null;
+			try {
+				RestTemplate restTemplate = new RestTemplate();
+				String vehicleListUrl = DELETE_VEHICLES_SELECTED;
+				response = restTemplate.postForObject(vehicleListUrl, vehicles, Response.class);
+			} catch (Exception e) {
+				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+			}
+			return response;
 		}
-		return response;
-	}
 		
 	//------------------------------------------------------
 	
