@@ -51,9 +51,6 @@ public class VehicleController {
 	@Value("${DELETE_VEHICLES}")
 	private String DELETE_VEHICLES;
 	
-	@Value("${DELETE_VEHICLES_SELECTED}")
-	private String DELETE_VEHICLES_SELECTED;
-	
 	@Value("${GET_TRACKING_DETAILS_BY_DATE}")
 	private String GET_TRACKING_DETAILS_BY_DATE;
 	
@@ -180,13 +177,13 @@ public class VehicleController {
 		}
 		
 		//------------------------------------------------------	
-		@RequestMapping(value = "/delete/selected", method = RequestMethod.DELETE)
+		@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 		public Response deleteVehicle(@RequestBody List<Vechicle> vehicles) {
 
 			Response response = null;
 			try {
 				RestTemplate restTemplate = new RestTemplate();
-				String vehicleListUrl = DELETE_VEHICLES_SELECTED;
+				String vehicleListUrl = DELETE_VEHICLES;
 				response = restTemplate.postForObject(vehicleListUrl, vehicles, Response.class);
 			} catch (Exception e) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);

@@ -195,7 +195,7 @@
 					if (result.status == '1') {
 						$('#addVehicleModal').modal('hide');
 						bootMessage('sucess', result.resonCode);
-						table.reload();
+						table.ajax.reload();
 					} else {
 						bootMessage('Error', result.resonCode);
 					}
@@ -236,7 +236,7 @@
 					if (result.status == '1') {
 						$('#editVehicleModal').modal('hide');
 						bootMessage('sucess', result.resonCode);
-						table.reload();
+						table.ajax.reload();
 					} else {
 						bootMessage('Error', result.resonCode);
 					}
@@ -329,7 +329,7 @@
 				success : function(result) {
 					if (result.status == '1') {
 						bootMessage('sucess', result.resonCode);
-						table.reload();
+						table.ajax.reload();
 					} else {
 						bootMessage('Error', result.resonCode);
 					}
