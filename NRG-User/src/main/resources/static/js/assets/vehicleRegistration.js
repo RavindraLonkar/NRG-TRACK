@@ -9,14 +9,10 @@ $(document).ready(function() {
         "select": true,
 		"ajax" : {
 			"url" : $("#contextPath").val() + "/vehicle/list",
-			"type" : "GET",	
-			 "error": function(){  
-	            jQuery("#tablename").append('<tbody class="grid-error"><tr><th colspan="2">No results.</th></tr></tbody>');
-	            jQuery("#tablename_processing").css("display","none");
-	        }
+			"type" : "GET",				
 		},
 		"language": {
-	        infoEmpty: "No records available - Got it?",
+	        "zeroRecords": "No Record Found!",
 	    },
 		"rowId": 'vehicleid',
 		"columns" : [ {
@@ -38,6 +34,7 @@ $(document).ready(function() {
         "buttons": [
             {
                 text: 'Add Vehicle',
+                className: 'green',
                 action: function ( e, dt, node, config ) {
                 	addclassHide();
                 	$('#addVehicleModal').modal('show');
@@ -45,6 +42,7 @@ $(document).ready(function() {
             },
             {
                 text: 'Delete Selected Vehicles',
+                className: 'red',
                 action: function ( e, dt, node, config ) {
                 	confirmdeleteVehicles();
                 }

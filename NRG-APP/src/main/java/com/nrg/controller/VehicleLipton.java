@@ -31,7 +31,7 @@ public class VehicleLipton {
 			List<Vechicle> vehicle = vehicleService.getVehiclesList(Integer.parseInt(userid));
 
 			if (vehicle.isEmpty()) {
-				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
+				response = new Response(CommonConstants.NRG_FAIL, 0, CommonUserMessages.RECORD_NOT_FOUND);
 			} else {
 				response = new Response(CommonConstants.NRG_SCUCESS, vehicle, CommonUserMessages.VEHICLE_LOADED);
 			}
