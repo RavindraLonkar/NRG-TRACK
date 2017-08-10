@@ -81,15 +81,15 @@ public class VehicleLipton {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Response deleteVehicle(@RequestBody Vechicle vehicle) {
+	public Response deleteVehicles(@RequestBody List<Vechicle> vehicles) {
 		Response response = null;
-		try {
-			vehicleService.deleteVehicle(vehicle);
-			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLE_DELETED);
-		} catch (Exception e) {
+		try{
+			vehicleService.deleteVehicles(vehicles);	
+			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLES_DELETED);
+		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
-
+				
 		return response;
 	}
 

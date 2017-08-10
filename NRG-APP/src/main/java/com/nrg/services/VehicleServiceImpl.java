@@ -34,7 +34,6 @@ public class VehicleServiceImpl implements VehicleService {
 	public List<Vechicle> getVehiclesList(Integer userId) {
 		User user = new User();
 		user.setUserid(userId);
-
 		return vehicleRepository.findByUserId(userId);
 	}
 
@@ -43,6 +42,7 @@ public class VehicleServiceImpl implements VehicleService {
 		User user = new User();
 		user.setUserid(userid);
 		vehicle.setUser(user);
+		vehicle.setIsactive(1);
 		return vehicleRepository.save(vehicle);
 	}
 
@@ -56,12 +56,14 @@ public class VehicleServiceImpl implements VehicleService {
 	}
 
 	@Override
-	public void deleteVehicle(Vechicle vehicle) {		
+	public void deleteVehicles(List<Vechicle> vehicles) {		
 		//TODO : for Hard Delete
 		/*vehicleRepository.delete(vehicle);*/
-		Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
-		newVehicle.setIsactive(0);
-		vehicleRepository.save(newVehicle);
+		for(Vechicle vehicle : vehicles){
+			Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
+			newVehicle.setIsactive(0);
+			vehicleRepository.save(newVehicle);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -72,6 +74,5 @@ public class VehicleServiceImpl implements VehicleService {
 		storedProcedureQuery.setParameter("userid", userId);
 		storedProcedureQuery.execute();
 		return storedProcedureQuery.getResultList();
-		// return trackingDataRepository.findVehiclePosition();
 	}
 }

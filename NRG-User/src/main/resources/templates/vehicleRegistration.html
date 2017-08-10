@@ -166,7 +166,7 @@
 	                {
 	                    text: 'Delete Selected Vehicles',
 	                    action: function ( e, dt, node, config ) {
-	                    	bootMessageMethodCall('Confirm', 'OK', 'deleteVehicles()', 'Are you sure! wants to delete vehicles information');
+	                    	confirmdeleteVehicles();
 	                    }
 	                }
 	            ]
@@ -262,6 +262,7 @@
 					buttons : [ {
 						label : "OK",
 						action : function(dialog) {
+							$(this).modal('hide');
 							deleteVehicles(data);
 						},
 					}]
@@ -269,7 +270,7 @@
 			}
 		}
 		
-		function confirmdeleteVehicles(vehicleid) {
+		function confirmdeleteVehicles() {
 			var data = new Array();
 			table.rows('.selected').every(function(rowIdx, tableLoop, rowLoop) {
 				data.push(this.data());
@@ -285,7 +286,8 @@
 					buttons : [ {
 						label : "OK",
 						action : function(dialog) {
-							deleteVehicles(data)
+							$(this).modal('hide');
+							deleteVehicles(data)							
 						},
 					}]
 				});

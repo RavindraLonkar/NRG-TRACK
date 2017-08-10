@@ -11,10 +11,10 @@ public interface VehicleService {
 
 	Vechicle updateVehicle(Vechicle vehicle);
 
-	void deleteVehicle(Vechicle vehicle);
-
 	Vechicle addVehicle(Vechicle vehicle, Integer userid);
 
 	List<VehiclePosition> vehiclePositions(Integer userId);
+
+	void deleteVehicles(List<Vechicle> vehicles);
 
 }

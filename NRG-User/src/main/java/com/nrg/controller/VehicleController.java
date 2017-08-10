@@ -3,6 +3,8 @@
  */
 package com.nrg.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -71,20 +73,9 @@ public class VehicleController {
 		String startDate=request.getParameter("startDate");
 		String endDate=request.getParameter("endDate");
 		
-		/*List<CoordinateDetail> list = new ArrayList<CoordinateDetail>();
-		list.add(new CoordinateDetail(1, 1, "21.486934", "86.924600"));
-		list.add(new CoordinateDetail(1, 2, "28.704059", "77.102490"));
-		// list.add(new CoordinateDetail("1234","28.704059","77.102490"));
-		// list.add(new CoordinateDetail("1234","28.734059","78.102490"));
-		// list.add(new CoordinateDetail("1234","28.454405","78.102490"));
-		// list.add(new CoordinateDetail("1234","66.704059","77.102490"));
-		list.add(new CoordinateDetail(1, 3, "21.145800", "79.088155"));
-		list.add(new CoordinateDetail(1, 4, "18.520430", "73.856744"));*/
-
 		String url = GET_TRACKING_DETAILS_BY_DATE + "?vehicleId=+"+vehicleId+"&startDate="+startDate+"&endDate="+endDate;
 		response = restTemplate.getForObject(url, Response.class);
 		
-		//Response res = new Response("success", list, "");
 		return response;
 	}
 
@@ -160,32 +151,23 @@ public class VehicleController {
 	}
 	
 	//------------------------------------------------------	
-		@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-		public Response deleteVehicle(@RequestBody Vechicle vehicle) {
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public Response deleteVehicle(@RequestBody List<Vechicle> vehicles) {
 
-			Response response = null;
-			try {
-				RestTemplate restTemplate = new RestTemplate();
-				String vehicleListUrl = DELETE_VEHICLE;
-				response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
-			} catch (Exception e) {
-				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
-			}
-			return response;
+		Response response = null;
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			String vehicleListUrl = DELETE_VEHICLES;
+			response = restTemplate.postForObject(vehicleListUrl, vehicles, Response.class);
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
-		
-		//------------------------------------------------------	
+		return response;
+	}
+	//------------------------------------------------------	
 
 	@RequestMapping(value = "/current/Position", method = RequestMethod.GET)
 	public Response vehiclePositions(HttpServletRequest request) {
-		/*
-		 * list.add(new VehiclePosition("MH12AS2112", "22.890542", "77.274856",
-		 * 1)); list.add(new VehiclePosition("MH12AS2113", "22.00", "77.259052",
-		 * 2)); list.add(new VehiclePosition("MH12AS2114", "22.028249",
-		 * "77.157507", 3)); list.add(new VehiclePosition("MH12AS2115",
-		 * "22.80010128657071", "77.259302", 4));
-		 */
-
 		Response response = null;
 		try {
 			User user = (User) request.getSession().getAttribute("usersession");
