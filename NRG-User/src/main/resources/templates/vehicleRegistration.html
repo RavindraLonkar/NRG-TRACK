@@ -135,7 +135,11 @@
 		        "select": true,
 				"ajax" : {
 					"url" : $("#contextPath").val() + "/vehicle/list",
-					"type" : "GET",					
+					"type" : "GET",	
+					 "error": function(){  
+			            jQuery("#tablename").append('<tbody class="grid-error"><tr><th colspan="2">No results.</th></tr></tbody>');
+			            jQuery("#tablename_processing").css("display","none");
+			        }
 				},
 				"language": {
 			        infoEmpty: "No records available - Got it?",
@@ -252,17 +256,17 @@
 			var data = new Array();
 			data.push(table.row('#' + vehicleid).data());
 			
-			if(data == null){
+			if(!(data.length > 0)){
 				bootMessage('Confirm','Please select vehicle to delete');
 				return;
-			}else{
+			} else{
 				BootstrapDialog.show({
 					title : "Confirm",
 					message : "Are you sure! Wants to delete.",
 					buttons : [ {
 						label : "OK",
 						action : function(dialog) {
-							$(this).modal('hide');
+							dialog.close();
 							deleteVehicles(data);
 						},
 					}]
@@ -276,7 +280,7 @@
 				data.push(this.data());
 			});
 			
-			if(data == null){
+			if(!(data.length > 0)){
 				bootMessage('Confirm','Please select vehicle to delete');
 				return;
 			}else{
@@ -286,7 +290,7 @@
 					buttons : [ {
 						label : "OK",
 						action : function(dialog) {
-							$(this).modal('hide');
+							dialog.close();
 							deleteVehicles(data)							
 						},
 					}]
