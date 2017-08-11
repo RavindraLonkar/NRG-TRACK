@@ -1,8 +1,6 @@
 package com.nrg.datareceiver;
 
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +20,7 @@ public class AndriodServiceDataReceiver {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Response saveAndroidServiceData(@RequestBody TrackingData trackingData){
-		Date date = new Date();
-		trackingData.setCreateddate(date);
 		Response response = null;
-		
 		String url=SAVE_ANDROID_SERVICEDATA;
 		RestTemplate rs=new RestTemplate();
 		response=rs.postForObject(url, trackingData, Response.class);
