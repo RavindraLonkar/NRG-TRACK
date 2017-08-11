@@ -27,10 +27,13 @@ public class TrackerServiceImpl implements TrackerService {
 		String date_s = " 2011-01-18 00:00:00.0"; 
 		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
 		try {
-			 d1 = (Date)dt.parse("2017-07-30 11:05:17");
-			 d2 = (Date)dt.parse("2017-07-30 17:05:17");
+			 //d1 = (Date)dt.parse("2017-07-30 11:05:17");
+			 //d2 = (Date)dt.parse("2017-07-30 17:05:17");
 		
+			 d1 = (Date)dt.parse(startDate);
+			 d2 = (Date)dt.parse(endDate);
 		
+			 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

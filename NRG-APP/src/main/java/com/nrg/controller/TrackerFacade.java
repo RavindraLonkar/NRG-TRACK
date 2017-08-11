@@ -25,7 +25,7 @@ public class TrackerFacade {
 	TrackerService trackerService;
 
 	@RequestMapping(value = "/trackingCoordinatesByDate", method = RequestMethod.GET)
-	public List<CoordinateDetail> getTrackingData(HttpServletRequest request) {
+	public Response getTrackingData(HttpServletRequest request) {
 		
 		Integer vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
 		String startDate=request.getParameter("startDate");
@@ -50,7 +50,7 @@ public class TrackerFacade {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
 				
-		return list;
+		return response;
 	}
 	
 	@RequestMapping(value = "/LatestList", method = RequestMethod.GET)

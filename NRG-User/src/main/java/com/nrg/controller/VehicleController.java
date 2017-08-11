@@ -3,6 +3,7 @@
  */
 package com.nrg.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nrg.models.CoordinateDetail;
 import com.nrg.models.User;
 import com.nrg.models.Vechicle;
 import com.nrg.utils.CommonConstants;
@@ -77,6 +79,8 @@ public class VehicleController {
 		response = restTemplate.getForObject(url, Response.class);
 		
 		return response;
+		
+		
 	}
 
 	@RequestMapping(value = "/vehicleReport", method = RequestMethod.GET)

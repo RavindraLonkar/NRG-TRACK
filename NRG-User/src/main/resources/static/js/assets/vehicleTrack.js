@@ -70,7 +70,7 @@ function initMap() {
     	         cache: false,
     	         timeout: 600000,
     	         success : function(result) {
-    	          if(result.status=='success'){
+    	          if(result.status=='1'){
     	           if(jQuery.isEmptyObject(result))
     	               return;
     	            
@@ -89,15 +89,15 @@ function initMap() {
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay,list) {
     	  var waypts = [];
-    	  var list;
+    	 // var list;
     	  
-    	  var start=list[0].longitude+','+list[0].latitude;
-    	  var end=list[list.length-1].longitude+','+list[list.length-1].latitude;
+    	  var start=list[0].latitude+','+list[0].longitude;
+    	  var end=list[list.length-1].latitude+','+list[list.length-1].longitude;
     	  
         for (var i = 1; i < list.length-1; i++) {
           
             waypts.push({
-              location: list[i].longitude+','+list[i].latitude,
+              location: list[i].latitude+','+list[i].longitude,
               stopover: false 	
             });
           
