@@ -9,53 +9,32 @@ function myMap() {
 		zoom : 5
 	};
 	var map = new google.maps.Map(mapCanvas, mapOptions);
-	/*
-	 * var marker = new google.maps.Marker({ position : latLong, animation :
-	 * google.maps.Animation.BOUNCE });
-	 */	
 	setMarkers(map);
-	/* marker.setMap(map); */
 }
-
-/*var beaches = [ [ 'Bondi Beach', 22.890542, 77.274856, 4 ],
-		[ 'Coogee Beach', 22.00, 77.259052, 5 ],
-		[ 'Cronulla Beach', 22.028249, 77.157507, 3 ],
-		[ 'Manly Beach', 22.80010128657071, 77.28747820854187, 2 ],
-		[ 'Maroubra Beach', 22.950198, 77.259302, 1 ] ];
-*/
-//var vehicles = "${vehicleList}";
 
 function setMarkers(map) {
-	
+
 	var url = window.location;
-	//var data;
-	 $.ajax({
-         type : "GET",
-        // url : url.host + "/NRG-User/vehicleList",
-         url : "http://localhost:8080/NRG-User/vehicle/current/Position",
-         //data : data,
-         processData: false, //prevent jQuery from automatically transforming the data into a query string
-         contentType: false,
-         cache: false,
-         timeout: 600000,
-         success : function(result) {
-          if(result.status=='1'){
-           if(jQuery.isEmptyObject(result))
-               return;
-            
-           loadMap(result.data,map);
-          }else{
-          // BootstrapDialog.alert(result.resonCode);
-          } 
-         },
-         /*error : function(e) {
-          $("#"+objectName+"").hide();
-             console.log("ERROR: ", e);
-         }*/
-     });
-	
+	$.ajax({
+		type : "GET",
+		url : $("#contextPath").val() + "/vehicle/current/Position",
+		processData : false,
+		contentType : false,
+		cache : false,
+		timeout : 600000,
+		success : function(result) {
+			if (result.status == '1') {
+				if (jQuery.isEmptyObject(result))
+					return;
+
+				loadMap(result.data, map);
+			} else {
+			}
+		},
+	});
+
 }
-	function loadMap(list,map){
+function loadMap(list, map) {
 	var image = {
 		url : './img/vehicle.jpg',
 		size : new google.maps.Size(40, 20),
@@ -68,27 +47,55 @@ function setMarkers(map) {
 	};
 	for (var i = 0; i < list.length; i++) {
 		var vehicle = list[i];
-		var vehiclenumber=vehicle.vehiclenumber;
-		var vehiclename=vehicle.vehiclename;
-		var title="<html><head><title></title></head><body><p<lable>vehicle No: "+vehiclenumber+" </lable><br><lable>vehicle Name: "+vehiclename+" </lable></p></body></html>";
-		var marker = new google.maps.Marker({
-			position : {
-				lat : parseFloat(vehicle.longitude),
-				lng : parseFloat(vehicle.latitude)
-			},
-			map : map,
-			icon : image,
-			shape : shape,
-			title : title,
-			zIndex :parseInt(1)
-		});
-		 
-		marker.infowindow = new google.maps.InfoWindow({
-			content : title
-		});
-		google.maps.event.addListener(marker, 'click', function() {
-			this.infowindow.open(map, this);
-		});
+		var vehiclenumber = vehicle.vehiclenumber;
+		var vehiclename = vehicle.vehiclename;
+		var location = '';
+		var marker = '';
+		var title = '';
+		$
+				.ajax({
+					type : "GET",
+					url : 'http://maps.googleapis.com/maps/api/geocode/json?latlng='
+							+ vehicle.longitude
+							+ ','
+							+ vehicle.latitude
+							+ '&sensor=false',
+					processData : false,
+					async : false,
+					contentType : false,
+					cache : false,
+					timeout : 600000,
+					success : function(result) {
+						if (result.status == 'OK') {
+							location = result.results[0].formatted_address;
+						}
+						title = "<html><head></head><body><table border='1'><tr><td>Vehicle No:</td><td> "
+								+ vehiclenumber
+								+ "</td></tr><tr><td> Vehicle Name:</td><td> "
+								+ vehiclename
+								+ "</td></tr><tr><td> Location Name:</td><td> "
+								+ location + "</td></tr></table></body></html>";
+						marker = new google.maps.Marker({
+							position : {
+								lat : parseFloat(vehicle.longitude),
+								lng : parseFloat(vehicle.latitude)
+							},
+							map : map,
+							icon : image,
+							shape : shape,
+							title : vehicle.vehiclenumber,
+							zIndex : parseInt(1)
+						});
+
+						marker.infowindow = new google.maps.InfoWindow({
+							content : title
+						});
+						google.maps.event.addListener(marker, 'click',
+								function() {
+									this.infowindow.open(map, this);
+								});
+					},
+				});
+
 	}
-	}
-	
+}
