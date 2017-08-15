@@ -56,10 +56,10 @@ public class VehicleServiceImpl implements VehicleService {
 	}
 
 	@Override
-	public void deleteVehicles(List<Vechicle> vehicles) {		
-		//TODO : for Hard Delete
-		/*vehicleRepository.delete(vehicle);*/
-		for(Vechicle vehicle : vehicles){
+	public void deleteVehicles(List<Vechicle> vehicles) {
+		// TODO : for Hard Delete
+		/* vehicleRepository.delete(vehicle); */
+		for (Vechicle vehicle : vehicles) {
 			Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
 			newVehicle.setIsactive(0);
 			vehicleRepository.save(newVehicle);
@@ -74,5 +74,10 @@ public class VehicleServiceImpl implements VehicleService {
 		storedProcedureQuery.setParameter("userid", userId);
 		storedProcedureQuery.execute();
 		return storedProcedureQuery.getResultList();
+	}
+
+	@Override
+	public List<Vechicle> getTrackerVehiclesList(Integer userId) {
+		return vehicleRepository.findTrackerVehicleByUserId(userId);
 	}
 }

@@ -17,5 +17,8 @@ public interface VehicleRepository extends CrudRepository<Vechicle, Long> {
 	List<Vechicle> findByUserId(@Param(value = "userid") Integer userid);
 
 	Vechicle findVechicleByvehicleid(Integer vehicleid);
+	
+	@Query(CommonSqlQueries.GET_TRACKER_VEHICLES)
+	List<Vechicle> findTrackerVehicleByUserId(@Param(value = "userid") Integer userid);
 
 }

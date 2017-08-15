@@ -111,4 +111,23 @@ public class VehicleLipton {
 
 		return response;
 	}
+	
+	@RequestMapping(value = "/tracker/list", method = RequestMethod.GET)
+	public Response getTrackerVehiclesOfUser(HttpServletRequest request) {
+		Response response = null;
+		try {
+			String userid = request.getParameter("userId");
+			List<Vechicle> vehicle = vehicleService.getTrackerVehiclesList(Integer.parseInt(userid));
+
+			if (vehicle.isEmpty()) {
+				response = new Response(CommonConstants.NRG_FAIL, 0, CommonUserMessages.RECORD_NOT_FOUND);
+			} else {
+				response = new Response(CommonConstants.NRG_SCUCESS, vehicle, CommonUserMessages.VEHICLE_LOADED);
+			}
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+		}
+
+		return response;
+	}
 }

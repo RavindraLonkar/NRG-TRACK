@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	var url = window.location;
 	$.ajax({
 		type : "GET",
-		url : url.origin + "/NRG-User/vehicle/list",
+		url : url.origin + "/NRG-User/vehicle/tracker/list",
 		processData : false,
 		contentType : false,
 		cache : false,
@@ -60,12 +60,8 @@ function initMap() {
 			var endDate=$("#trackEndDate").val(); 	
 			$.ajax({
     	         type : "GET",
-    	        // url : url.host + "/NRG-User/vehicleList",
     	         url : url.origin + "/NRG-User/vehicle/trackingCoordinatesByDate?vehicleId="+vehicleId+"&startDate="+startDate+"&endDate="+endDate,
-    	         // data : data,
-    	         processData: false, // prevent jQuery from automatically
-										// transforming the data into a query
-										// string
+    	         processData: false, 
     	         contentType: false,
     	         cache: false,
     	         timeout: 600000,
@@ -80,17 +76,14 @@ function initMap() {
     	          // BootstrapDialog.alert(result.resonCode);
     	          } 
     	         },
-    	         /*
-					 * error : function(e) { $("#"+objectName+"").hide();
-					 * console.log("ERROR: ", e); }
-					 */
+    	         
     	     });
 		}
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay,list) {
     	  var waypts = [];
-    	 // var list;
-    	  
+    	  getStartLocationName(list[0].longitude,list[0].latitude);
+    	  getEndLocationName(list[list.length-1].longitude,list[list.length-1].latitude);
     	  var start=list[0].latitude+','+list[0].longitude;
     	  var end=list[list.length-1].latitude+','+list[list.length-1].longitude;
     	  
@@ -104,9 +97,7 @@ function initMap() {
         }
 
         directionsService.route({
-         // origin: "Halifax, NS",
         	origin:start,
-         // destination: "Vancouver, BC",
         	destination:end,
           waypoints: waypts,
           optimizeWaypoints: true,
@@ -115,17 +106,58 @@ function initMap() {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
-            var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '';
+            $('.distance-km').text('');
             var totalDist=0;
             for (var i = 0; i < route.legs.length; i++) {
                 var routeSegment = i + 1;
                 totalDist=totalDist+parseInt(route.legs[i].distance.value);
             }
-            
-            summaryPanel.innerHTML ='<h3>Total Dist cover:-'+totalDist/1000+'Km</h3>';
+            $('.distance-km').text(totalDist/1000+'  KM');
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
       }
+      
+
+      //start point of track
+     function getStartLocationName(longitude,latitude) {
+		$.ajax({
+			type : "GET",
+			url : 'http://maps.googleapis.com/maps/api/geocode/json?latlng='
+					+ latitude + ',' + longitude + '&sensor=false',
+			processData : false,
+			async : true,
+			contentType : false,
+			cache : false,
+			timeout : 600000,
+			success : function(result) {
+				if (result.status == 'OK') {
+					$('.startpoint').text(result.results[0].formatted_address);
+				}else{
+					$('.startpoint').text('');
+				}
+			},
+		});
+}
+     
+     //end point of track
+     function getEndLocationName(longitude,latitude) {
+		$.ajax({
+			type : "GET",
+			url : 'http://maps.googleapis.com/maps/api/geocode/json?latlng='
+					+ latitude + ',' + longitude + '&sensor=false',
+			processData : false,
+			async : true,
+			contentType : false,
+			cache : false,
+			timeout : 600000,
+			success : function(result) {
+				if (result.status == 'OK') {
+					$('.endpoint').text(result.results[0].formatted_address);
+				}else{
+					$('.endpoint').text('');
+				}
+			},
+		});
+}    

@@ -41,8 +41,15 @@ html, body {
 
 #directions-panel {
 	margin-top: 10px;
-	background-color: #FFEE77;
 	padding: 10px;
-	overflow: scroll;
 	height: 174px;
+}
+
+.margin-track-info {
+	margin-left: 16px;
+}
+
+.distance-km {
+	padding: 71px;
+	vertical-align: -webkit-baseline-middle;
 }

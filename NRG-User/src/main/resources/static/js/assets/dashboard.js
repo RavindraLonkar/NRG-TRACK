@@ -56,9 +56,9 @@ function loadMap(list, map) {
 				.ajax({
 					type : "GET",
 					url : 'http://maps.googleapis.com/maps/api/geocode/json?latlng='
-							+ vehicle.longitude
-							+ ','
 							+ vehicle.latitude
+							+ ','
+							+ vehicle.longitude
 							+ '&sensor=false',
 					processData : false,
 					async : false,
@@ -77,8 +77,8 @@ function loadMap(list, map) {
 								+ location + "</td></tr></table></body></html>";
 						marker = new google.maps.Marker({
 							position : {
-								lat : parseFloat(vehicle.longitude),
-								lng : parseFloat(vehicle.latitude)
+								lat : parseFloat(vehicle.latitude),
+								lng : parseFloat(vehicle.longitude)
 							},
 							map : map,
 							icon : image,

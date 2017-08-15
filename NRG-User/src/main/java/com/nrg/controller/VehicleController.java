@@ -3,7 +3,6 @@
  */
 package com.nrg.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nrg.models.CoordinateDetail;
 import com.nrg.models.User;
 import com.nrg.models.Vechicle;
 import com.nrg.utils.CommonConstants;
@@ -54,6 +52,9 @@ public class VehicleController {
 	
 	@Value("${GET_VEHICLE_CURRENT_LOCATION_LIST}")
 	private String GET_VEHICLE_CURRENT_LOCATION_LIST;
+	
+	@Value("${GET_VEHICLE_TRACKER_LIST}")
+	private String GET_VEHICLE_TRACKER_LIST;	
 	
 	@RequestMapping(value = "/track", method = RequestMethod.GET)
 	public ModelAndView trackVehicle(HttpServletRequest request) {
@@ -110,7 +111,7 @@ public class VehicleController {
 			User user = (User) request.getSession().getAttribute("usersession");
 
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = GET_VEHICLE_LIST + "?userId=" + 1;
+			String vehicleListUrl = GET_VEHICLE_LIST + "?userId=" + user.getUserid();
 			response = restTemplate.getForObject(vehicleListUrl, Response.class);
 
 		} catch (Exception e) {
@@ -129,7 +130,7 @@ public class VehicleController {
 			User user = (User) request.getSession().getAttribute("usersession");
 
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = SAVE_VEHICLE + "?userId=" + 1;
+			String vehicleListUrl = SAVE_VEHICLE + "?userId=" + user.getUserid();
 			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
 
 		} catch (Exception e) {
@@ -185,5 +186,24 @@ public class VehicleController {
 
 		return response;
 	}
+	
+	@RequestMapping(value = "/tracker/list", method = RequestMethod.GET)
+	public Response getTrackerVehicleList(HttpServletRequest request) {
 
+		Response response = null;
+		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+
+			RestTemplate restTemplate = new RestTemplate();
+			String vehicleListUrl = GET_VEHICLE_TRACKER_LIST + "?userId=" + user.getUserid();
+			response = restTemplate.getForObject(vehicleListUrl, Response.class);
+
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+		}
+
+		return response;
+	}
+
+	
 }

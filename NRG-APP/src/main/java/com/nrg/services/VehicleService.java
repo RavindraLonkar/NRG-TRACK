@@ -17,4 +17,5 @@ public interface VehicleService {
 
 	void deleteVehicles(List<Vechicle> vehicles);
 
+	List<Vechicle> getTrackerVehiclesList(Integer userId);
 }
