@@ -55,3 +55,6 @@ function editclassHide() {
 	$('#editvechiclenumber_error').html('');
 	$('#editvechiclename_error').html('');
 }
+
+$('#menu-vehicle').addClass('active');
+$('#CMRegistrationLink').addClass('active');	
