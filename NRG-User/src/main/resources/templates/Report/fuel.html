@@ -2,22 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link th:replace="fragments/commonCss :: commonCss" />
-<link th:href="@{/css/assets/VehicleTrack.css}" rel="stylesheet"></link>
 </head>
 
 <body>
+
 	<div th:replace="fragments/header :: header"></div>
+
 	<section id="main-content">
 		<section class="wrapper">
-		<div class="row">
+			<!--overview start-->
+			<div class="row">
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i>Vehicle</li>
-						<li><i class="icon_pin"></i>Track</li>
+						<li><i class="fa fa-home"></i>Home</li>
+						<li><i class="icon_pin"></i>Position</li>
 					</ol>
 				</div>
 			</div>
-			<!--overview start-->
 			<ol class="breadcrumb vehicletrackform">
 				<div class="row">
 					<div class="">
@@ -30,18 +31,8 @@
 					</div>
 					<div class="">
 						<div class="col-lg-3">
-							<div class='input-group date' id='startDate'>
-								<input type='text' class="form-control" id='trackStartDate' /> <span
-									class="input-group-addon"> <span
-									class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="">
-						<div class="col-lg-3">
-							<div class='input-group date' id='endDate'>
-								<input type='text' class="form-control" id='trackEndDate' /> <span
+							<div class='input-group date' id='vehicleTrackDate'>
+								<input type='text' class="form-control" id='trackDate' /> <span
 									class="input-group-addon"> <span
 									class="glyphicon glyphicon-calendar"></span>
 								</span>
@@ -54,43 +45,41 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</ol>
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="info-box blue-bg">
-						<div class="title">Start Point</div>
+						<div class="title">Location</div>
 						<i class="icon_pin"></i>
-						<div class="startpoint"></div>
+						<div class="position"></div>
 					</div>
 					<!--/.info-box-->
 				</div>
 				<!--/.col-->
-
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="info-box brown-bg">
-						<div class="title">End Point</div>
-						<i class="icon_stop_alt2"></i>
-						<div class="endpoint"></div>
+					<div class="info-box red-bg">
+						<div class="title">Fuel Details</div>
+						<i class="icon_bag_alt"></i>
+						<div class="fueldetail"></div>
 					</div>
 					<!--/.info-box-->
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="info-box dark-bg">
 						<div class="title">Total Distance in KM.</div>
-						<i class=" icon_map"></i>
-						<span class="distance-km"></span>
+						<i class=" icon_map"></i> <span class="distance-km"></span>
 					</div>
 					<!--/.info-box-->
 				</div>
-
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h2>
-								<i class="fa fa-map-marker red"></i><strong>Track</strong>
+								<i class="fa fa-map-marker red"></i><strong>Vehicle
+									Position</strong>
 							</h2>
 						</div>
 						<div class="panel-body-map">
@@ -100,13 +89,12 @@
 				</div>
 			</div>
 		</section>
-		
 	</section>
 	<div th:replace="fragments/footer :: footer"></div>
 	<!-- JS Paths -->
 	<div th:replace="fragments/commonJs :: commonJs"></div>
-	<script th:src="@{/js/assets/vehicleTrack.js}"></script>
+	<script th:src="@{/js/assets/VehiclePosition.js}"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlhEyIB0wJDgigqwoVyA8LAVCET5KyCU&callback=initMap"></script>
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlhEyIB0wJDgigqwoVyA8LAVCET5KyCU&callback=myMap"></script>
 </body>
 </html>

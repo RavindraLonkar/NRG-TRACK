@@ -1,7 +1,5 @@
 package com.nrg.models;
 
-import javax.persistence.Column;
-
 public class CoordinateDetail {
   
    private Integer trackerid;

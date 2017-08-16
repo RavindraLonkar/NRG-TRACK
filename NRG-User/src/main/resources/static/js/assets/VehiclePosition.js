@@ -1,3 +1,33 @@
+$( document ).ready(function() {
+	var url = window.location;
+	$.ajax({
+		type : "GET",
+		url : url.origin + "/NRG-User/vehicle/tracker/list",
+		processData : false,
+		contentType : false,
+		cache : false,
+		timeout : 600000,
+		success : function(result) {
+			if (result.status == '1') {
+				var dataSet = result.data;
+				$(dataSet).each(function(i,obj) {
+    				var vehicleid=obj.vehicleid;
+    				var vechiclename=obj.vechiclename;
+    				var vechiclenumber=obj.vechiclenumber;		
+    					$('#vehicleId').append('<option value="'+vehicleid+'">'+vechiclename+ '/ '+ vechiclenumber+'</option>');
+    			});	
+			} 
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});	
+
+	 $('#vehicleTrackDate').datetimepicker({
+		 format: 'DD/MM/YYYY hh:mm:ss'
+	 });
+});
+
 /*function myMap() {
 	var latLong = new google.maps.LatLng(51.508742, -0.120850);
 	var mapCanvas = document.getElementById("googleMap");
@@ -83,29 +113,27 @@ function setMarkers(map) {
 */
 function myMap() {
 	document.getElementById('submit').addEventListener('click', function() {
+		var vehicleId=$("#vehicleId").val(); 
+		var trackDate=$("#trackDate").val(); 
 		 $.ajax({
 	         type : "GET",
-	        // url : url.host + "/NRG-User/vehicleList",
-	         url : "http://localhost:8080/NRG-User/vehiclePosition",
-	         //data : data,
-	         processData: false, //prevent jQuery from automatically transforming the data into a query string
+	         url : "http://localhost:8080/NRG-User/vehicle/date/position?vehicleId="+vehicleId+"&trackDate="+trackDate,
+	         processData: false, 
 	         contentType: false,
 	         cache: false,
 	         timeout: 600000,
 	         success : function(result) {
-	          if(result.status=='success'){
+	          if(result.status == '1'){
 	           if(jQuery.isEmptyObject(result))
 	               return;
 	            
 	           initMap(result.data);
 	          }else{
-	          // BootstrapDialog.alert(result.resonCode);
 	          } 
 	         },
 	         error : function(e) {
-	          $("#"+objectName+"").hide();
-	             console.log("ERROR: ", e);
-	         }
+	 			console.log("ERROR: ", e);
+	 		}
 	     });
 	 });
 	
@@ -113,8 +141,8 @@ function myMap() {
 
 
 function initMap(data) {
-	    var lon=parseFloat(data.longitude).toFixed(6);
-	    var lat=parseFloat(data.latitude).toFixed(6);
+	    var lon=parseFloat(data[0].longitude);
+	    var lat=parseFloat(data[0].latitude);
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: lat, lng: lon},
           zoom: 15

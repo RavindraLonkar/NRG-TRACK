@@ -15,5 +15,8 @@ public interface TrackingDataRepository extends CrudRepository<TrackingData, Int
 	@Query("select new com.nrg.models.CoordinateDetail(t.tracker.trackerid,t.trackingdataid,t.latitude,t.longitude) from TrackingData t where t.tracker.vechicle.vehicleid = :vehicleid and t.createddate between :start and :end order by createddate asc")
 	List<CoordinateDetail> findBytrackerId(@Param("vehicleid") Integer vehicleid, @Param("start") Date start,
 			@Param("end") Date end);
+	
+	/*@Query("select new com.nrg.models.VehicleDatePosition(t.tracker.vechicle.vechiclenumber,t.tracker.vechicle.vechiclename,t.latitude,t.longitude) from TrackingData t where t.tracker.vechicle.vehicleid = :vehicleid and t.createddate > :trackdate order by createddate asc")
+	List<VehiclePosition> findVehiclePositionByDate(@Param("vehicleid") Integer vehicleid, @Param("trackdate") Date trackdate);*/
 
 }

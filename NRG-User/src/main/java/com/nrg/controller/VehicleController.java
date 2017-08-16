@@ -34,28 +34,32 @@ public class VehicleController {
 
 	@Value("${GET_VEHICLE_LIST}")
 	private String GET_VEHICLE_LIST;
-	
+
 	@Value("${DELETE_VEHICLE}")
 	private String DELETE_VEHICLE;
-	
+
 	@Value("${UPDATE_VEHICLE}")
 	private String UPDATE_VEHICLE;
-	
+
 	@Value("${SAVE_VEHICLE}")
 	private String SAVE_VEHICLE;
-	
+
 	@Value("${DELETE_VEHICLES}")
 	private String DELETE_VEHICLES;
-	
+
 	@Value("${GET_TRACKING_DETAILS_BY_DATE}")
 	private String GET_TRACKING_DETAILS_BY_DATE;
-	
+
 	@Value("${GET_VEHICLE_CURRENT_LOCATION_LIST}")
 	private String GET_VEHICLE_CURRENT_LOCATION_LIST;
-	
+
 	@Value("${GET_VEHICLE_TRACKER_LIST}")
-	private String GET_VEHICLE_TRACKER_LIST;	
+	private String GET_VEHICLE_TRACKER_LIST;
 	
+	@Value("${GET_VEHICLE_POSITION}")
+	private String GET_VEHICLE_POSITION;
+	
+
 	@RequestMapping(value = "/track", method = RequestMethod.GET)
 	public ModelAndView trackVehicle(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("VehicleTrack");
@@ -71,38 +75,44 @@ public class VehicleController {
 	public Response trackingCoordinates(HttpServletRequest request) {
 		Response response = null;
 		RestTemplate restTemplate = new RestTemplate();
-		
+
 		Integer vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
-		String startDate=request.getParameter("startDate");
-		String endDate=request.getParameter("endDate");
-		
-		String url = GET_TRACKING_DETAILS_BY_DATE + "?vehicleId=+"+vehicleId+"&startDate="+startDate+"&endDate="+endDate;
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+
+		String url = GET_TRACKING_DETAILS_BY_DATE + "?vehicleId=+" + vehicleId + "&startDate=" + startDate + "&endDate="
+				+ endDate;
 		response = restTemplate.getForObject(url, Response.class);
-		
+
 		return response;
-		
-		
+
 	}
 
-	@RequestMapping(value = "/vehicleReport", method = RequestMethod.GET)
+	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	public ModelAndView vehicleReport(HttpServletRequest request) {
 
-		return new ModelAndView("VehiclePosition");
+		return new ModelAndView("Report/fuel");
 	}
 
-	@RequestMapping(value = "/vehiclePosition", method = RequestMethod.GET)
+	@RequestMapping(value = "/date/position", method = RequestMethod.GET)
 	public Response vehiclePosition(HttpServletRequest request) {
 
-		// List<VehiclePosition> list=new ArrayList<VehiclePosition>();
-		// list.add(new
-		// VehiclePosition("MH12AS2112","22.890542","77.274856",1));
+		Response response = null;
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			Integer vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
+			String trackDate = request.getParameter("trackDate");
+			String vehicleListUrl = GET_VEHICLE_POSITION + "?vehicleId=" + vehicleId + "&trackDate=" + trackDate;
+			response = restTemplate.getForObject(vehicleListUrl, Response.class);
 
-		Response res = new Response("success", null,
-				"");
-		return res;
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+		}
+
+		return response;
 	}
-	
-	//------------------------------------------------------	
+
+	// ------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Response getVehicleList(HttpServletRequest request) {
 
@@ -120,8 +130,8 @@ public class VehicleController {
 
 		return response;
 	}
-	
-	//------------------------------------------------------
+
+	// ------------------------------------------------------
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Response addVehicle(@RequestBody Vechicle vehicle, HttpServletRequest request) {
 
@@ -139,8 +149,8 @@ public class VehicleController {
 
 		return response;
 	}
-	
-	//------------------------------------------------------
+
+	// ------------------------------------------------------
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public Response updateVehicle(@RequestBody Vechicle vehicle) {
 
@@ -154,8 +164,8 @@ public class VehicleController {
 		}
 		return response;
 	}
-	
-	//------------------------------------------------------	
+
+	// ------------------------------------------------------
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public Response deleteVehicle(@RequestBody List<Vechicle> vehicles) {
 
@@ -169,7 +179,7 @@ public class VehicleController {
 		}
 		return response;
 	}
-	//------------------------------------------------------	
+	// ------------------------------------------------------
 
 	@RequestMapping(value = "/current/Position", method = RequestMethod.GET)
 	public Response vehiclePositions(HttpServletRequest request) {
@@ -186,7 +196,7 @@ public class VehicleController {
 
 		return response;
 	}
-	
+
 	@RequestMapping(value = "/tracker/list", method = RequestMethod.GET)
 	public Response getTrackerVehicleList(HttpServletRequest request) {
 
@@ -205,5 +215,4 @@ public class VehicleController {
 		return response;
 	}
 
-	
 }
