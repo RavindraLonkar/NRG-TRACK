@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link th:replace="fragments/commonCss :: commonCss" />
+<link th:href="@{/css/assets/VehicleTrack.css}" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -95,6 +96,6 @@
 	<div th:replace="fragments/commonJs :: commonJs"></div>
 	<script th:src="@{/js/assets/VehiclePosition.js}"></script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlhEyIB0wJDgigqwoVyA8LAVCET5KyCU&callback=myMap"></script>
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNFeScXv7qgf6TjJPwQlZhQwMxZJD-oL4&libraries=places&callback=myMap"></script>
 </body>
 </html>
