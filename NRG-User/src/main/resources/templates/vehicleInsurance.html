@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:replace="fragments/commonCss :: commonCss" />
+<link th:href="@{/css/datatable.css}" rel="stylesheet"></link>
+<link th:href="@{/css/buttons.dataTables.min.css}" rel="stylesheet"></link>
+<link th:href="@{/css/assets/custom.css}" rel="stylesheet"></link>
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<section id="main-content">
+		<section class="wrapper">
+			<!--overview start-->
+			<div class="row">
+				<div class="col-lg-12">
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i>Vehicle</li>
+						<li><i class="fa fa-laptop"></i>Registration</li>
+					</ol>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<table id="vehicleDt" class="display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Edit</th>
+								<th>Vehicle Number</th>
+								<th>Vehicle name</th>
+								<th>Delete</th>
+							</tr>
+						</thead>						
+					</table>
+				</div>
+			</div>
+
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+				tabindex="-1" id="addVehicleModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button aria-hidden="true" data-dismiss="modal" class="close"
+								type="button">X</button>
+							<h4 class="modal-title">Edit Vehicle Information</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form" id="addVehicleForm" action="">
+								<input type="hidden" class="form-control" id="addVehicleId">
+								<div class="form-group">
+									<label for="vechiclenumber">Vehicle Number</label> <input
+										type="text" class="form-control" id="addVechicleNumber"
+										placeholder="Enter Vehicle Number"> <label
+										class="help-block" id="vechiclenumber_error"></label>
+								</div>
+								<div class="form-group">
+									<label for="vechiclename">Vehicle Name</label> <input
+										type="text" class="form-control" id="addVechicleName"
+										placeholder="Enter Vehicle Name"> <label
+										class="help-block" id="vechiclename_error"></label>
+								</div>
+								<button type="submit" class="btn btn-primary"
+									onclick="addVehicle();">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+				tabindex="-1" id="editVehicleModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button aria-hidden="true" data-dismiss="modal" class="close"
+								type="button">X</button>
+							<h4 class="modal-title">Edit Vehicle Information</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form" id="editVehicleForm" action="">
+								<input type="hidden" class="form-control" id="editVehicleId">
+								<div class="form-group">
+									<label for="vechiclenumber">Vehicle Number</label> <input
+										type="text" class="form-control" id="editVechicleNumber"
+										placeholder="Enter Vehicle Number">
+										<label
+										class="help-block" id="editvechiclenumber_error"></label>
+								</div>
+								<div class="form-group">
+									<label for="vechiclename">Vehicle Name</label> <input
+										type="text" class="form-control" id="editVechicleName"
+										placeholder="Enter Vehicle Name">
+										<label
+										class="help-block" id="editvechiclename_error"></label>
+								</div>
+								<button type="submit" class="btn btn-primary"
+									onclick="editVedhicle();">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<!-- JS Paths -->
+	<div th:replace="fragments/commonJs :: commonJs"></div>
+	<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/dataTables.buttons.min.js}"></script>
+	<script th:src="@{/js/dataTables.select.min.js}"></script>
+	<script th:src="@{/js/assets/vehicle-registration-validation.js}"></script>
+	<script th:src="@{/js/assets/vehicleRegistration.js}"></script>
+</body>
+</html>

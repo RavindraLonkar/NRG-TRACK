@@ -33,4 +33,12 @@ public class CommonUserMessages {
 	public static final String VEHICLE_LOADED = "Vehicle information loaded successfully.";
 	public static final String VEHICLES_DELETED = "Vehicle information deleted successfully for selected vehicle ids.";
 
+	public static final String INSURANCE_ADDED = "";
+
+	public static final String INSURANCES_DELETED = "";
+
+	public static final String INSURANCE_UPDATED = "";
+
+	public static final String INSURANCE_LOADED = "";
+
 }
