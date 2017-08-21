@@ -2,22 +2,32 @@ package com.nrg.services;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nrg.models.Insurance;
 import com.nrg.repositories.InsuranceRepository;
+import com.nrg.utils.CommonSqlQueries;
 
 @Service
 public class InsuranceServiceImpl implements InsuranceService {
 
 	@Autowired
 	InsuranceRepository insuranceRepository;
+	
+	@Autowired
+	private EntityManager entityManager;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Insurance> getInsuranceList(Integer userid) {		
-		//return insuranceRepository.findUserVehiclesInsuarance(userid);
-		return null;
+		Query q=entityManager.createQuery(CommonSqlQueries.GET_INSURANCES);
+		q.setParameter("userid", userid);
+		List<Insurance> list =q.getResultList();
+		return list;
 	}
 
 	@Override

@@ -30,10 +30,13 @@ $(document).ready(
 			});
 
 			$('#vehicleTrackDate').datetimepicker({
-				maxDate : moment(),
 				format : 'DD/MM/YYYY HH:mm:ss',
 				ignoreReadonly : true
 			});
+			
+			 $("#vehicleTrackDate").on("dp.change", function (e) {
+				  jQuery('#vehicleTrackDate').data("DateTimePicker").maxDate(new Date());
+			     });
 		});
 
 function myMap() {
