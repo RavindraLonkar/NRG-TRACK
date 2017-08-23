@@ -1,6 +1,6 @@
 var table;
 $(document).ready(function() {
-	table = $('#vehicleDt').DataTable({
+	table = $('#insuranceDt').DataTable({
         "dom": 'Bfrtip',
 		"processing" : true,
 		"scrollX": true,
@@ -14,18 +14,16 @@ $(document).ready(function() {
 		"language": {
 	        "zeroRecords": "No Record Found!",
 	    },
-		"rowId": 'vehicleid',
+		"rowId": 'insuranceid',
 		"columns" : [ {
             "render": function ( data, type, row ) {
-                return "<a href='#editVehicleModal' data-toggle='modal'><span class = 'glyphicon glyphicon-edit' id='" 
+                return "<a href='#editInsuranceModal' data-toggle='modal'><span class = 'glyphicon glyphicon-edit' id='" 
                 + row.insuranceid + "' onclick='setModelData(this.id)'></span></a>";
             },
             "targets": 1
         }, {
 			"data" : "vechiclenumber"
 		}, {
-			"data" : "vechiclename"
-		},{
 			"data" : "insurancename"
 		},{
 			"data" : "startdate"
@@ -35,43 +33,97 @@ $(document).ready(function() {
 		},
 		{
             "render": function ( data, type, row ) {
-                return "<a href='#'><span class = 'glyphicon glyphicon-trash' id='" + row.insuranceid + "' onclick='confirmdeleteVehicle(this.id);'></span></a>";
+                return "<a href='#'><span class = 'glyphicon glyphicon-trash' id='" + row.insuranceid + "' onclick='confirmdeleteInsurance(this.id);'></span></a>";
             },
             "targets": 4
         }],
         "buttons": [
             {
-                text: 'Add Vehicle',
+                text: 'Add Insurance',
                 className: 'green',
                 action: function ( e, dt, node, config ) {
                 	addclassHide();
-                	$('#addVehicleModal').modal('show');
+                	$('#addInsuranceModal').modal('show');
+                	getVehicles();
                 }
             },
             {
-                text: 'Delete Selected Vehicles',
+                text: 'Delete Selected Insurances',
                 className: 'red',
                 action: function ( e, dt, node, config ) {
-                	confirmdeleteVehicles();
+                	confirmdeleteInsurances();
                 }
             }
         ]
 	});
+	
+	//add form Date pickers
+	$('#addStartDate').datetimepicker({
+		 format: 'DD/MM/YYYY'
+	 });
+    $('#addEndDate').datetimepicker({
+        useCurrent: false,
+        format: 'DD/MM/YYYY'
+    });
+    $("#addStartDate").on("dp.change", function (e) {
+        $('#addEndDate').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker7").on("dp.change", function (e) {
+        $('#addStartDate').data("DateTimePicker").maxDate(e.date);
+    });
+    
+    //edit form Date pickers
+	$('#editStartDate').datetimepicker({
+		 format: 'DD/MM/YYYY'
+	 });
+    $('#editEndDate').datetimepicker({
+        useCurrent: false,
+        format: 'DD/MM/YYYY'
+    });
+    $("#editStartDate").on("dp.change", function (e) {
+        $('#editEndDate').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker7").on("dp.change", function (e) {
+        $('#editStartDate').data("DateTimePicker").maxDate(e.date);
+    });
 });
 
-function addVehicle() {
+function getVehicles(vehicleNoField,vehicleNameField){
+	$.ajax({
+		type : "GET",
+		url : $("#contextPath").val() + "/vehicle/tracker/list",
+		processData : false,
+		contentType : false,
+		cache : false,
+		timeout : 600000,
+		success : function(result) {
+			if (result.status == '1') {
+				var dataSet = result.data;
+				$(dataSet).each(function(i,obj) {		
+    				$('#addVehicleNumber').append('<option value="'+obj.vehicleid+'">'+ obj.vechiclenumber+'</option>');
+    			});	
+			} 
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});	
+
+}
+
+function addInsurance() {
 	var validation = false;
-	var validation = addVehicleRegFormValidation();
+	var validation = addInsuranceRegFormValidation();
 	if (validation == false)
 		return;
 
 	var data = {
-		vechiclenumber : $("#addVechicleNumber").val(),
-		vechiclename : $("#addVechicleName").val()
+		insurancenumber : $("#addInsuranceNumber").val(),
+		insurancename : $("#addInsuranceName").val()
 	}
 	$.ajax({
 		type : "POST",
-		url : $("#contextPath").val() + "/vehicle/save",
+		url : $("#contextPath").val() + "/insurance/save",
 		data : JSON.stringify(data),
 		processData : false, //prevent jQuery from automatically transforming the data into a query string
 		contentType : 'application/json',
@@ -79,7 +131,7 @@ function addVehicle() {
 		timeout : 600000,
 		success : function(result) {
 			if (result.status == '1') {
-				$('#addVehicleModal').modal('hide');
+				$('#addInsuranceModal').modal('hide');
 				bootMessage('sucess', result.resonCode);
 				table.ajax.reload();
 			} else {
@@ -93,26 +145,26 @@ function addVehicle() {
 
 }
 
-function setModelData(vehicleid) {
-	var data = table.row('#' + vehicleid).data();
-	$("#editVehicleId").val(data.vehicleid);
-	$("#editVechicleNumber").val(data.vechiclenumber);
-	$("#editVechicleName").val(data.vechiclename);
+function setModelData(insuranceid) {
+	var data = table.row('#' + insuranceid).data();
+	$("#editInsuranceId").val(data.insuranceid);
+	$("#editInsuranceNumber").val(data.insurancenumber);
+	$("#editInsuranceName").val(data.insurancename);
 }
 
-function editVedhicle() {
+function editInsurance() {
 	var validation = false;
-	var validation = editVehicleRegFormValidation();
+	var validation = editInsuranceRegFormValidation();
 	if (validation == false)
 		return;
 	var data = {
-		vehicleid : $("#editVehicleId").val(),
-		vechiclenumber : $("#editVechicleNumber").val(),
-		vechiclename : $("#editVechicleName").val()
+		insuranceid : $("#editInsuranceId").val(),
+		insurancenumber : $("#editInsuranceNumber").val(),
+		insurancename : $("#editInsuranceName").val()
 	}
 	$.ajax({
 		type : "PUT",
-		url : $("#contextPath").val() + "/vehicle/update",
+		url : $("#contextPath").val() + "/insurance/update",
 		data : JSON.stringify(data),
 		processData : false, //prevent jQuery from automatically transforming the data into a query string
 		contentType : 'application/json',
@@ -120,7 +172,7 @@ function editVedhicle() {
 		timeout : 600000,
 		success : function(result) {
 			if (result.status == '1') {
-				$('#editVehicleModal').modal('hide');
+				$('#editInsuranceModal').modal('hide');
 				bootMessage('sucess', result.resonCode);
 				table.ajax.reload();
 			} else {
@@ -134,12 +186,12 @@ function editVedhicle() {
 
 }
 
-function confirmdeleteVehicle(vehicleid) {
+function confirmdeleteInsurance(insuranceid) {
 	var data = new Array();
-	data.push(table.row('#' + vehicleid).data());
+	data.push(table.row('#' + insuranceid).data());
 	
 	if(!(data.length > 0)){
-		bootMessage('Confirm','Please select vehicle to delete');
+		bootMessage('Confirm','Please select insurance to delete');
 		return;
 	} else{
 		BootstrapDialog.show({
@@ -149,21 +201,21 @@ function confirmdeleteVehicle(vehicleid) {
 				label : "OK",
 				action : function(dialog) {
 					dialog.close();
-					deleteVehicles(data);
+					deleteInsurances(data);
 				},
 			}]
 		});
 	}
 }
 
-function confirmdeleteVehicles() {
+function confirmdeleteInsurances() {
 	var data = new Array();
 	table.rows('.selected').every(function(rowIdx, tableLoop, rowLoop) {
 		data.push(this.data());
 	});
 	
 	if(!(data.length > 0)){
-		bootMessage('Confirm','Please select vehicle to delete');
+		bootMessage('Confirm','Please select insurance to delete');
 		return;
 	}else{
 		BootstrapDialog.show({
@@ -173,17 +225,17 @@ function confirmdeleteVehicles() {
 				label : "OK",
 				action : function(dialog) {
 					dialog.close();
-					deleteVehicles(data)							
+					deleteInsurances(data)							
 				},
 			}]
 		});
 	}
 }
 
-function deleteVehicle(data){
+function deleteInsurance(data){
 	$.ajax({
 		type : "DELETE",
-		url : $("#contextPath").val() + "/vehicle/delete",
+		url : $("#contextPath").val() + "/insurance/delete",
 		data : JSON.stringify(data),
 		processData : false, //prevent jQuery from automatically transforming the data into a query string
 		contentType : 'application/json',
@@ -204,11 +256,11 @@ function deleteVehicle(data){
 
 }
 
-function deleteVehicles(data) {			
+function deleteInsurances(data) {			
 
 	$.ajax({
 		type : "DELETE",
-		url : $("#contextPath").val() + "/vehicle/delete",
+		url : $("#contextPath").val() + "/insurance/delete",
 		data : JSON.stringify(data),
 		processData : false, //prevent jQuery from automatically transforming the data into a query string
 		contentType : 'application/json',
