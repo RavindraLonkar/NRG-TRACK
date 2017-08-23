@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nrg.models.Insurance;
+import com.nrg.models.InsuranceDetails;
 import com.nrg.repositories.InsuranceRepository;
 import com.nrg.utils.CommonSqlQueries;
 
@@ -23,10 +24,10 @@ public class InsuranceServiceImpl implements InsuranceService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Insurance> getInsuranceList(Integer userid) {		
+	public List<InsuranceDetails> getInsuranceList(Integer userid) {		
 		Query q=entityManager.createQuery(CommonSqlQueries.GET_INSURANCES);
 		q.setParameter("userid", userid);
-		List<Insurance> list =q.getResultList();
+		List<InsuranceDetails> list =q.getResultList();
 		return list;
 	}
 

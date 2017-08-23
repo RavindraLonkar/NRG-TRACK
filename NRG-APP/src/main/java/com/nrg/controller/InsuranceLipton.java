@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nrg.models.Insurance;
+import com.nrg.models.InsuranceDetails;
 import com.nrg.services.InsuranceService;
 import com.nrg.utils.CommonConstants;
 import com.nrg.utils.CommonUserMessages;
@@ -23,10 +24,11 @@ public class InsuranceLipton {
 	InsuranceService insuranceService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Response getInsuranceList(Integer userid,HttpServletRequest request) {
+	public Response getInsuranceList(HttpServletRequest request) {
 		Response response = null;
 		try {
-			List<Insurance> insurance = insuranceService.getInsuranceList(userid);
+			String userid = request.getParameter("userId");
+			List<InsuranceDetails> insurance = insuranceService.getInsuranceList(Integer.parseInt(userid));
 
 			if (insurance.isEmpty()) {
 				response = new Response(CommonConstants.NRG_FAIL, 0, CommonUserMessages.RECORD_NOT_FOUND);

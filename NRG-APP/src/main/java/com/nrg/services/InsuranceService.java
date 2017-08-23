@@ -3,6 +3,7 @@ package com.nrg.services;
 import java.util.List;
 
 import com.nrg.models.Insurance;
+import com.nrg.models.InsuranceDetails;
 
 public interface InsuranceService {
 
@@ -12,6 +13,6 @@ public interface InsuranceService {
 
 	void deleteInsurances(List<Insurance> insurances);
 
-	List<Insurance> getInsuranceList(Integer userid);
+	List<InsuranceDetails> getInsuranceList(Integer userid);
 
 }
