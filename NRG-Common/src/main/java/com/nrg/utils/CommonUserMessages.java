@@ -40,5 +40,7 @@ public class CommonUserMessages {
 	public static final String INSURANCE_UPDATED = "";
 
 	public static final String INSURANCE_LOADED = "";
+	
+	public static final String INSURANCE_NOTIFICATION_LIST_SUCCESS = "";
 
 }

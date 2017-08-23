@@ -85,7 +85,7 @@ FOREIGN KEY(TCSignOffContentID) REFERENCES CFG_CodeValue(CodeValueID)
 
 create table Txn_Insurance(
 insuranceID             serial, 
-vechicleId              int  not null, 
+vehicleId              int  not null, 
 insuranceName           varchar(255),
 startDate               timestamp,
 endDate                 timestamp,
@@ -96,5 +96,5 @@ CreatedDate				timestamp,
 LastModifiedBy			int,
 LastModifiedDate		timestamp,
 CONSTRAINT Txn_Insurance_pkey PRIMARY KEY (insuranceID) ,
-FOREIGN KEY(vechicleId) REFERENCES MST_Vechicle
+FOREIGN KEY(vehicleId) REFERENCES MST_Vechicle
 )
