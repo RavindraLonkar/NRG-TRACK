@@ -1,18 +1,39 @@
-function addVehicleRegFormValidation() {
+function addInsuranceRegFormValidation() {
 	addclassHide();
 	var validation = true;
 
 	// vehicle number validation
-	if ($.trim($('#addVechicleNumber').val()) == '') {
-		$('#vechiclenumber_error').removeClass('hide');
-		$('#vechiclenumber_error').html("Please enter valid Vehicle Number.");
+	if ($.trim($('#addVehicleNumber').val()) == '0') {
+		$('#vehiclenumber_error').removeClass('hide');
+		$('#vehiclenumber_error').html("Please enter valid Vehicle Number.");
 		validation = false;
 	}
 
-	// vehicle name validation
-	if ($.trim($('#addVechicleName').val()) == '') {
-		$('#vechiclename_error').removeClass('hide');
-		$('#vechiclename_error').html("Please enter valid Vehicle Name.");
+	// vehicle insurance name validation
+	if ($.trim($('#addInsuranceName').val()) == '') {
+		$('#addinsurancename_error').removeClass('hide');
+		$('#addinsurancename_error').html("Please enter valid Vehicle Number.");
+		validation = false;
+	}
+	
+	// insurance start date validation
+	if ($.trim($('#addStartDate').val()) == '') {
+		$('#addstartdate_error').removeClass('hide');
+		$('#addstartdate_error').html("Please enter valid Vehicle Number.");
+		validation = false;
+	}
+	
+	// insurance end date validation
+	if ($.trim($('#addEndDate').val()) == '') {
+		$('#addenddate_error').removeClass('hide');
+		$('#addenddate_error').html("Please enter valid Vehicle Number.");
+		validation = false;
+	}
+	
+	// insurance reminder validation
+	if ($.trim($('#addReminder').val()) == '0') {
+		$('#addreminder_error').removeClass('hide');
+		$('#addreminder_error').html("Please enter valid Vehicle Number.");
 		validation = false;
 	}
 	return validation;
@@ -20,28 +41,56 @@ function addVehicleRegFormValidation() {
 
 function addclassHide() {
 
-	$('#vechiclenumber_error').addClass('hide');
-	$('#vechiclename_error').addClass('hide');
+	$('#addvehiclenumber_error').addClass('hide');
+	$('#addinsurancename_error').addClass('hide');
+	$('#addstartdate_error').addClass('hide');
+	$('#addenddate_error').addClass('hide');
+	$('#addreminder_error').addClass('hide');
 	
-	$('#vechiclenumber_error').html('');
-	$('#vechiclename_error').html('');
+	$('#addvehiclenumber_error').html('');
+	$('#addinsurancename_error').html('');
+	$('#addstartdate_error').html('');
+	$('#addenddate_error').html('');
+	$('#addreminder_error').html('');
+	
 }
 
 
-function editVehicleRegFormValidation() {
+function editInsuranceRegFormValidation() {
 	editclassHide();
 	var validation = true;
 	// vehicle number validation
-	if ($.trim($('#editVechicleNumber').val()) == '') {
-		$('#editvechiclenumber_error').removeClass('hide');
-		$('#editvechiclenumber_error').html("Please enter valid Vehicle Number.");
+	if ($.trim($('#editVehicleNumber').val()) == '0') {
+		$('#vehiclenumber_error').removeClass('hide');
+		$('#vehiclenumber_error').html("Please enter valid Vehicle Number.");
 		validation = false;
 	}
 
-	// vehicle name validation
-	if ($.trim($('#editVechicleName').val()) == '') {
-		$('#editvechiclename_error').removeClass('hide');
-		$('#editvechiclename_error').html("Please enter valid Vehicle Name.");
+	// vehicle insurance name validation
+	if ($.trim($('#editInsuranceName').val()) == '') {
+		$('#editinsurancename_error').removeClass('hide');
+		$('#editinsurancename_error').html("Please enter valid Vehicle Number.");
+		validation = false;
+	}
+	
+	// insurance start date validation
+	if ($.trim($('#editStartDate').val()) == '') {
+		$('#editstartdate_error').removeClass('hide');
+		$('#editstartdate_error').html("Please enter valid Vehicle Number.");
+		validation = false;
+	}
+	
+	// insurance end date validation
+	if ($.trim($('#editEndDate').val()) == '') {
+		$('#editenddate_error').removeClass('hide');
+		$('#editenddate_error').html("Please enter valid Vehicle Number.");
+		validation = false;
+	}
+	
+	// insurance reminder validation
+	if ($.trim($('#editReminder').val()) == '0') {
+		$('#editreminder_error').removeClass('hide');
+		$('#editreminder_error').html("Please enter valid Vehicle Number.");
 		validation = false;
 	}
 
@@ -49,11 +98,17 @@ function editVehicleRegFormValidation() {
 }
 
 function editclassHide() {
-	$('#editvechiclenumber_error').addClass('hide');
-	$('#editvechiclename_error').addClass('hide');
+	$('#editvehiclenumber_error').addClass('hide');
+	$('#editinsurancename_error').addClass('hide');
+	$('#editstartdate_error').addClass('hide');
+	$('#editenddate_error').addClass('hide');
+	$('#editreminder_error').addClass('hide');
 	
-	$('#editvechiclenumber_error').html('');
-	$('#editvechiclename_error').html('');
+	$('#editvehiclenumber_error').html('');
+	$('#editinsurancename_error').html('');
+	$('#editstartdate_error').html('');
+	$('#editenddate_error').html('');
+	$('#editreminder_error').html('');
 }
 
 $('#menu-vehicle').addClass('active');

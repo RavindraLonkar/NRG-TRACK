@@ -59,11 +59,11 @@ $(document).ready(function() {
 	
 	//add form Date pickers
 	$('#addStartDate').datetimepicker({
-		 format: 'DD/MM/YYYY'
+		 format: 'DD/MM/YYYY hh:mm:ss'
 	 });
     $('#addEndDate').datetimepicker({
         useCurrent: false,
-        format: 'DD/MM/YYYY'
+        format: 'DD/MM/YYYY hh:mm:ss'
     });
     $("#addStartDate").on("dp.change", function (e) {
         $('#addEndDate').data("DateTimePicker").minDate(e.date);
@@ -74,11 +74,11 @@ $(document).ready(function() {
     
     //edit form Date pickers
 	$('#editStartDate').datetimepicker({
-		 format: 'DD/MM/YYYY'
+		 format: 'DD/MM/YYYY hh:mm:ss'
 	 });
     $('#editEndDate').datetimepicker({
         useCurrent: false,
-        format: 'DD/MM/YYYY'
+        format: 'DD/MM/YYYY hh:mm:ss'
     });
     $("#editStartDate").on("dp.change", function (e) {
         $('#editEndDate').data("DateTimePicker").minDate(e.date);
@@ -100,7 +100,7 @@ function getVehicles(vehicleNoField,vehicleNameField){
 			if (result.status == '1') {
 				var dataSet = result.data;
 				$(dataSet).each(function(i,obj) {		
-    				$('#addVehicleNumber').append('<option value="'+obj.vehicleid+'">'+ obj.vechiclenumber+'</option>');
+    				$('#addVehicleNumber').append('<option value="'+obj.vehicleid+'">'+ obj.vechiclenumber+ "/" + obj.vechiclename + '</option>');
     			});	
 			} 
 		},
@@ -116,10 +116,13 @@ function addInsurance() {
 	var validation = addInsuranceRegFormValidation();
 	if (validation == false)
 		return;
-
+	
 	var data = {
-		insurancenumber : $("#addInsuranceNumber").val(),
-		insurancename : $("#addInsuranceName").val()
+		vehicleid : $("#addVehicleNumber").val(),
+		insurancename : $("#addInsuranceName").val(),
+		startdate : $("#addStartDate").val(),
+		enddate : $("#addEndDate").val(),
+		reminder : $("#addReminder").val(),
 	}
 	$.ajax({
 		type : "POST",
