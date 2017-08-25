@@ -7,7 +7,7 @@ import com.nrg.models.InsuranceDetails;
 
 public interface InsuranceService {
 
-	Insurance addInsurance(Insurance insurance);
+	Insurance addInsurance(Insurance insurance, Integer vehicleid, String userid);
 
 	Insurance updateInsurance(Insurance insurance);
 

@@ -44,7 +44,6 @@ $(document).ready(function() {
                 action: function ( e, dt, node, config ) {
                 	addclassHide();
                 	$('#addInsuranceModal').modal('show');
-                	getVehicles();
                 }
             },
             {
@@ -59,11 +58,11 @@ $(document).ready(function() {
 	
 	//add form Date pickers
 	$('#addStartDate').datetimepicker({
-		 format: 'DD/MM/YYYY hh:mm:ss'
+		 format: 'DD/MM/YYYY'
 	 });
     $('#addEndDate').datetimepicker({
         useCurrent: false,
-        format: 'DD/MM/YYYY hh:mm:ss'
+        format: 'DD/MM/YYYY'
     });
     $("#addStartDate").on("dp.change", function (e) {
         $('#addEndDate').data("DateTimePicker").minDate(e.date);
@@ -74,11 +73,11 @@ $(document).ready(function() {
     
     //edit form Date pickers
 	$('#editStartDate').datetimepicker({
-		 format: 'DD/MM/YYYY hh:mm:ss'
+		 format: 'DD/MM/YYYY'
 	 });
     $('#editEndDate').datetimepicker({
         useCurrent: false,
-        format: 'DD/MM/YYYY hh:mm:ss'
+        format: 'DD/MM/YYYY'
     });
     $("#editStartDate").on("dp.change", function (e) {
         $('#editEndDate').data("DateTimePicker").minDate(e.date);
@@ -86,10 +85,9 @@ $(document).ready(function() {
     $("#datetimepicker7").on("dp.change", function (e) {
         $('#editStartDate').data("DateTimePicker").maxDate(e.date);
     });
-});
-
-function getVehicles(vehicleNoField,vehicleNameField){
-	$.ajax({
+    
+    // get vehicle tracker list
+    $.ajax({
 		type : "GET",
 		url : $("#contextPath").val() + "/vehicle/tracker/list",
 		processData : false,
@@ -101,24 +99,54 @@ function getVehicles(vehicleNoField,vehicleNameField){
 				var dataSet = result.data;
 				$(dataSet).each(function(i,obj) {		
     				$('#addVehicleNumber').append('<option value="'+obj.vehicleid+'">'+ obj.vechiclenumber+ "/" + obj.vechiclename + '</option>');
-    			});	
+    				$('#editVehicleNumber').append('<option value="'+obj.vehicleid+'">'+ obj.vechiclenumber+ "/" + obj.vechiclename + '</option>');
+				});	
 			} 
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
 		}
-	});	
+	});
+    
+    // get reminder values
+    $.ajax({
+		type : "GET",
+		url : $("#contextPath").val() + "common/codevalue?codetypeId=5",
+		processData : false,
+		contentType : false,
+		cache : false,
+		timeout : 600000,
+		success : function(result) {
+			if (result.status == '1') {
+				var dataSet = result.data;
+				$(dataSet).each(
+						function(i, obj) {
+							var codeValueID = obj.codevalueid;
+							var codeValue = obj.codevalue;
+							$('#addReminder').append(
+									'<option value="' + codeValueID + '">'
+											+ codeValue + '</option>');
+							$('#editReminder').append(
+									'<option value="' + codeValueID + '">'
+											+ codeValue + '</option>');
+						});
+			}
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
 
-}
+});
 
 function addInsurance() {
 	var validation = false;
 	var validation = addInsuranceRegFormValidation();
 	if (validation == false)
 		return;
+	var vehicleid=$("#addVehicleNumber").val();
 	
 	var data = {
-		vehicleid : $("#addVehicleNumber").val(),
 		insurancename : $("#addInsuranceName").val(),
 		startdate : $("#addStartDate").val(),
 		enddate : $("#addEndDate").val(),
@@ -126,7 +154,7 @@ function addInsurance() {
 	}
 	$.ajax({
 		type : "POST",
-		url : $("#contextPath").val() + "/insurance/save",
+		url : $("#contextPath").val() + "/insurance/save?vehicleid="+vehicleid,
 		data : JSON.stringify(data),
 		processData : false, //prevent jQuery from automatically transforming the data into a query string
 		contentType : 'application/json',

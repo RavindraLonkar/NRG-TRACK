@@ -28,10 +28,10 @@ public class Insurance {
 	
 	private String insurancename;
 	@Column
-	@JsonFormat(pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy",  timezone = "America/Phoenix")
 	private Date startdate;
 	@Column
-	@JsonFormat(pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy",  timezone = "America/Phoenix")
 	private Date enddate;
 	private Integer reminder;
 	private Integer isactive;

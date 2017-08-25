@@ -69,13 +69,13 @@ public class InsuranceController {
 	//------------------------------------------------------
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Response addInsurance(@RequestBody Insurance insurance, HttpServletRequest request) {
-
+		Integer vehicleid;
 		Response response = null;
+		User user = (User) request.getSession().getAttribute("usersession");
 		try {
-			User user = (User) request.getSession().getAttribute("usersession");
-
+			vehicleid=Integer.parseInt(request.getParameter("vehicleid"));
 			RestTemplate restTemplate = new RestTemplate();
-			String insuranceListUrl = SAVE_INSURANCE + "?userId=" + user.getUserid();
+			String insuranceListUrl = SAVE_INSURANCE + "?vehicleid=" + vehicleid+"&userId="+user.getUserid();
 			response = restTemplate.postForObject(insuranceListUrl, insurance, Response.class);
 
 		} catch (Exception e) {

@@ -78,3 +78,39 @@ insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescripti
 select 402,4,'Female','Female', 1,0,1,1,1,now(),1,now()
 where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 4 and CodeValueID=402)
 --------------------------------------------
+
+--------------------------------- for reminder days
+insert into cfg_codeType (CodeTypeID,CodeType,CodeTypeDescription,CreatedBy,CreatedDate,LastModifiedBy,LastModifiedDate,isActive) 
+select 5,'Reminder Days','Reminder Days',1,now(),1,now(),1
+where NOT EXISTS(select * from cfg_codeType where codeTypeId = 5)
+
+-- 
+insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescription, DisplaySeqNo, IsDefault, IsDisplay, IsActive, CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate)
+select 3,5,'3 Days Before','3 Days Before', 3,0,1,1,1,now(),1,now()
+where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 5 and CodeValueID=3)
+
+
+insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescription, DisplaySeqNo, IsDefault, IsDisplay, IsActive, CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate)
+select 7,5,'7 Days Before','7 Days Before', 7,0,1,1,1,now(),1,now()
+where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 5 and CodeValueID=7)
+
+
+insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescription, DisplaySeqNo, IsDefault, IsDisplay, IsActive, CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate)
+select 10,5,'10 Days Before','10 Days Before', 10,0,1,1,1,now(),1,now()
+where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 5 and CodeValueID=10)
+
+insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescription, DisplaySeqNo, IsDefault, IsDisplay, IsActive, CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate)
+select 15,5,'15 Days Before','15 Days Before', 15,0,1,1,1,now(),1,now()
+where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 5 and CodeValueID=15)
+
+
+insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescription, DisplaySeqNo, IsDefault, IsDisplay, IsActive, CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate)
+select 20,5,'20 Days Before','20 Days Before', 20,0,1,1,1,now(),1,now()
+where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 5 and CodeValueID=20)
+
+
+insert into CFG_CodeValue(CodeValueID, CodeTypeId, CodeValue, CodeValueDescription, DisplaySeqNo, IsDefault, IsDisplay, IsActive, CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate)
+select 30,5,'30 Days Before','30 Days Before', 30,0,1,1,1,now(),1,now()
+where NOT EXISTS(select * from CFG_CodeValue where codeTypeId = 5 and CodeValueID=30)
+-----------------------------------------------------------------------------
+

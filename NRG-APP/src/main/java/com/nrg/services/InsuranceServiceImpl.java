@@ -1,5 +1,6 @@
 package com.nrg.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.nrg.models.Insurance;
 import com.nrg.models.InsuranceDetails;
+import com.nrg.models.Vechicle;
 import com.nrg.repositories.InsuranceRepository;
+import com.nrg.repositories.VehicleRepository;
 import com.nrg.utils.CommonSqlQueries;
 
 @Service
@@ -18,21 +21,31 @@ public class InsuranceServiceImpl implements InsuranceService {
 
 	@Autowired
 	InsuranceRepository insuranceRepository;
-	
+
+	@Autowired
+	VehicleRepository vehicleRepository;
+
 	@Autowired
 	private EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<InsuranceDetails> getInsuranceList(Integer userid) {		
-		Query q=entityManager.createQuery(CommonSqlQueries.GET_INSURANCES);
+	public List<InsuranceDetails> getInsuranceList(Integer userid) {
+		Query q = entityManager.createQuery(CommonSqlQueries.GET_INSURANCES);
 		q.setParameter("userid", userid);
-		List<InsuranceDetails> list =q.getResultList();
+		List<InsuranceDetails> list = q.getResultList();
 		return list;
 	}
 
 	@Override
-	public Insurance addInsurance(Insurance insurance) {
+	public Insurance addInsurance(Insurance insurance, Integer vehicleid, String userid) {
+		Vechicle vehicle = new Vechicle();
+		vehicle = vehicleRepository.findVechicleByvehicleid(vehicleid);
+		vehicle.setCreatedby(Integer.parseInt(userid));
+		vehicle.setCreateddate(new Date());
+		vehicle.setLastmodifiedby(Integer.parseInt(userid));
+		vehicle.setLastmodifieddate(new Date());
+		insurance.setVehicle(vehicle);
 		insurance.setIsactive(1);
 		return insuranceRepository.save(insurance);
 	}

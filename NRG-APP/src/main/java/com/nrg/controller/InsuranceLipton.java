@@ -46,12 +46,15 @@ public class InsuranceLipton {
 	public Response addInsurance(@RequestBody Insurance insurance, HttpServletRequest request) {
 		Response response = null;
 		try {
-			Insurance addedInsurance = insuranceService.addInsurance(insurance);
+			String userid = request.getParameter("userId");
+			Integer vehicleid = Integer.parseInt(request.getParameter("vehicleid"));
+			Insurance addedInsurance = insuranceService.addInsurance(insurance, vehicleid, userid);
 
 			if (addedInsurance == null) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
 			} else {
-				response = new Response(CommonConstants.NRG_SCUCESS, addedInsurance, CommonUserMessages.INSURANCE_ADDED);
+				response = new Response(CommonConstants.NRG_SCUCESS, addedInsurance,
+						CommonUserMessages.INSURANCE_ADDED);
 			}
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -82,13 +85,13 @@ public class InsuranceLipton {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public Response deleteInsurances(@RequestBody List<Insurance> insurances) {
 		Response response = null;
-		try{
-			insuranceService.deleteInsurances(insurances);	
+		try {
+			insuranceService.deleteInsurances(insurances);
 			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.INSURANCES_DELETED);
-		}catch(Exception e){
+		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}
-				
+
 		return response;
 	}
 

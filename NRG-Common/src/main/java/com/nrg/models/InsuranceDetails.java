@@ -24,19 +24,18 @@ public class InsuranceDetails {
 		super();
 	}
 
-	public InsuranceDetails(long insuranceid, String vechiclenumber,String vechiclename, String insurancename, Date startdate, Date enddate,
-			Integer reminder) {
+	public InsuranceDetails(long insuranceid, String vechiclenumber, String vechiclename, String insurancename,
+			Date startdate, Date enddate, Integer reminder) {
 		super();
-		this.insuranceid=insuranceid;
+		this.insuranceid = insuranceid;
 		this.vechiclenumber = vechiclenumber;
-		this.vechiclename=vechiclename;
+		this.vechiclename = vechiclename;
 		this.insurancename = insurancename;
 		this.startdate = startdate;
 		this.enddate = enddate;
 		this.reminder = reminder;
 	}
 
-	
 	public long getInsuranceid() {
 		return insuranceid;
 	}
