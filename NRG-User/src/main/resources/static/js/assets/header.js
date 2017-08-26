@@ -20,23 +20,17 @@ $(document).ready(function() {
     				var remainingdays=obj.remainingdays;
     				notificationcount=obj.notificationcount;
     				var startdate=obj.startdate;
-    				$('#notificationdetails').append('<li><a href="#" onClick ="showNotification('+vechiclename+','+vechiclenumber+','+enddate+','+insurancename+');"> <span class="label label-primary"><i class="icon_profile"></i></span>' +vechiclename+'/'+vechiclenumber+'</a></li>');
+    				var message="Your "+insurancename+" Insurance for "+vechiclenumber+" / "+vechiclename+" Vehicle  will be expired on "+enddate+"";
+    				$('#notificationdetails').append("<li><a href='#' onClick='showNotification(\""+message+"\");'> <span class='label label-primary'><i class='icon_profile'></i></span>"+vechiclename+"/"+vechiclenumber+"</a></li>");
     			});
-				
 				$('#notificationCount').html(notificationcount);
-				$('#notifCount').html("You have "+notificationcount+" new notifications");
-				 	
-				
-				
-				
+				$('#notifCount').html("You have "+notificationcount+" new notifications");							
 			} else {
 			}
 		},
-	});
-	
-	function showNotification(vechiclename,vechiclenumber,enddate,insurancename){
-	
-	}
-	
+	});	
 });
 
+function showNotification(message){
+	bootMessage('Info',message);
+}

@@ -19,7 +19,7 @@ import com.nrg.utils.Response;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserLipton {
 
 	@Autowired
 	UserService userService;
