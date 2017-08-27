@@ -152,12 +152,14 @@ public class VehicleController {
 
 	// ------------------------------------------------------
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
-	public Response updateVehicle(@RequestBody Vechicle vehicle) {
-
+	public Response updateVehicle(@RequestBody Vechicle vehicle, HttpServletRequest request) {
+		
 		Response response = null;
 		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+			
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = UPDATE_VEHICLE;
+			String vehicleListUrl = UPDATE_VEHICLE + "?userId=" + user.getUserid();
 			response = restTemplate.postForObject(vehicleListUrl, vehicle, Response.class);
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -167,12 +169,14 @@ public class VehicleController {
 
 	// ------------------------------------------------------
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public Response deleteVehicle(@RequestBody List<Vechicle> vehicles) {
+	public Response deleteVehicle(@RequestBody List<Vechicle> vehicles, HttpServletRequest request) {
 
 		Response response = null;
 		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+			
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = DELETE_VEHICLES;
+			String vehicleListUrl = DELETE_VEHICLES + "?userId=" + user.getUserid();
 			response = restTemplate.postForObject(vehicleListUrl, vehicles, Response.class);
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -205,7 +209,7 @@ public class VehicleController {
 			User user = (User) request.getSession().getAttribute("usersession");
 
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = GET_VEHICLE_TRACKER_LIST + "?userId=" + user.getUserid();
+			String vehicleListUrl = GET_VEHICLE_TRACKER_LIST + "?userId=" + 1;
 			response = restTemplate.getForObject(vehicleListUrl, Response.class);
 
 		} catch (Exception e) {

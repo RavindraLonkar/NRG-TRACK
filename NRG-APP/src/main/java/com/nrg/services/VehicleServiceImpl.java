@@ -1,5 +1,6 @@
 package com.nrg.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,25 +44,33 @@ public class VehicleServiceImpl implements VehicleService {
 		user.setUserid(userid);
 		vehicle.setUser(user);
 		vehicle.setIsactive(1);
+		vehicle.setCreateddate(new Date());
+		vehicle.setCreatedby(userid);
+		vehicle.setLastmodifiedby(userid);
+		vehicle.setLastmodifieddate(new Date());
 		return vehicleRepository.save(vehicle);
 	}
 
 	@Override
-	public Vechicle updateVehicle(Vechicle vehicle) {
+	public Vechicle updateVehicle(Vechicle vehicle, Integer userid) {
 		Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
 		newVehicle.setVechiclename(vehicle.getVechiclename());
 		newVehicle.setVechiclenumber(vehicle.getVechiclenumber());
 		newVehicle.setVechiclename(vehicle.getVechiclename());
+		newVehicle.setLastmodifiedby(userid);
+		newVehicle.setLastmodifieddate(new Date());
 		return vehicleRepository.save(newVehicle);
 	}
 
 	@Override
-	public void deleteVehicles(List<Vechicle> vehicles) {
+	public void deleteVehicles(List<Vechicle> vehicles, Integer userid) {
 		// TODO : for Hard Delete
 		/* vehicleRepository.delete(vehicle); */
 		for (Vechicle vehicle : vehicles) {
 			Vechicle newVehicle = vehicleRepository.findVechicleByvehicleid(vehicle.getVehicleid());
 			newVehicle.setIsactive(0);
+			newVehicle.setLastmodifiedby(userid);
+			newVehicle.setLastmodifieddate(new Date());
 			vehicleRepository.save(newVehicle);
 		}
 	}

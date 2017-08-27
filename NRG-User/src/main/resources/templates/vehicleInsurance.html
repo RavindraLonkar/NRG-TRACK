@@ -111,10 +111,10 @@
 							<form role="form" id="editInsuranceForm" action="">
 								<input type="hidden" class="form-control" id="editInsuranceId">
 								<div class="form-group">
-									<label for="vehiclenumber">Vehicle Number</label> <select
-										class="form-control m-bot15" id="editVehicleNumber">
-										<option value="0">---- Select -----</option>
-									</select> <label class="help-block" id="editvehiclenumber_error"></label>
+									<label for="vehiclenumber">Vehicle Number</label> <input
+										type="text" class="form-control" id="editVehicleNumber" disabled>
+										<label
+										class="help-block" id="editinsurancename_error"></label>
 								</div>
 								<div class="form-group">
 									<label for="insurancename">Insurance Name</label> <input
@@ -127,7 +127,7 @@
 									<label for="vehiclename">Insurance Start Date</label>
 									<div class='input-group date' id='editInsuranceStartDate'>
 										<input type='text' class="form-control" id='editStartDate' /> 
-										<span class="input-group-editon">
+										<span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-calendar"></span>
 					                    </span>
 									</div>
@@ -137,7 +137,7 @@
 									<label for="vehiclename">Insurance End Date</label>
 									<div class='input-group date' id='editInsuranceEndDate'>
 										<input type='text' class="form-control" id='editEndDate' /> 
-										<span class="input-group-editon">
+										<span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-calendar"></span>
 					                    </span>
 									</div>

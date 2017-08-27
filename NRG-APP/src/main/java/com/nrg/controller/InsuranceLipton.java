@@ -46,7 +46,7 @@ public class InsuranceLipton {
 	public Response addInsurance(@RequestBody Insurance insurance, HttpServletRequest request) {
 		Response response = null;
 		try {
-			String userid = request.getParameter("userId");
+			Integer userid = Integer.parseInt(request.getParameter("userId"));
 			Integer vehicleid = Integer.parseInt(request.getParameter("vehicleid"));
 			Insurance addedInsurance = insuranceService.addInsurance(insurance, vehicleid, userid);
 
@@ -67,7 +67,8 @@ public class InsuranceLipton {
 	public Response updateInsurance(@RequestBody Insurance insurance, HttpServletRequest request) {
 		Response response = null;
 		try {
-			Insurance updatedInsurance = insuranceService.updateInsurance(insurance);
+			Integer userid = Integer.parseInt(request.getParameter("userId"));
+			Insurance updatedInsurance = insuranceService.updateInsurance(insurance, userid);
 
 			if (updatedInsurance == null) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
@@ -83,10 +84,11 @@ public class InsuranceLipton {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Response deleteInsurances(@RequestBody List<Insurance> insurances) {
+	public Response deleteInsurances(@RequestBody List<Insurance> insurances, HttpServletRequest request) {
 		Response response = null;
 		try {
-			insuranceService.deleteInsurances(insurances);
+			Integer userid = Integer.parseInt(request.getParameter("userId"));
+			insuranceService.deleteInsurances(insurances, userid);
 			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.INSURANCES_DELETED);
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);

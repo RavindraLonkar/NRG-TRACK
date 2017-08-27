@@ -71,8 +71,9 @@ public class InsuranceController {
 	public Response addInsurance(@RequestBody Insurance insurance, HttpServletRequest request) {
 		Integer vehicleid;
 		Response response = null;
-		User user = (User) request.getSession().getAttribute("usersession");
 		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+			
 			vehicleid=Integer.parseInt(request.getParameter("vehicleid"));
 			RestTemplate restTemplate = new RestTemplate();
 			String insuranceListUrl = SAVE_INSURANCE + "?vehicleid=" + vehicleid+"&userId="+user.getUserid();
@@ -87,12 +88,14 @@ public class InsuranceController {
 	
 	//------------------------------------------------------
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
-	public Response updateInsurance(@RequestBody Insurance insurance) {
+	public Response updateInsurance(@RequestBody Insurance insurance, HttpServletRequest request) {
 
 		Response response = null;
 		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+			
 			RestTemplate restTemplate = new RestTemplate();
-			String insuranceListUrl = UPDATE_INSURANCE;
+			String insuranceListUrl = UPDATE_INSURANCE + "?userId=" + user.getUserid();
 			response = restTemplate.postForObject(insuranceListUrl, insurance, Response.class);
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
@@ -102,12 +105,14 @@ public class InsuranceController {
 	
 	//------------------------------------------------------	
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public Response deleteInsurance(@RequestBody List<Insurance> insuranceList) {
+	public Response deleteInsurance(@RequestBody List<Insurance> insuranceList, HttpServletRequest request) {
 
 		Response response = null;
 		try {
+			User user = (User) request.getSession().getAttribute("usersession");
+			
 			RestTemplate restTemplate = new RestTemplate();
-			String insuranceListUrl = DELETE_INSURANCES;
+			String insuranceListUrl = DELETE_INSURANCES + "?userId=" + user.getUserid();
 			response = restTemplate.postForObject(insuranceListUrl, insuranceList, Response.class);
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);

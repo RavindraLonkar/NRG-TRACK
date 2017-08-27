@@ -178,9 +178,13 @@ function addInsurance() {
 
 function setModelData(insuranceid) {
 	var data = table.row('#' + insuranceid).data();
+	
+	$("#editVehicleNumber").val(data.vechiclenumber + "/" + data.vechiclename);
 	$("#editInsuranceId").val(data.insuranceid);
-	$("#editInsuranceNumber").val(data.insurancenumber);
 	$("#editInsuranceName").val(data.insurancename);
+	$("#editStartDate").val(data.startdate);
+	$("#editEndDate").val(data.enddate);
+	$("#editReminder").val(data.reminder);
 }
 
 function editInsurance() {
@@ -190,8 +194,10 @@ function editInsurance() {
 		return;
 	var data = {
 		insuranceid : $("#editInsuranceId").val(),
-		insurancenumber : $("#editInsuranceNumber").val(),
-		insurancename : $("#editInsuranceName").val()
+		insurancename : $("#editInsuranceName").val(),
+		startdate : $("#editStartDate").val(),
+		enddate : $("#editEndDate").val(),
+		reminder : $("#editReminder").val(),
 	}
 	$.ajax({
 		type : "PUT",
@@ -261,30 +267,6 @@ function confirmdeleteInsurances() {
 			}]
 		});
 	}
-}
-
-function deleteInsurance(data){
-	$.ajax({
-		type : "DELETE",
-		url : $("#contextPath").val() + "/insurance/delete",
-		data : JSON.stringify(data),
-		processData : false, //prevent jQuery from automatically transforming the data into a query string
-		contentType : 'application/json',
-		cache : false,
-		timeout : 600000,
-		success : function(result) {
-			if (result.status == '1') {
-				bootMessage('sucess', result.resonCode);
-				table.ajax.reload();
-			} else {
-				bootMessage('Error', result.resonCode);
-			}
-		},
-		error : function(e) {
-			console.log("ERROR: ", e);
-		}
-	});
-
 }
 
 function deleteInsurances(data) {			

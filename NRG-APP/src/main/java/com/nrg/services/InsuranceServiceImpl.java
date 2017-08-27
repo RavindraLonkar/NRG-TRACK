@@ -38,32 +38,43 @@ public class InsuranceServiceImpl implements InsuranceService {
 	}
 
 	@Override
-	public Insurance addInsurance(Insurance insurance, Integer vehicleid, String userid) {
+	public Insurance addInsurance(Insurance insurance, Integer vehicleid, Integer userid) {
 		Vechicle vehicle = new Vechicle();
 		vehicle = vehicleRepository.findVechicleByvehicleid(vehicleid);
-		vehicle.setCreatedby(Integer.parseInt(userid));
-		vehicle.setCreateddate(new Date());
-		vehicle.setLastmodifiedby(Integer.parseInt(userid));
-		vehicle.setLastmodifieddate(new Date());
+				
 		insurance.setVehicle(vehicle);
 		insurance.setIsactive(1);
+		insurance.setCreateddate(new Date());
+		insurance.setCreatedby(userid);
+		insurance.setLastmodifiedby(userid);
+		insurance.setLastmodifieddate(new Date());
+		
 		return insuranceRepository.save(insurance);
 	}
 
 	@Override
-	public Insurance updateInsurance(Insurance insurance) {
+	public Insurance updateInsurance(Insurance insurance, Integer userid) {
 		Insurance newInsurance = insuranceRepository.findInsuranceByinsuranceid(insurance.getInsuranceid());
+		
 		newInsurance.setInsurancename(insurance.getInsurancename());
+		newInsurance.setStartdate(insurance.getStartdate());
+		newInsurance.setEnddate(insurance.getEnddate());
+		newInsurance.setReminder(insurance.getReminder());
+		newInsurance.setLastmodifiedby(userid);
+		newInsurance.setLastmodifieddate(new Date());
+		
 		return insuranceRepository.save(newInsurance);
 	}
 
 	@Override
-	public void deleteInsurances(List<Insurance> insurances) {
+	public void deleteInsurances(List<Insurance> insurances, Integer userid) {
 		// TODO : for Hard Delete
 		/* insuranceRepository.delete(insurance); */
 		for (Insurance insurance : insurances) {
 			Insurance newInsurance = insuranceRepository.findInsuranceByinsuranceid(insurance.getInsuranceid());
 			newInsurance.setIsactive(0);
+			newInsurance.setLastmodifiedby(userid);
+			newInsurance.setLastmodifieddate(new Date());
 			insuranceRepository.save(newInsurance);
 		}
 	}

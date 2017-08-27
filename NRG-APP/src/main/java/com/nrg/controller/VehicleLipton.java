@@ -65,7 +65,8 @@ public class VehicleLipton {
 	public Response updateVehicle(@RequestBody Vechicle vehicle, HttpServletRequest request) {
 		Response response = null;
 		try {
-			Vechicle updatedVehicle = vehicleService.updateVehicle(vehicle);
+			Integer userid = Integer.parseInt(request.getParameter("userId"));
+			Vechicle updatedVehicle = vehicleService.updateVehicle(vehicle, userid);
 
 			if (updatedVehicle == null) {
 				response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.RECORD_NOT_FOUND);
@@ -81,10 +82,11 @@ public class VehicleLipton {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Response deleteVehicles(@RequestBody List<Vechicle> vehicles) {
+	public Response deleteVehicles(@RequestBody List<Vechicle> vehicles, HttpServletRequest request) {
 		Response response = null;
 		try{
-			vehicleService.deleteVehicles(vehicles);	
+			Integer userid = Integer.parseInt(request.getParameter("userId"));
+			vehicleService.deleteVehicles(vehicles, userid);	
 			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLES_DELETED);
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
