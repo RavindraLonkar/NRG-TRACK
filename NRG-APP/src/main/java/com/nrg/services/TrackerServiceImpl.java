@@ -29,7 +29,7 @@ public class TrackerServiceImpl implements TrackerService {
 	public List<CoordinateDetail> getTrackingData(Integer vehicleId, String startDate, String endDate) {
 		Date d1 = null;
 		Date d2 = null;
-		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			d1 = (Date) dt.parse(startDate);
 			d2 = (Date) dt.parse(endDate);

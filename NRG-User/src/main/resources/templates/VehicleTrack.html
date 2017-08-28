@@ -9,7 +9,7 @@
 	<div th:replace="fragments/header :: header"></div>
 	<section id="main-content">
 		<section class="wrapper">
-		<div class="row">
+			<div class="row">
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i>Vehicle</li>
@@ -20,32 +20,35 @@
 			<!--overview start-->
 			<ol class="breadcrumb vehicletrackform">
 				<div class="row">
-					<div class="">
-						<label class="col-lg-1 control-label"><b>Vehicle:</b></label>
-						<div class="col-lg-3">
+					<div class="col-md-4">
+						<label class="col-lg-2 control-label"><b>Vehicle:</b></label>
+						<div class="col-lg-10">
 							<select class="form-control m-bot15" id="vehicleId"
 								name="vehicleId" style="cursor: pointer"><option
-									value="0">--Select--</option></select>
+									value="0">--Select--</option></select> <label class="help-block"
+								id="vehicleId_error"></label>
 						</div>
 					</div>
-					<div class="">
-						<div class="col-lg-3">
+					<div class="col-lg-3">
+						<div class="col-lg-12">
 							<div class='input-group date' id='startDate'>
-								<input type='text' class="form-control" id='trackStartDate' /> <span
-									class="input-group-addon"> <span
+								<input type='text' class="form-control" id='trackStartDate'
+									readonly /> <span class="input-group-addon"> <span
 									class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
+							<label class="help-block" id="startDate_error"></label>
 						</div>
 					</div>
-					<div class="">
-						<div class="col-lg-3">
+					<div class="col-lg-3">
+						<div class="col-lg-12">
 							<div class='input-group date' id='endDate'>
-								<input type='text' class="form-control" id='trackEndDate' /> <span
-									class="input-group-addon"> <span
+								<input type='text' class="form-control" id='trackEndDate'
+									readonly /> <span class="input-group-addon"> <span
 									class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
+							<label class="help-block" id="endDate_error"></label>
 						</div>
 					</div>
 					<div class="">
@@ -54,7 +57,6 @@
 						</div>
 					</div>
 				</div>
-				
 			</ol>
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -78,8 +80,7 @@
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="info-box dark-bg">
 						<div class="title">Total Distance in KM.</div>
-						<i class=" icon_map"></i>
-						<span class="distance-km"></span>
+						<i class=" icon_map"></i> <span class="distance-km"></span>
 					</div>
 					<!--/.info-box-->
 				</div>
@@ -100,12 +101,13 @@
 				</div>
 			</div>
 		</section>
-		
+
 	</section>
 	<div th:replace="fragments/footer :: footer"></div>
 	<!-- JS Paths -->
 	<div th:replace="fragments/commonJs :: commonJs"></div>
 	<script th:src="@{/js/assets/vehicleTrack.js}"></script>
+	<script th:src="@{/js/assets/vehicleTrack-Validation.js}"></script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlhEyIB0wJDgigqwoVyA8LAVCET5KyCU&callback=initMap"></script>
 </body>

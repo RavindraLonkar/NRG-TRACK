@@ -23,7 +23,7 @@ import com.nrg.utils.Response;
 
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class LoginLipton {
 
 	@Autowired
 	UserService userService;
