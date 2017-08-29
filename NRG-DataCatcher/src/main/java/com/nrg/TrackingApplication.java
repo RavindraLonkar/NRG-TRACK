@@ -14,7 +14,7 @@ import com.tcp.track.main.MainCatcher;
 
 
 @SpringBootApplication
-@PropertySource("classpath:urls.properties")
+//@PropertySource("classpath:urls.properties")
 @EnableAutoConfiguration(exclude={SecurityAutoConfiguration.class,DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 public class TrackingApplication extends SpringBootServletInitializer {
 	
@@ -25,11 +25,11 @@ public class TrackingApplication extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("main1***************************************************************************");
-		//SpringApplication.run(TrackingApplication.class, args);
+		//System.out.println("main1***************************************************************************");
+		SpringApplication.run(TrackingApplication.class, args);
 		
 		
-			try {
+			/*try {
 				 System.out.println("main2***************************************************************************");
 				Class.forName("MainCatche").newInstance();
 			} catch (InstantiationException e) {
@@ -41,6 +41,6 @@ public class TrackingApplication extends SpringBootServletInitializer {
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 	}	
 }
