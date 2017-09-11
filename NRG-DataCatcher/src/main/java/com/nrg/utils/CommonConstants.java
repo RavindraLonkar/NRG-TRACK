@@ -9,5 +9,5 @@ public class CommonConstants {
 	public static final String COMMAND_PROTOCOL_NUMBER = "80";
 	
 	public static final String START_BYTE = "7878";
-	public static final String TOP_BYTE = "0D0A";
+	public static final String STOP_BYTE = "0D0A";
 }

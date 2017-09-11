@@ -49,7 +49,7 @@ class TrackerDataReciever {
 			int bytesRead = 0;
 
 			messageByte[0] = in.readByte();
-			// messageByte[1] = in.readByte();
+			// messageByte[1] = in.readByte();					
 			ByteBuffer byteBuffer = ByteBuffer.wrap(messageByte, 0, 2);
 
 			int bytesToRead = byteBuffer.getShort();
@@ -69,7 +69,8 @@ class TrackerDataReciever {
 					end = true;
 				}
 			}*/
-			String messageByte1 = "78 78 0A 13 05 00 64 00 01 00 44 A6 83 0D 0A 78 78 1F 12 0D 0B 0B 00 00 00 C0 00 00 00 00 00 00 00 00 00 20 00 01 94 16 27 9D 00 0D 55 00 45 C0 B0 0D 0A";
+			String messageByte1 = "78 78 0A 13 05 00 64 00 01 00 44 A6 83 0D 0A "
+					+ "78 78 1F 12 0D 0B 0B 00 00 00 C0 00 00 00 00 00 00 00 00 00 20 00 01 94 16 27 9D 00 0D 55 00 45 C0 B0 0D 0A";
 			processDataPackets(messageByte1.replace(" ", ""));
 		} catch (Exception e) {
 			e.printStackTrace();
