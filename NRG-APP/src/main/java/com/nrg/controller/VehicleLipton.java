@@ -87,7 +87,7 @@ public class VehicleLipton {
 		try{
 			Integer userid = Integer.parseInt(request.getParameter("userId"));
 			vehicleService.deleteVehicles(vehicles, userid);	
-			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLES_DELETED);
+			response = new Response(CommonConstants.NRG_SCUCESS, 1, CommonUserMessages.VEHICLE_DELETED);
 		}catch(Exception e){
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
 		}

@@ -74,6 +74,8 @@ function addVehicle() {
 				$('#addVehicleModal').modal('hide');
 				bootMessage('sucess', result.resonCode);
 				table.ajax.reload();
+				$('#addVechicleName').val('');
+				$('#addVechicleNumber').val('');
 			} else {
 				bootMessage('Error', result.resonCode);
 			}
@@ -115,6 +117,8 @@ function editVedhicle() {
 				$('#editVehicleModal').modal('hide');
 				bootMessage('sucess', result.resonCode);
 				table.ajax.reload();
+				$('#editVechicleNumber').val('');
+				$('#editVechicleName').val('');
 			} else {
 				bootMessage('Error', result.resonCode);
 			}
@@ -155,7 +159,7 @@ function confirmdeleteVehicles() {
 	});
 	
 	if(!(data.length > 0)){
-		bootMessage('Confirm','Please select vehicle to delete');
+		bootMessage('Confirm','Please select vehicle row to delete');
 		return;
 	}else{
 		BootstrapDialog.show({

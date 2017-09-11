@@ -31,12 +31,11 @@ public class CommonUserMessages {
 	public static final String VEHICLE_ADDED = "Vehicle information added successfully.";
 	public static final String VEHICLE_DELETED = "Vehicle information deleted successfully.";
 	public static final String VEHICLE_LOADED = "Vehicle information loaded successfully.";
-	public static final String VEHICLES_DELETED = "Vehicle information deleted successfully for selected vehicle ids.";
 
 	public static final String INSURANCE_ADDED = "Vehicle Insurance added successfully.";
 	public static final String INSURANCES_DELETED = "Vehicle Insurance deleted successfully.";
 	public static final String INSURANCE_UPDATED = "Vehicle Insurance updated successfully.";
-	public static final String INSURANCE_LOADED = "Vehicle Insurance loaded successfully.";	
+	public static final String INSURANCE_LOADED = "Vehicle Insurance Saved successfully.";	
 	
 	public static final String INSURANCE_NOTIFICATION_LIST_SUCCESS = "";
 
