@@ -19,7 +19,7 @@ import com.nrg.utils.Response;
 
 @RestController
 @RequestMapping("/tracker")
-public class TrackerFacade {
+public class TrackerLipton {
 	@Autowired
 	TrackerService trackerService;
 
