@@ -12,6 +12,7 @@ public class LocationDataPacket {
 	private String mnc;
 	private String locationCode;
 	private String cellId;
+	private String deviceId;
 	public DataPacket getDataPacket() {
 		return dataPacket;
 	}
@@ -77,6 +78,12 @@ public class LocationDataPacket {
 	}
 	public void setCellId(String cellId) {
 		this.cellId = cellId;
+	}
+	public String getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
 	
 }
