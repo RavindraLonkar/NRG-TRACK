@@ -37,6 +37,8 @@ public class TrackingData {
 	private Date createddate;
 	@Column
 	private String tdeviceid;
+	@Column
+	private Integer speed;
 
 	public Integer getTrackingdataid() {
 		return trackingdataid;
@@ -84,6 +86,14 @@ public class TrackingData {
 
 	public void setTdeviceid(String tdeviceid) {
 		this.tdeviceid = tdeviceid;
+	}
+	
+	public Integer getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(Integer speed) {
+		this.speed = speed;
 	}
 
 	public static long getSerialversionuid() {

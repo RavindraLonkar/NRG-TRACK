@@ -3,14 +3,28 @@ package com.nrg.datareceiver;
 import java.math.BigDecimal;
 import java.util.concurrent.Callable;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
+
 import com.google.gson.Gson;
+import com.nrg.datacatcher.utils.CommonUtils;
+import com.nrg.datacatcher.utils.DataCatcherConstants;
 import com.nrg.models.DataPacket;
 import com.nrg.models.LocationDataPacket;
 import com.nrg.utils.CommonConstants;
-import com.nrg.utils.CommonUtils;
+import com.nrg.utils.CommonUserMessages;
+import com.nrg.utils.Response;
+
 
 public class LocationDataPacketProcessor implements Callable<Boolean> {
+	
+	private static final Logger logger = Logger.getLogger(LocationDataPacketProcessor.class);
+	
+	@Value("${SAVE_LOCATION_PACKET}")
+	private String SAVE_LOCATION_PACKET;
 
+	
 	String dataPacket;
 	public LocationDataPacketProcessor(String dataPacket) {
 		this.dataPacket = dataPacket;
@@ -20,15 +34,16 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 	public Boolean call() throws Exception {
 		
 		LocationDataPacket locationDataPacket = getLocationDataPacket(dataPacket);
+		saveLocationDataPacket(locationDataPacket);
 		return null;
 	}
 
 	private LocationDataPacket getLocationDataPacket(String dataPacket) {
 		
 		LocationDataPacket locationDataPacket = new LocationDataPacket();
-		
+			
 		DataPacket dataPacketData = new DataPacket();
-		dataPacketData.setStartBit(CommonConstants.START_BYTE);
+		dataPacketData.setStartBit(DataCatcherConstants.START_BYTE);
 		dataPacketData.setPacketLength(dataPacket.substring(0,2));
 		dataPacketData.setProtocolNumber(dataPacket.substring(2,4));
 				
@@ -42,10 +57,12 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 		locationDataPacket.setMnc(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(44,46))));
 		locationDataPacket.setLocationCode(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(46,50))));
 		locationDataPacket.setCellId(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(50,56))));
+		locationDataPacket.setDeviceId("355488020913415");
 		
 		dataPacketData.setInfoSerialNumber(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(56,60))));
 		dataPacketData.setErrorCheck(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(60,64))));
-		dataPacketData.setStopBit(CommonConstants.STOP_BYTE);
+		dataPacketData.setStopBit(DataCatcherConstants.STOP_BYTE);
+		
 		
 		locationDataPacket.setDataPacket(dataPacketData);
 		
@@ -53,7 +70,21 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 		String s = gson.toJson(locationDataPacket);
 		System.out.println(s);
 				
-		return null;
+		return locationDataPacket;
 	}
 		
+	private void saveLocationDataPacket(LocationDataPacket locationDataPacket) {
+		Response response = null;
+		try {
+
+			RestTemplate restTemplate = new RestTemplate();
+			String vehicleListUrl = SAVE_LOCATION_PACKET;
+			restTemplate.postForObject(vehicleListUrl, locationDataPacket, Response.class);
+
+		} catch (Exception e) {
+			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
+			logger.info(response.toString());
+		}
+	}
+
 }

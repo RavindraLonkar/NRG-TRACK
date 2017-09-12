@@ -1,9 +1,10 @@
 package com.nrg.services;
 
 import com.nrg.models.LocationDataPacket;
+import com.nrg.models.TrackingData;
 
 public interface DataPacketService {
 
-	LocationDataPacket saveLocationDataPacket(LocationDataPacket locationDataPacket);
+	TrackingData saveLocationDataPacket(LocationDataPacket trackingData);
 
 }

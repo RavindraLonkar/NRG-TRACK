@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nrg.utils.CommonConstants;
-import com.nrg.utils.CommonUtils;
+import com.nrg.datacatcher.utils.DataCatcherConstants;
+import com.nrg.datacatcher.utils.CommonUtils;
 
 /*@EnableScheduling
 @EnableAutoConfiguration*/
@@ -81,7 +81,7 @@ class TrackerDataReciever {
 		
 		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
 		
-		String[] dataPackets = socketData.replace(" ", "").replace("\n", "").split(CommonConstants.START_BYTE);
+		String[] dataPackets = socketData.replace(" ", "").replace("\n", "").split(DataCatcherConstants.START_BYTE);
 		
 		List<String> dataPacketList = Arrays.asList(dataPackets);
 		
@@ -92,7 +92,7 @@ class TrackerDataReciever {
 			if(dataPacket.equals("")) 
 				continue;
 			
-			if(dataPacket.substring(2, 4).equals(CommonConstants.LOCATION_PROTOCOL_NUMBER)){
+			if(dataPacket.substring(2, 4).equals(DataCatcherConstants.LOCATION_PROTOCOL_NUMBER)){
 				LocationDataPacketProcessor camsTrxnThread = new LocationDataPacketProcessor(dataPacket);
 				Future<Boolean> locationDataPacketProcessorThreadFuture = executor.submit(camsTrxnThread);
 				futureList.add(locationDataPacketProcessorThreadFuture);

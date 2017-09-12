@@ -1,4 +1,4 @@
-package com.nrg.utils;
+package com.nrg.datacatcher.utils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

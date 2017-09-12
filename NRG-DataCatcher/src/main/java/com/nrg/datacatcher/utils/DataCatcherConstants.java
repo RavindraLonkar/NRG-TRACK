@@ -1,5 +1,5 @@
-package com.nrg.utils;
-public class CommonConstants {
+package com.nrg.datacatcher.utils;
+public class DataCatcherConstants {
 	
 	public static final String LOGIN_PROTOCOL_NUMBER = "1";
 	public static final String LOCATION_PROTOCOL_NUMBER = "12";
