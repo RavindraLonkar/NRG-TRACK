@@ -47,11 +47,10 @@ $('#file_click').change(
 											$('#file_click').val().lastIndexOf(
 													'\\') + 1));
 					isImageSelected = 1;
-					var fileupload = window.location;
 					$.ajax({
 						type : "POST",
 						enctype : 'multipart/form-data',
-						url : fileupload.origin + "/NRG-User/profileUpload",
+						url : $("#contextPath").val() + "/NRG-User/profileUpload",
 						data : new FormData($('#uploadFile')[0]),
 						processData : false, // prevent jQuery from
 						// automatically
@@ -93,7 +92,6 @@ $(document).ready(function() {
 	
 	
 	var validation = false;
-	var url = window.location;
 	$("#clientprofile").click(function(event) {
 		var validation = profileformvalidation();
 		if (validation == true) {
@@ -110,7 +108,7 @@ $(document).ready(function() {
 			var jsonUser = JSON.stringify(user);
 			$.ajax({
 				type : "POST",
-				url : url.origin + "/NRG-User/client/profile",
+				url :$("#contextPath").val() + "/client/profile",
 				contentType : 'application/json',
 				data : jsonUser,
 				processData : false, // prevent jQuery from
@@ -121,6 +119,13 @@ $(document).ready(function() {
 						bootMessage('Error', result.resonCode);
 					} else {
 						bootMessage('sucess', result.resonCode);
+						var dataSet = result.data;
+						$('#infofirstname').html(dataSet.firstname);
+						$('#infolastname').html(dataSet.lastname);
+						$('#infoemailid').html(dataSet.emailid);
+						$('#infocontactmobile').html(dataSet.contactmobile);
+						$('#infocontactmobile2').html(dataSet.contactmobile2);
+						$('#infodob').html(dataSet.dob);
 					}
 				},
 				error : function(e) {
@@ -131,15 +136,15 @@ $(document).ready(function() {
 
 	});
 
-	getSalutaion(url);
+	getSalutaion();
 
 });
 
 // for get client profile
-function getprofile(url) {
+function getprofile() {
 	$.ajax({
 		type : "GET",
-		url : url.origin + "/NRG-User/client/get/profile",
+		url : $("#contextPath").val() + "/client/get/profile",
 		processData : false,
 		contentType : false,
 		cache : false,
@@ -193,11 +198,11 @@ function getprofile(url) {
 }
 
 // for salutation call
-function getSalutaion(url) {
+function getSalutaion() {
 
 	$.ajax({
 		type : "GET",
-		url : url.origin + "/NRG-User/common/codevalue?codetypeId=3",
+		url : $("#contextPath").val() + "/common/codevalue?codetypeId=3",
 		processData : false,
 		contentType : false,
 		cache : false,
@@ -213,7 +218,7 @@ function getSalutaion(url) {
 									'<option value="' + codeValueID + '">'
 											+ codeValue + '</option>');
 						});
-				getGender(url);
+				getGender();
 			}
 		},
 		error : function(e) {
@@ -223,11 +228,11 @@ function getSalutaion(url) {
 }
 
 // for gender call
-function getGender(url) {
+function getGender() {
 
 	$.ajax({
 		type : "GET",
-		url : url.origin + "/NRG-User/common/codevalue?codetypeId=4",
+		url : $("#contextPath").val() + "/common/codevalue?codetypeId=4",
 		processData : false,
 		contentType : false,
 		cache : false,
@@ -243,7 +248,7 @@ function getGender(url) {
 									'<option value="' + codeValueID + '">'
 											+ codeValue + '</option>');
 						});
-				getprofile(url);
+				getprofile();
 			}
 		},
 		error : function(e) {
