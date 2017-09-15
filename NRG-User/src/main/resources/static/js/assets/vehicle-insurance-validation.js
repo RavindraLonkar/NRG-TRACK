@@ -4,8 +4,8 @@ function addInsuranceRegFormValidation() {
 
 	// vehicle number validation
 	if ($.trim($('#addVehicleNumber').val()) == '0') {
-		$('#vehiclenumber_error').removeClass('hide');
-		$('#vehiclenumber_error').html("Please enter valid Vehicle Number.");
+		$('#addvehiclenumber_error').removeClass('hide');
+		$('#addvehiclenumber_error').html("Please enter valid Vehicle Number.");
 		validation = false;
 	}
 

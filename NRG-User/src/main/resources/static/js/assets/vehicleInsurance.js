@@ -212,6 +212,11 @@ function editInsurance() {
 				$('#editInsuranceModal').modal('hide');
 				bootMessage('sucess', result.resonCode);
 				table.ajax.reload();
+				$("#editInsuranceId").val(0);
+				$("#editInsuranceName").val('');
+				$("#editStartDate").val('');
+				$("#editEndDate").val('');
+				$("#editReminder").val('');
 			} else {
 				bootMessage('Error', result.resonCode);
 			}
@@ -252,7 +257,7 @@ function confirmdeleteInsurances() {
 	});
 	
 	if(!(data.length > 0)){
-		bootMessage('Confirm','Please select insurance to delete');
+		bootMessage('Confirm','Please select insurance row  to delete');
 		return;
 	}else{
 		BootstrapDialog.show({

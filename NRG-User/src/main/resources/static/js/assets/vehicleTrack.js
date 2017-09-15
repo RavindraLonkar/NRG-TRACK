@@ -30,12 +30,12 @@ $(document).ready(
 			});
 
 			$('#startDate').datetimepicker({
-				format : 'DD/MM/YYYY',
+				format : 'DD/MM/YYYY hh:mm:ss',
 				ignoreReadonly : true
 			});
 			$('#endDate').datetimepicker({
 				useCurrent : false,
-				format : 'DD/MM/YYYY',
+				format : 'DD/MM/YYYY hh:mm:ss',
 				ignoreReadonly : true
 			});
 			$("#startDate").on("dp.change", function(e) {
@@ -80,7 +80,7 @@ function getCoordinates() {
 						list = result.data;
 						initialize(list);
 					} else {
-						// BootstrapDialog.alert(result.resonCode);
+						bootMessage('sucess', 'There is not have any data for given dates');
 					}
 				},
 

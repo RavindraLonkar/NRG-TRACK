@@ -75,7 +75,7 @@ public class LoginLipton {
 
 			Email email = new Email();
 			email.setTo(userDataForEmail.getEmailid());
-			email.setFrom("ravindra.lonkar@extrapreneursindia.com");
+			email.setFrom("namdev.arade@gmail.com");
 
 			Map<String, Object> contextMap = new HashMap<String, Object>();
 			contextMap.put("name", userDataForEmail.getUsername());
