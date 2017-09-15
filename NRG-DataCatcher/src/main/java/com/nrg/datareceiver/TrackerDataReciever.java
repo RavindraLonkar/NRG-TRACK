@@ -1,36 +1,33 @@
 package com.nrg.datareceiver;
 
-import java.io.DataInputStream;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ThreadPoolExecutor;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nrg.datacatcher.utils.DataCatcherConstants;
-import com.nrg.datacatcher.utils.CommonUtils;
 
 /*@EnableScheduling
 @EnableAutoConfiguration*/
 
 @RestController
 @RequestMapping("/dataReceiver")
-class TrackerDataReciever {
+public class TrackerDataReciever {
 
+	@Autowired
+	ThreadPoolTaskExecutor executor;
+	
+	@Autowired
+	Environment environment;
+	
+	
 	// @Scheduled(fixedRate = 10000)
 	@RequestMapping(value = "/run", method = RequestMethod.GET)
 	public void recieveSocketData() {
@@ -79,8 +76,6 @@ class TrackerDataReciever {
 
 	private void processDataPackets(String socketData) {
 		
-		ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
-		
 		String[] dataPackets = socketData.replace(" ", "").replace("\n", "").split(DataCatcherConstants.START_BYTE);
 		
 		List<String> dataPacketList = Arrays.asList(dataPackets);
@@ -93,7 +88,7 @@ class TrackerDataReciever {
 				continue;
 			
 			if(dataPacket.substring(2, 4).equals(DataCatcherConstants.LOCATION_PROTOCOL_NUMBER)){
-				LocationDataPacketProcessor camsTrxnThread = new LocationDataPacketProcessor(dataPacket);
+				LocationDataPacketProcessor camsTrxnThread = new LocationDataPacketProcessor(dataPacket, environment);
 				Future<Boolean> locationDataPacketProcessorThreadFuture = executor.submit(camsTrxnThread);
 				futureList.add(locationDataPacketProcessorThreadFuture);
 			}

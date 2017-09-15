@@ -5,6 +5,7 @@ import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
@@ -23,11 +24,13 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 	
 	@Value("${SAVE_LOCATION_PACKET}")
 	private String SAVE_LOCATION_PACKET;
-
+	
+	Environment environment;
 	
 	String dataPacket;
-	public LocationDataPacketProcessor(String dataPacket) {
+	public LocationDataPacketProcessor(String dataPacket, Environment environment) {
 		this.dataPacket = dataPacket;
+		this.environment = environment;
 	}
 	
 	@Override
@@ -78,7 +81,7 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
-			String vehicleListUrl = SAVE_LOCATION_PACKET;
+			String vehicleListUrl = environment.getProperty("SAVE_LOCATION_PACKET");
 			restTemplate.postForObject(vehicleListUrl, locationDataPacket, Response.class);
 
 		} catch (Exception e) {

@@ -2,6 +2,7 @@ package com.nrg.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ public class TrackingData {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer trackingdataid;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "trackerid")
 	private Tracker tracker;
 
