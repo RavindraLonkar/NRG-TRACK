@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nrg.models.LocationDataPacket;
 import com.nrg.models.TrackingData;
-import com.nrg.models.User;
 import com.nrg.services.DataPacketService;
 import com.nrg.utils.CommonConstants;
-import com.nrg.utils.CommonUserMessages;
 import com.nrg.utils.Response;
 
 @RestController

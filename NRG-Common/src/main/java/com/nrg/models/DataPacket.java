@@ -7,6 +7,8 @@ public class DataPacket {
 	private String infoSerialNumber;
 	private String errorCheck;
 	private String stopBit;
+	private Integer port;
+	
 	public String getStartBit() {
 		return startBit;
 	}
@@ -43,5 +45,11 @@ public class DataPacket {
 	public void setStopBit(String stopBit) {
 		this.stopBit = stopBit;
 	}
-	
+	public Integer getPort() {
+		return port;
+	}
+	public void setPort(Integer port) {
+		this.port = port;
+	}
+		
 }

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,15 +21,14 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 	
 	private static final Logger logger = Logger.getLogger(LocationDataPacketProcessor.class);
 	
-	@Value("${SAVE_LOCATION_PACKET}")
-	private String SAVE_LOCATION_PACKET;
-	
 	Environment environment;
 	
 	String dataPacket;
-	public LocationDataPacketProcessor(String dataPacket, Environment environment) {
+	int port;
+	public LocationDataPacketProcessor(String dataPacket, int port, Environment environment) {
 		this.dataPacket = dataPacket;
 		this.environment = environment;
+		this.port = port;
 	}
 	
 	@Override
@@ -65,7 +63,7 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 		dataPacketData.setInfoSerialNumber(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(56,60))));
 		dataPacketData.setErrorCheck(Integer.toString(CommonUtils.hex2Decimal(dataPacket.substring(60,64))));
 		dataPacketData.setStopBit(DataCatcherConstants.STOP_BYTE);
-		
+		dataPacketData.setPort(port);
 		
 		locationDataPacket.setDataPacket(dataPacketData);
 		
@@ -86,7 +84,7 @@ public class LocationDataPacketProcessor implements Callable<Boolean> {
 
 		} catch (Exception e) {
 			response = new Response(CommonConstants.NRG_FAIL, null, CommonUserMessages.SYSTEM_ERROR);
-			logger.info(response.toString());
+			logger.info("Error : " + response.toString());
 		}
 	}
 

@@ -37,6 +37,8 @@ public class Tracker {
 	private Integer LastModifiedby;
 	@Column
 	private Date LastModifieddate;
+	@Column
+	private Integer port;
 
 	public Integer getTrackerid() {
 		return trackerid;
@@ -101,6 +103,14 @@ public class Tracker {
 
 	public void setLastModifieddate(Date lastModifieddate) {
 		LastModifieddate = lastModifieddate;
+	}
+
+	public Integer getPort() {
+		return port;
+	}
+
+	public void setPort(Integer port) {
+		this.port = port;
 	}
 
 	public static long getSerialversionuid() {
