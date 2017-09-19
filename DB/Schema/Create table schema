@@ -20,6 +20,7 @@ CreatedBy      		int,
 CreatedDate       	timestamp,
 LastModifiedBy 		int,
 LastModifiedDate	timestamp,
+port	            int,
 CONSTRAINT mst_Tracker_pkey PRIMARY KEY (Id),
 unique (deviceId),
 FOREIGN KEY(vechicleId) REFERENCES mst_Vechicle
@@ -98,3 +99,5 @@ LastModifiedDate		timestamp,
 CONSTRAINT Txn_Insurance_pkey PRIMARY KEY (insuranceID) ,
 FOREIGN KEY(vehicleId) REFERENCES MST_Vechicle
 )
+
+
