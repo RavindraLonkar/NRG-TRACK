@@ -52,7 +52,7 @@ public class TrackerDataReciever {
 		String messageString = "";
 
 		try {
-			/*Socket clientSocket;
+			Socket clientSocket;
 			ServerSocket server;
 			
 			server = new ServerSocket(port);
@@ -78,10 +78,10 @@ public class TrackerDataReciever {
 				if (messageString.length() == bytesToRead) {
 					end = true;
 				}
-			}*/
-			String messageByte1 = "78 78 0A 13 05 00 64 00 01 00 44 A6 83 0D 0A "
+			}
+			/*String messageByte1 = "78 78 0A 13 05 00 64 00 01 00 44 A6 83 0D 0A "
 					+ "78 78 1F 12 0D 0B 0B 00 00 00 C0 00 00 00 00 00 00 00 00 00 20 00 01 94 16 27 9D 00 0D 55 00 45 C0 B0 0D 0A";
-			processDataPackets(messageByte1.replace(" ", ""), port);
+			processDataPackets(messageByte1.replace(" ", ""), port);*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
