@@ -11,7 +11,7 @@
 	<modules>
 		<module>NRG-APP</module>
 		<module>NRG-Common</module>
-		<module>NRG-Welcome</module>
+		<module>NRG-Welcome</module> 
 		<module>NRG-DataCatcher</module>
 		<module>NRG-User</module>
 		<module>NRG-Admin</module>
@@ -96,14 +96,14 @@
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<api_server_path>http://localhost:8080</api_server_path>
 				<build.profile.id>dev</build.profile.id>
-				<spring.datasource.url>jdbc:postgresql://192.168.12.53/NRG-DB</spring.datasource.url>
+				<spring.datasource.url>jdbc:postgresql://nrg-instance.ck0rrmrlkiec.ap-south-1.rds.amazonaws.com:5432/NRG</spring.datasource.url>
 				<spring.datasource.username>postgres</spring.datasource.username>
-				<spring.datasource.password>admin@123</spring.datasource.password>
+				<spring.datasource.password>admin123</spring.datasource.password>
 				<spring.datasource.driver>org.postgresql.Driver</spring.datasource.driver>
 				<spring.jpa.properties.hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</spring.jpa.properties.hibernate.dialect> 
 			</properties>
@@ -138,10 +138,16 @@
 		<profile>
 			<id>prod</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>localhost:8080</api_server_path>
+				<api_server_path>http://13.126.121.181:8080</api_server_path>
+				<build.profile.id>prod</build.profile.id>
+				<spring.datasource.url>jdbc:postgresql://nrg-instance.ck0rrmrlkiec.ap-south-1.rds.amazonaws.com:5432/NRG</spring.datasource.url>
+				<spring.datasource.username>postgres</spring.datasource.username>
+				<spring.datasource.password>admin123</spring.datasource.password>
+				<spring.datasource.driver>org.postgresql.Driver</spring.datasource.driver>
+				<spring.jpa.properties.hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</spring.jpa.properties.hibernate.dialect> 
 			</properties>
 		</profile>
 	</profiles>

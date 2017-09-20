@@ -18,13 +18,13 @@
 		</dependency>
 	</dependencies>
 
-	<build>
+	<build>		
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
 			</resource>
-		</resources>
+		</resources>	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
