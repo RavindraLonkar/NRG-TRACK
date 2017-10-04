@@ -141,13 +141,19 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<api_server_path>http://13.126.121.181:8080</api_server_path>
+				<api_server_path>http://13.126.133.29:8080</api_server_path>
 				<build.profile.id>prod</build.profile.id>
 				<spring.datasource.url>jdbc:postgresql://nrg-instance.ck0rrmrlkiec.ap-south-1.rds.amazonaws.com:5432/NRG</spring.datasource.url>
 				<spring.datasource.username>postgres</spring.datasource.username>
 				<spring.datasource.password>admin123</spring.datasource.password>
 				<spring.datasource.driver>org.postgresql.Driver</spring.datasource.driver>
-				<spring.jpa.properties.hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</spring.jpa.properties.hibernate.dialect> 
+				<spring.jpa.properties.hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</spring.jpa.properties.hibernate.dialect>
+				
+				<NRG-Welcome.logfile>D:/logs/NRG-Welcome.log</NRG-Welcome.logfile> 
+				<NRG-APP.logfile>D:/logs/NRG-APP.log</NRG-APP.logfile>
+				<NRG-User.logfile>D:/logs/NRG-User.log</NRG-User.logfile>
+				<NRG-Admin.logfile>D:/logs/NRG-Admin.log</NRG-Admin.logfile>
+				<NRG-DataCatcher.logfile>D:/logs/NRG-DataCatcher.log</NRG-DataCatcher.logfile>
 			</properties>
 		</profile>
 	</profiles>

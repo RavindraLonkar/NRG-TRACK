@@ -39,7 +39,9 @@
 			<artifactId>nekohtml</artifactId>
 		</dependency>
 	</dependencies>
+	
 	<build>
+		<finalName>NRG-Welcome</finalName>
 		<resources>
 			<resource>
 				<filtering>true</filtering>
