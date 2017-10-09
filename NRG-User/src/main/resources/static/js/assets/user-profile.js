@@ -81,7 +81,7 @@ $('#file_click').change(
 		});
 
 $(document).ready(function() {
-
+	
 	$("#dobdatetimepicker").datetimepicker({
 		format : 'DD-MM-YYYY',
 		ignoreReadonly: true,

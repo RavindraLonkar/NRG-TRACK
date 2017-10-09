@@ -66,6 +66,9 @@ $(document).ready(function() {
         ]
 	});
 	
+	$("#fleetSub").css({'overflow': 'hidden', 'display': 'block'})
+	$("#insurance").addClass("active-menu");
+	
 	$('.add-ins').each(function() {
 		   $(this).removeClass('dt-button').addClass('btn btn-info btn-sm')
 		})
