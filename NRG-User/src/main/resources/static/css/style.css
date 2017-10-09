@@ -5779,7 +5779,7 @@ span.customSelect.changed {
 }
 
 .vehicletrackform {
-	height: 66px;
+	height: auto;
 	overflow: visible;
 }
 
@@ -5791,4 +5791,10 @@ span.customSelect.changed {
 .select-help-block {
 	color: #d16e6c;
 	margin-top: -13px;
+}
+
+.add-ins, .delete-ins {
+	margin-right: 0.333em;
+	padding: 0.5em 1em;
+	border: 1px solid #999;
 }

@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={SecurityAutoConfiguration.class})
+@EnableAutoConfiguration(exclude={SecurityAutoConfiguration.class,ErrorMvcAutoConfiguration.class})
 public class TrackingApplicationAPP extends SpringBootServletInitializer {
 		
 	@Override

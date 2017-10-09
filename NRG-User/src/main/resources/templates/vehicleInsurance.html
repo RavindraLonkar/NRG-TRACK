@@ -5,7 +5,6 @@
 <link th:href="@{/css/datatable.css}" rel="stylesheet"></link>
 <link th:href="@{/css/buttons.dataTables.min.css}" rel="stylesheet"></link>
 <link th:href="@{/css/assets/custom.css}" rel="stylesheet"></link>
-
 </head>
 
 <body>
@@ -33,12 +32,14 @@
 								<th>Insurance Name</th>
 								<th>Start Date</th>
 								<th>Expire Date</th>
+								<th>Status</th>
 								<th>Delete</th>
 							</tr>
 						</thead>						
 					</table>
 				</div>
 			</div>
+			
 
 			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 				tabindex="-1" id="addInsuranceModal" class="modal fade">
@@ -155,6 +156,14 @@
 					</div>
 				</div>
 			</div>
+			<div class="panel-body">
+			<div class="alert alert-success fade in">
+				<button data-dismiss="alert" class="close close-sm" type="button">
+					<i class="icon-remove"></i>
+				</button>
+				<strong>Note: </strong> Multiple delete insurance please use ctrl + select rows.
+			</div>
+		</div>
 		</section>
 	</section>
 	<div th:replace="fragments/footer :: footer"></div>

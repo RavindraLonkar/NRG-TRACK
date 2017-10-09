@@ -65,7 +65,7 @@ function initializeJS() {
             jQuery("#container").addClass("sidebar-closed");
         } else {
             jQuery('#main-content').css({
-                'margin-left': '180px'
+                'margin-left': '125px'
             });
             jQuery('#sidebar > ul').show();
             jQuery('#sidebar').css({

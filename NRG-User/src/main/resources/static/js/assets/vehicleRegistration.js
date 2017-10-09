@@ -34,15 +34,15 @@ $(document).ready(function() {
         "buttons": [
             {
                 text: 'Add Vehicle',
-                className: 'green',
+                className: 'add-ins',
                 action: function ( e, dt, node, config ) {
                 	addclassHide();
-                	$('#addVehicleModal').modal('show');
+                	$('#addVehicleModal').modal('show'); 
                 }
             },
             {
                 text: 'Delete Selected Vehicles',
-                className: 'red',
+                className: 'delete-ins',
                 action: function ( e, dt, node, config ) {
                 	confirmdeleteVehicles();
                 }
@@ -50,7 +50,13 @@ $(document).ready(function() {
         ]
 	});
 });
+$('.add-ins').each(function() {
+	   $(this).removeClass('dt-button').addClass('btn btn-info btn-sm')
+	})
 
+$('.delete-ins').each(function() {
+	   $(this).removeClass('dt-button').addClass('btn btn-info btn-sm')
+	})
 function addVehicle() {
 	var validation = false;
 	var validation = addVehicleRegFormValidation();

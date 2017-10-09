@@ -32,15 +32,25 @@ $(document).ready(function() {
 			"data" : "enddate"
 		},
 		{
+        	 "render": function ( data, type, row ) {
+    			 if(row.status=='1'){
+    				 return "<span class ='label label-success'>Active</span>";	 
+    			 }else{
+    				 return "<span class ='label label-danger'>Expired</span>";	 
+    			 }
+             },
+        },
+		{
             "render": function ( data, type, row ) {
                 return "<a href='#'><span class = 'glyphicon glyphicon-trash' id='" + row.insuranceid + "' onclick='confirmdeleteInsurance(this.id);'></span></a>";
             },
             "targets": 4
-        }],
+        }        
+		],
         "buttons": [
             {
                 text: 'Add Insurance',
-                className: 'green',
+                className: 'add-ins',
                 action: function ( e, dt, node, config ) {
                 	addclassHide();
                 	$('#addInsuranceModal').modal('show');
@@ -48,7 +58,7 @@ $(document).ready(function() {
             },
             {
                 text: 'Delete Selected Insurances',
-                className: 'red',
+                className: 'delete-ins',
                 action: function ( e, dt, node, config ) {
                 	confirmdeleteInsurances();
                 }
@@ -56,6 +66,14 @@ $(document).ready(function() {
         ]
 	});
 	
+	$('.add-ins').each(function() {
+		   $(this).removeClass('dt-button').addClass('btn btn-info btn-sm')
+		})
+	
+	$('.delete-ins').each(function() {
+		   $(this).removeClass('dt-button').addClass('btn btn-info btn-sm')
+		})
+		
 	//add form Date pickers
 	$('#addStartDate').datetimepicker({
 		 format: 'DD/MM/YYYY'

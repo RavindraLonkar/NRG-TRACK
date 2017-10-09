@@ -19,13 +19,14 @@ public class InsuranceDetails {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy",  timezone = "America/Phoenix")
 	private Date enddate;
 	private Integer reminder;
+	private String status;
 
 	public InsuranceDetails() {
 		super();
 	}
 
 	public InsuranceDetails(long insuranceid, String vechiclenumber, String vechiclename, String insurancename,
-			Date startdate, Date enddate, Integer reminder) {
+			Date startdate, Date enddate, Integer reminder,String status) {
 		super();
 		this.insuranceid = insuranceid;
 		this.vechiclenumber = vechiclenumber;
@@ -34,6 +35,7 @@ public class InsuranceDetails {
 		this.startdate = startdate;
 		this.enddate = enddate;
 		this.reminder = reminder;
+		this.status = status;
 	}
 
 	public long getInsuranceid() {
@@ -90,6 +92,14 @@ public class InsuranceDetails {
 
 	public void setReminder(Integer reminder) {
 		this.reminder = reminder;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
