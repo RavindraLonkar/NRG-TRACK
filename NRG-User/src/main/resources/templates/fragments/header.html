@@ -60,32 +60,28 @@
 		<div id="sidebar" class="nav-collapse ">
 			<!-- sidebar menu start-->
 			<ul class="sidebar-menu">
-				<li class="active"><a class="" th:href="@{/home.html}"> <i
-						class="icon_house_alt"></i> <span>Dashboard</span>
-				</a></li>
-				<li class="sub-menu"><a href="javascript:;" class=""> <i
+				<li id="dashboard"><a class="" th:href="@{/home.html}"> <i
+						class="icon_house_alt"></i> <span>Dashboard</span></a>
+				</li>
+				<li class="sub-menu" id="vechicle"><a href="javascript:;" class=""> <i
 						class="icon_map"></i> <span>Vechicle</span> <span
 						class="menu-arrow arrow_carrot-right"></span>
-				</a>
-					<ul class="sub">
-						<li><a class="" th:href="@{/vehicle/registration}">Registration</a></li>
-						<li><a class="" th:href="@{/vehicle/track}">Track</a></li>
-						<li><a class="" th:href="@{/vehicle/report}">Fuel Monitor</a></li>
-					</ul></li>
-				<!-- <li class="sub-menu"><a href="javascript:;" class=""> <i
-						class="icon_datareport_alt"></i> <span>Report</span> <span
-						class="menu-arrow arrow_carrot-right"></span>
-				</a>
-					<ul class="sub">
-						<li><a class="" th:href="@{/vehicle/report}">Fuel Monitor</a></li>
-					</ul></li> -->
-				<li class="sub-menu"><a href="javascript:;" class=""> <i
+					</a>
+					<ul class="sub" id="vehicleSub">
+						<li id="registration"><a class="" th:href="@{/vehicle/registration}">Registration</a></li>
+						<li id="track"><a class="" th:href="@{/vehicle/track}">Track</a></li>
+						<li id="fuelmonitor"><a class="" th:href="@{/vehicle/report}">Fuel Monitor</a></li>
+					</ul>
+				</li>
+			
+				<li class="sub-menu" id="fleet"><a href="javascript:;" class=""> <i
 						class="icon_cogs"></i> <span>Fleet</span> <span
 						class="menu-arrow arrow_carrot-right"></span>
-				</a>
-					<ul class="sub">
-						<li><a class="" th:href="@{/insurance/}">Insurance</a></li>
-					</ul></li>	
+					</a>
+					<ul class="sub" id="fleetSub">
+						<li id="insurance"><a class="" th:href="@{/insurance/}">Insurance</a></li>
+					</ul>
+				</li>	
 			</ul>
 			<!-- sidebar menu end-->
 		</div>

@@ -1,5 +1,5 @@
-$(document).ready(
-		function() {
+$(document).ready(function() {
+			
 			var url = window.location;
 			$.ajax({
 				type : "GET",
@@ -28,7 +28,12 @@ $(document).ready(
 					console.log("ERROR: ", e);
 				}
 			});
-
+			
+			$("#vehicleSub").css({'overflow': 'hidden', 'display': 'block'})
+			$("#track").addClass("active-menu");
+			
+			style="overflow: hidden; display: none;"
+	            
 			$('#startDate').datetimepicker({
 				format : 'DD/MM/YYYY hh:mm:ss',
 				ignoreReadonly : true
@@ -44,7 +49,7 @@ $(document).ready(
 			$("#endDate").on("dp.change", function(e) {
 				$('#startDate').data("DateTimePicker").maxDate(e.date);
 			});
-		});
+});
 
 function initMap() {
 	document.getElementById('submit').addEventListener('click', function() {
@@ -220,4 +225,8 @@ function getEndLocationName(longitude, latitude) {
 			}
 		},
 	});
+}
+
+function setActiveMenu(menuId){
+	$("#" + menuId).addClass("active");
 }

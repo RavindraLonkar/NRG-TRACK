@@ -99,3 +99,7 @@ function loadMap(list, map) {
 
 	}
 }
+
+$(document).ready(function() {
+	$("#dashboard").addClass("active-menu");
+})

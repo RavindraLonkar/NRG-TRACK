@@ -28,6 +28,9 @@ $(document).ready(
 					console.log("ERROR: ", e);
 				}
 			});
+			
+			$("#vehicleSub").css({'overflow': 'hidden', 'display': 'block'})
+			$("#fuelmonitor").addClass("active-menu");
 
 			$('#vehicleTrackDate').datetimepicker({
 				format : 'DD/MM/YYYY HH:mm:ss',

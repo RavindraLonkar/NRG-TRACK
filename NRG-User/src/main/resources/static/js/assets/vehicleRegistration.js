@@ -1,5 +1,9 @@
 var table;
 $(document).ready(function() {
+	
+	$("#vehicleSub").css({'overflow': 'hidden', 'display': 'block'})
+	$("#registration").addClass("active-menu");
+	
 	table = $('#vehicleDt').DataTable({
         "dom": 'Bfrtip',
 		"processing" : true,
